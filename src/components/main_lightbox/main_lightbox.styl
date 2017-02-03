@@ -1,0 +1,110 @@
+.fan-of-images
+	margin 0 auto
+	margin-top 200px
+	text-align center
+	padding-bottom 200px
+	.main-wrapper
+		padding 60px 0 200px
+		border 10px solid #fff
+		color $light-gold
+		font-family Impact
+		background-color rgba(255,255,255,.4)
+		
+		position relative
+	
+		
+		&__heading 
+			font-size 61px
+			line-height 70px
+			font-weight normal
+			letter-spacing .1em
+		&__first-subheading,&__second-subheading, &__third-subheading
+			padding-top 20px
+		&__first-subheading, &__third-subheading
+			font-family 'Marck Script', cursive
+			font-size 60px
+			letter-spacing 2px
+		&__second-subheading
+			font-size 40px
+		&__image-container
+			position absolute
+			display inline-block
+			
+			max-width 350px 
+			height auto
+			border 10px solid #fff
+			z-index 5
+			img
+				max-width 100%
+				height auto
+				margin-bottom -4px
+.heading
+	.fan-of-images
+		.main-wrapper
+			&__image-container:first-of-type
+				top 30%
+				left -17%
+			&__image-container:nth-of-type(2)
+				top 68%
+				left 0%
+				
+			&__image-container:nth-of-type(3)
+				top 74%
+				left 20%
+				
+			&__image-container:nth-of-type(4)
+				top 82%
+				left 45%
+				z-index 5
+				
+			&__image-container:nth-of-type(5)
+				top 74%
+				left 71%
+				z-index 4
+@media (max-width 1199px)
+	.fan-of-images
+		padding-bottom 10px
+		.main-wrapper
+			padding 10px 0
+			&__heading
+				font-size 40px
+				
+			&__second-subheading
+				font-size 30px	
+			&__first-subheading, &__third-subheading
+				font-size 32px
+			&__image-container
+				width calc(100% / 2 - 60px)
+				display inline-block
+				vertical-align middle
+				margin 30px 15px
+				position initial !important
+				max-width initial
+				top 0 
+				left 0
+				
+				
+				img 
+					width 100%
+			&__image-container:last-child
+				margin-bottom 0
+@media (max-width 791px)
+	.fan-of-images
+		margin-top 110px
+		.main-wrapper
+			&__image-container
+				width calc(100% / 2 - 10px)
+				margin 10px 5px
+@media (max-width 480px)
+	.fan-of-images
+		.main-wrapper
+			&__image-container
+				width 100%
+				margin-left 0
+				margin-right 0		
+				border-left 0
+				border-right 0
+		
+		
+	
+		

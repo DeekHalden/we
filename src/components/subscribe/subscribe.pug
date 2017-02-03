@@ -1,0 +1,9 @@
+include /mixins/main_mixins
+.row
+	+b.subscribe-wrapper
+		+e.H3.heading Будьте в курсе всех наших новостей, получайте презентации первыми<br>Подписывайтесь на рассылку от компании "Протекс" прямо сейчас!
+		+e.FORM(name="subscribe" action="POST").form
+			+e.INPUT.form--name#name(placeholder="Имя" type="text" name="name" )
+			+e.INPUT.form--email#email(placeholder="Укажите Ваш email" type="email" name="email")
+			+CreateButton('','Подписаться сейчас', 'action-btn subscribe-action')
+			+e.SPAN.form--error

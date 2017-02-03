@@ -1,0 +1,224 @@
+.navbar
+	padding  0 0 28px
+	position fixed
+	top 0
+	z-index 999
+	background-color rgba(255,255,255,0.6)
+	box-shadow 0 0 5px rgba(0, 0, 0, 0.7)
+	border-top 0px solid rgba(47, 46, 46, 1)
+	border-bottom 0px solid rgba(47, 46, 46, 1)
+	.login
+		text-decoration none
+		float right
+		cursor pointer
+		font-size 18px
+		color $light-gray
+		&:hover
+			color $light-gold
+		
+	.logo
+		float left    	
+		padding-top 5px
+    	
+	.heading
+		width 85%
+		display block
+		margin 10px auto 0
+		float left
+		font-weight 100
+		color $dark-gray
+		margin-right 20px
+		white-space normal
+		text-align center
+	// .basket
+	// 	float right
+	// 	padding-top 15px
+	// 	display inline-block
+	// 	font-size 30px
+	// 	color $light-gold		
+	// 	transition .2s ease all
+	// 	position relative
+	// 	&:hover 
+	// 		color #4a410d
+	// 	&__goods-count
+	// 		position absolute
+	// 		top 22px
+	// 		left 7px
+	// 		color #fff
+	// 		font-size 18px
+			
+	
+	.nav
+		width 100%
+		list-style none
+		display flex
+		justify-content space-between
+		position relative
+		&__element
+			border-left 1px solid $gold
+			padding-left 20px
+			&--href
+				font-size 24px
+				text-decoration none
+				color $light-gold
+				transition .4s ease all
+			a:hover
+				color #4A410D
+		&__element:first-child,&__element:nth-child(2),&__element:nth-child(3) 
+			border none
+			
+		&__element.icon-basket
+			position absolute
+			right 0
+			top -65px
+			&:before
+				color $light-gold
+				font-size 30px
+			&--href
+				
+				position relative
+			.nav__element--href--text
+					display none
+			.nav__element--href--goods-count
+					font-size 18px
+					position absolute
+					top 7px
+					left 27px
+					color #fff
+			
+		&__element.lg-hidden
+			display none
+			border-left none
+		
+			
+@media (max-width 1199px)
+	.navbar
+		padding 0
+		.login, .basket
+			display none
+		.heading
+			line-height 110px
+			font-size 28px
+			float none
+			width 100%
+		.button-wrapper
+			width 40px
+			height 40px
+			position fixed
+			display inline-block
+			transition .4s ease all
+			z-index 9998888888888
+			right 10px
+			top 5px 
+			position absolute
+			transform rotate(0deg)
+			transition .5s ease-in-out
+			cursor pointer
+			&__button
+				
+				&--horizontal-line
+					position absolute
+					display block
+					width 40px
+					height 3px
+					border 1px solid transparent
+					border-radius 12px
+					background-color $light-gold
+					margin 10px 0
+					transition .4s ease all
+				&--horizontal-line:nth-child(1)
+					top 0
+				&--horizontal-line:nth-child(2)
+					top 10px
+				&--horizontal-line:nth-child(3)
+					top 20px
+		.button-wrapper.active
+			
+			.button-wrapper__button
+				&--horizontal-line
+					background-color #D2014E
+				&--horizontal-line:nth-child(1) 
+					top 9px
+					transform rotate(135deg)
+				&--horizontal-line:nth-child(2) 
+					opacity 0
+					
+				&--horizontal-line:nth-child(3)
+					top 9px
+					transform rotate(-135deg);
+			
+		.nav.side-right
+			width 260px
+			right -260px
+			display block
+			position fixed
+			top 0
+			height 100%
+			z-index 999999
+			overflow-x hidden
+			overflow-y auto
+			background rgba(255,255,255 1)
+			color #fff
+			font-style italic
+			transition .4s ease all
+			box-shadow 0 0 5px rgba(0, 0, 0, 0.7)
+			border-left 0px solid rgba(47, 46, 46, 1)
+		.nav.side-right.open
+			transform translateX(-260px)
+			background-color #EDE9D9
+		.nav
+			
+			&__element, &__element:first-child
+			
+				border none 
+				border-bottom 1px solid #f4f4f4
+			&__element.lg-hidden
+				display block
+			&__element.xs-hidden
+				display none
+			&__element:hover
+				background-color #fff
+			&__element
+				padding 10px
+				color $light-gold
+				&--href
+					position relative 
+					
+					
+				
+			&__element:hover
+				color #4a410d
+			
+			&__element.icon-basket
+				position initial
+				
+				.nav__element--href--text
+					display inline-block
+				.nav__element--href--goods-count
+					top 3px
+					left -18px
+
+		
+			&__element.icon-basket > &--href
+				font-style italic
+			&__element.icon-basket:before
+				font-size 30px	
+			
+					 
+@media (max-width 991px)
+	.navbar
+		.heading
+			margin-top 25px
+			line-height initial	
+@media (max-width 767px)
+	.navbar
+		.heading
+			line-height 110px
+			margin-top 0
+			.heading-sub
+				display none
+				
+@media (max-width 480px)
+	.navbar
+		.heading
+			font-size 24px

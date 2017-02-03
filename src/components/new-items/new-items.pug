@@ -1,0 +1,21 @@
+-var items = [{title:'Баракан',img:'assets/images/butterfly.jpg',label:'ХИТ'},{title:'Баракан',img:'assets/images/butterfly.jpg',label:''},{title:'Баракан',img:'assets/images/butterfly.jpg',label:'ХИТ'}]
+include /mixins/main_mixins
+
+.container-fluid.new-items
+	.row
+		+b.heading
+			+e.H2.title НОВИНКИ
+			+e.SPAN.divider
+			+e.P.subheading Коллекции тканей комбината "Основа" регулярно пополняются новыми дизайнами.
+			+e.P.subheading Если вы не нашли подходящий рисунок, можете заказать собственный дизайн ткани.
+		.media-container.clearfix
+			each item, i in items
+				+b.item
+					-if(item.label.length > 0) {
+						+e.SPAN.label #{item.label}
+					-}
+					+e.image-wrapper
+						+e.IMG(src=item.img).image-wrapper--image
+					+e.P.title #{item.title}
+	.row
+		+CreateButton('collections.html','Смотреть все коллекции' ,'collections-btn')

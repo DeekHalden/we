@@ -1,0 +1,6 @@
+include /mixins/main_mixins
+-var news = {image:'assets/images/about-slider-img.webp'}
+
+.container-fluid.about-wrapper
+	.row
+		+CreateSlider(2 ,'goods.html', news.image, 3 )

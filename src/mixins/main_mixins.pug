@@ -1,0 +1,111 @@
+mixin CreateLightboxContainer(heading, first_subheading, second_subheading, third_subheading, image, count, data_lightbox, createButton)
+	.container-fluid.fan-of-images
+		.row
+			+b.main-wrapper
+				+e.H1.heading #{heading}
+				+e.P.first-subheading #{first_subheading}
+				+e.P.second-subheading #{second_subheading}
+				+e.P.third-subheading #{third_subheading}
+				+CreateLightbox(image, count, data_lightbox)
+				-if(createButton){
+					+CreateButton('discounts.html','Смотреть все акции', 'collections-btn') 
+				-}
+
+
+mixin CreateLightbox(image, count, data_lightbox, className,  title, content, data_title)
+	- for (var i =0; i < count; i++) {
+		+e.A(href=image, data-lightbox=data_lightbox data-title=data_title).image-container.example-image-link
+			if title || content
+				+e.image-container--text-content
+					if title
+						+e.H3.image-container--text-content--title #{title}
+					if content
+						+e.P.image-container--text-content--content #{content}
+			+e.IMG(src=image alt="" width=340 height=auto).image-container--image.example-image
+	- }
+
+
+
+mixin CreateSeo(title, content)
+	if title
+		+e.H2.heading #{title}
+	+e.P.content #{content}
+
+
+mixin CreateSlider(id, href, image, count, title, date)
+	-var i = 0
+	ul(id='lightSlider' +id)
+		while i < count
+			li
+				+b.A(href=href).item
+					+e.media
+						+e.media--img(src=image)
+					if(title, href)
+						+e.P.title #{title}
+						+e.P.date #{date}
+			-i++
+
+mixin CreateLegend(title, content,className, author)
+	+b(class=className)
+		+e.H2.title #{title}
+		+e.divider
+		if author
+			+e.SPAN.author #{author}
+		each el, i in content
+			+e.P.content #{el}
+
+
+mixin CreateClothItem(title,image,href,label)
+	+b.A(href=href).card-wrapper
+		+e.SPAN.image-wrapper
+			+e.IMG(src=image, data-lightbox=data_lightbox data-title="").image-wrapper--image
+		+e.SPAN.button Детальная информация
+		+e.SPAN.title #{title}
+		if label
+			+e.SPAN.label #{label}
+
+mixin CreateGallery(id, image, count)
+	-var i = 0
+		+b.UL(id=id).gallery
+			+e.LI(data-thumb=image).item
+				+e.IMG(id='i' src=image  data-large=image).item--image.my-foto
+			while i < count
+				-i++
+
+mixin CreateCard(content, title)
+	+b.discount-card-wrapper
+		+CreateLightbox()
+	if title
+		+e.H3.title #{title}
+	+e.P.content #{content}
+
+mixin CreatePostCard(title, date, image, content, className)
+		if className === 'thumb'
+			+b.A(href="post.html" class=className) 
+				+e.media.clearfix
+					+e.IMG(src=image).media--image
+				+e.P.title #{title}
+				+e.P.date #{date}
+				
+		else if className === 'post-card'
+			+b(class = className)
+				+e.A(href="post.html").title #{title}
+				+e.P.date #{date}
+				+e.info.clearfix
+					+e.IMG(src=image).info--image
+					+e.P.info--content #{content}
+					+CreateButton("post.html", 'Читать далее','action-btn')
+		else
+			+b(class = className)
+				+e.title #{title}
+				+e.P.date #{date}
+				+e.info.clearfix
+					+e.IMG(src=image).info--image
+					+e.info--text
+						each el, i in content
+							+e.P #{el} 
+
+
+mixin CreateButton(href, text,button_class)
+	a(href=href class=button_class) #{text}
+	

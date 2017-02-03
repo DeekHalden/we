@@ -1,0 +1,14 @@
+-var news = {image:'assets/images/butterfly.jpg',title:'Lorem ipsum Excepteur Excepteur officia consectetur ad dolor cupidatat exercitation dolor Duis non exercitation eiusmod eu fugiat ex.',date:'27.01.2017'}
+-var i = 0
+.container-fluid.news-wrapper
+	ul#lightSlider1
+		while i < 6
+			li
+				+b.A(href="post.html").news-post
+					+e.media
+						+e.media--img(src=news.image)
+					+e.P.title #{news.title}
+					+e.P.date #{news.date}
+			-i++
+
+

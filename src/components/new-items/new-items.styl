@@ -1,0 +1,81 @@
+.new-items
+	text-align center
+	background-color #fff
+	position relative
+	padding-bottom 120px
+	.heading
+		padding-top 50px
+	
+		&__title
+			font-size 29px
+			font-weight 200 
+			color $gold
+		&__divider
+			width 20px
+			height 3px
+			background-color $gold
+			display block
+			margin 10px auto
+		&__subheading
+			font-size 22px
+			color $light-gray
+	.media-container
+		display flex
+		flex-wrap wrap
+		justify-content space-between
+		align-items center
+		margin 40px auto
+		.item
+			width 280px
+			height auto
+			float left
+			margin 15px
+			position relative
+			display inline-block
+			vertical-align middle
+			color $gold
+			text-align center
+			transition .2s ease all
+			&__label
+				width 68px
+				height 44px
+				text-align center
+				line-height 44px
+				position absolute
+				top 0
+				left 0
+				background-color #fff
+				z-index 99
+			&__image-wrapper
+				overflow hidden
+				&--image
+					transition .2s ease all
+					max-width 100%
+					height auto
+			&__title
+				font-size 20px
+				font-weight 200
+				font-family "eb garamond", serif
+		.item:hover .item__image-wrapper--image
+			transform scale(1.1)
+		.item:hover
+			opacity .5
+	
+		
+
+@media (max-width 1199px)
+	.new-items
+		.media-container
+			justify-content center
+			&__item
+				width 33%	
+
+
+
+@media (max-width 480px)			
+	.new-items
+		padding-bottom 40px
+		.media-container
+			margin-bottom 20px
+		.collections-btn
+			font-size 24px

@@ -1,0 +1,61 @@
+@import '../../assets/styles/jquery.nstSlider.css'
+
+.filter-menu
+	width 250px
+	padding 0 10px
+	float left
+	
+	.heading
+		font-size 26px 
+		color #212020
+	.filter-accordion
+		padding 30px 0
+		
+		&__title
+			cursor pointer
+			display block
+			position relative
+			&:before
+				content '-'
+				position absolute
+				right 0px
+			
+			&.passive
+				position relative
+				&:before
+					content '+'
+					position absolute
+					right 0px
+		&__content
+			padding 10px 0
+	.filter-accordion
+		&__content
+			cursor pointer
+			&--list-heading
+				font-weight 800
+					
+	.heading, .collections-filter, .price-filter
+		border-bottom 1px solid rgba(33, 32, 32, .2)
+	.heading
+		padding-bottom 20px
+		font-weight 300
+	.price-filter
+		padding-bottom 60px
+	
+		
+	.clear-all
+		padding 30px 0
+		cursor pointer 
+		display inline-block
+		
+		&__sign
+			vertical-align middle
+				
+
+		
+@media(max-width 900px)
+	.filter-menu
+		float none
+		width 95%
+		margin 0 auto
+		

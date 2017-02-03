@@ -1,0 +1,63 @@
+// discounts lightbox depends on main_lightbox except of &__image-container:nth-child(n) positioning
+
+
+.discounts
+	.fan-of-images
+		padding-bottom 110px
+		.main-wrapper
+			&__third-subheading
+				margin-bottom 40px
+				
+			&__image-container:first-of-type
+				top -10%
+				right -7%
+			&__image-container:nth-of-type(2)
+				top 58%
+				right -3%
+				
+			&__image-container:nth-of-type(3)
+				top 72%
+				right 20%
+			// &__image-container:nth-of-type(4)
+			// 	top 82%
+			// 	left 45%
+			// 	z-index 5
+				
+			// &__image-container:nth-of-type(5)
+			// 	top 74%
+			// 	left 71%
+			// 	z-index 4
+			.collections-btn
+				
+				width 350px
+				background-color #fff
+				height 48px
+				margin 0 auto
+				display block
+				padding-top 5px
+				
+				&:hover
+					background-color $gold
+				
+@media(max-width 1199px)
+	.discounts
+		.fan-of-images
+			padding-bottom 20px
+			.main-wrapper
+				&__image-container
+					
+					margin 15px 
+			
+				
+@media(max-width 480px)
+	.discounts
+		.fan-of-images
+			margin-top 5px
+			padding-bottom 20px
+			.main-wrapper
+				&__image-container
+					margin 15px 0
+				.collections-btn
+				
+					width auto
+					padding 5px 0 10px

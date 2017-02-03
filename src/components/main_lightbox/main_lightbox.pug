@@ -1,0 +1,6 @@
+include /mixins/main_mixins
+
+-var data = {heading:'Комбинат "ОСНОВА"', first_subheading:'Высококачественные ткани', second_subheading:'ДЛЯ ЛУЧШИХ ПРОИЗВОДИТЕЛЕЙ', third_subheading:'Сатин. Перкаль. Флис.', row_of_images:'assets/images/butterfly.jpg', count: 5, data_lightbox: 'main'}
+
+.heading
+	+CreateLightboxContainer(data.heading, data.first_subheading, data.second_subheading, data.third_subheading,data.row_of_images, data.count, data.data_lightbox)

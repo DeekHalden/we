@@ -1,0 +1,16 @@
+include /mixins/main_mixins
+.row
+	+b.partnership-wrapper
+		+e.H3.heading Заполните свои реквизиты для заключения договора
+		+e.FORM(name="subscribe" action="POST").form
+			+e.INPUT.form--name.form-control#name(placeholder="Контактное лицо (ФИО, должность)" type="text" name="name" )
+			+e.INPUT.form--email.form-control#email(placeholder="email для регистрации юр.лица" type="email" 
+			name="email")
+			+e.INPUT.form--tel.form-control#tel(placeholder="Телефон" type="tel" name="tel" )
+			+e.INPUT.form--organization.form-control#organization(placeholder="Наименование организации" type="text" 
+			name="email")
+			+e.INPUT.form--id_number.form-control#id_number(placeholder="ИНН/КПП" type="number" name="id_number" )
+			+e.INPUT.form--requisites.form-control#requisites(placeholder="Банковские реквизиты" type="text" 
+			name="requisites")
+			+CreateButton('','Отправить реквизиты для договора', 'action-btn partnership-action')
+			+e.SPAN.form--error

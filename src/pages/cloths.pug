@@ -1,0 +1,24 @@
+include /assets/bemto/bemto
+
+
+doctype html
+html(lang="zxx")
+	title Интернет - магазин ткани комбинат Основа
+	include /components/head/head
+	
+	body
+		.cloths-main-container
+			include /components/navbar/navbar
+			include /components/horizontal_accordion/horizontal_accordion
+			include /components/cloths_legend/cloths_legend
+			include /components/cloths_market_wrapper/cloths_market_wrapper
+			include /components/footer/footer
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js")
+		script(src="assets/scripts/bundle.min.js")
+		script(src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js")
+		script.
+			WebFont.load({
+				google: {
+					families: [ 'Marck+Script:400,700:latin', 'Kelly+Slab:400,600,400italic,700italic,700:latin']
+				}
+			});

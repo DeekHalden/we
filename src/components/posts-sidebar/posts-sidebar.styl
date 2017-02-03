@@ -1,0 +1,82 @@
+.posts-sidebar
+		float left
+		padding-left 40px
+		width 30%
+		.heading
+			color $light-gray	
+			font-size 22px
+			font-weight 300
+			padding-bottom 20px
+			border-bottom 1px solid rgb(176, 161, 113)
+		.favorites
+			padding-bottom 30px
+			.lightSlider
+				height 100% !important
+				.item
+					margin-top 0
+					display block
+					text-decoration none
+					color  $dark-gray
+					font-size 20px
+					transition .2s ease all
+					&:hover .item__title
+						text-decoration underline
+					&__media
+						display block
+						vertical-align middle
+						height 180px
+						line-height 180px
+						&--img
+							width 100%
+							height auto
+							vertical-align middle
+					&__title
+						transition .2s ease all
+					&__date
+						font-family 'Abel', sans-serif
+						font-size 12px
+					
+		.recent
+			.thumb
+				padding 10px 0
+				text-decoration  none
+				color $dark-gray
+				display block
+				&__media
+					width 100%
+					&--image
+						width 100%
+						height auto
+				&__title
+					&:hover
+						text-decoration underline
+				&__date
+					font-family  "Abel",sans-serif
+					font-size 12px
+@media (max-width 1199px)
+	.posts-sidebar
+			
+			padding-left 0
+			width 100%
+			display flex
+			justify-content space-between
+			flex-wrap wrap
+			.favorites
+				float left
+				width 48%
+				.lightSlider
+					padding-top 10px
+					.item
+						&__media
+							height auto
+							line-height  100%
+							&--img
+								max-width 100%
+			.recent
+				float left
+				width 48%
+				
+@media (max-width 640px)
+	.posts-sidebar
+		.recent,.favorites
+			width 100%

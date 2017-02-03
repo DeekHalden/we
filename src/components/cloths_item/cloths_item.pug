@@ -1,0 +1,15 @@
+include /mixins/main_mixins
+-var select = ['Новейшие','Цена(низкая - высокая)','Цена(высокая - низкая)','Название А-Я','Название Я-А']
+-var i = 0
+.cards-wrapper
+	.select
+		#current_page Сортировка <span class="down-arrowhead">&#709;</span>
+		#current_menu
+			+b.UL.select-wrapper
+				each el, i in select
+					+e.LI.item
+						+e.A(value = el) #{el}
+			
+	while i < 20
+		+CreateClothItem('Бридж', 'assets/images/cloths-image.jpg', 'item.html', 'hot')
+		-i++

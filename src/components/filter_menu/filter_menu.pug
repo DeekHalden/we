@@ -1,0 +1,25 @@
+-var collection_sort = ['Акварель', 'Гобелен', 'Прованс', 'Этно', 'Бохо']
+
+.filter-menu
+	h2.heading Найти товары
+	+b.filter-accordion.collections-filter
+		+e.A().title Коллекции
+		+e.content.passive.show
+			+e.UL.content--list 
+				+e.P.content--list-heading Все
+				each el, i in collection_sort
+					li.content--element #{el}
+
+	+b.filter-accordion.price-filter
+		+e.A().title Цена 
+		+e.content.widget.passive.show
+			.nstSlider(data-range_min="7115" data-range_max="7830" data-cur_min="7115" data-cur_max="7830")
+				.bar
+				.leftGrip
+				.rightGrip
+				.leftLabel
+				.rightLabel
+
+	+b.clear-all
+		+e.SPAN.text Очистить все  <span class="clear-all__sign">&#x2715;</span>
+

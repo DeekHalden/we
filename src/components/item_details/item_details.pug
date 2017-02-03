@@ -1,0 +1,40 @@
+include /mixins/main_mixins
+-var item = {image:'assets/images/item.jpg', title:'Аббай', article: 'Артикул: P00504TU', price: '7.215руб.', old_price: '7.800руб.', about: 'Несмотря на многообразие тканей, появившихся сравнительно недавно, традиционно востребованные разновидности держат свои позиции, и кануть в Лету не собираются. Насчитывая несколько веков применения, они и сейчас актуальны, благодаря достойным характеристикам. Одна из таких тканей – перкаль, ее свойства до сих пор впечатляют. Перкаль – на удивление прочная ткань. В своё время из него производили обшивку для первых самолётов, паруса и парашюты, а теперь изделия из него относят к классу «премиум».',short_about:['Перкаль набивной 220см 100% хлопок 125гр/м.кв','Рулон 60 м','Цена варьируется от размера партии. Уточняйте у менеджеров.'], delivery: ['Доставка транспортной компанией.', 'Партнерам из удаленных регионов рекомендуем воспользоваться услугами доставки заказа силами транспортной компании. С ценами  на доставку вы можете ознакомиться здесь.'] }
+-var select = ['1','2','3','4','5','6','7','8','9','10']
+
+.container-fluid.item
+	.row
+		.item-details.clearfix
+			.gallery-wrapper
+				+CreateGallery('item-gallery',item.image, 3)
+				+b.short-about
+					each el, i in item.short_about
+						+e.P.paragraph #{el}
+			+b.description
+				+e.H2.title #{item.title}
+				+e.P.article #{item.article}
+				+e.P.price <span class="old-price">#{item.old_price}</span>&nbsp;&nbsp;<span class="price">#{item.price}</span>
+				+e.form-control
+					+e.LABEL(for="feedback").form-control--feedback-label Ваши пожелания (необязательно)
+					+e.TEXTAREA(name="feedback" id="feedback" placeholder="До 500 символов").form-control--feedback
+					+e.form-control--chars_remaining#chars-remaining
+				.select Количество
+					#current_page 1 <span class="down-arrowhead">&#709;</span>
+					#current_menu
+						+b.UL.select-wrapper
+							each el, i in select
+								+e.LI.item
+									+e.A(value = el) #{el}
+				+CreateButton('','Добавить в корзину','action-btn')
+				+e.item-description
+					+e.H4.item-description--title О ТКАНИ
+					+e.P.item-description--content #{item.about}
+				+e.delivery
+					each el, i in item.delivery
+						+e.P.delivery--content #{el} 
+					+CreateButton('', 'Калькулятор','action-btn')
+
+
+
+	
+

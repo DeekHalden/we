@@ -1,0 +1,109 @@
+	
+.cards-wrapper
+	padding 20px
+	display flex
+	flex-wrap wrap
+	justify-content space-between
+	position relative
+	.select
+		width 250px
+		position absolute
+		top -10px
+		right 35px
+		border 1px solid #212020
+		padding 5px 20px
+		z-index 5
+		background-color #fff
+		c
+		.down-arrowhead
+			position absolute
+			right 10px
+			font-size 20px
+		.select-wrapper
+			&__item
+				padding 10px 0
+				&--checked
+					position absolute
+					right 10px
+	.card-wrapper
+		float left
+		width 279px
+		text-decoration none
+		margin 1%  auto
+		position relative
+		transition .2s ease all
+		&__image-wrapper
+			width 100%
+			height 240px
+			display block
+			line-height 240px
+			overflow hidden
+			&--image
+				max-width 100%
+				
+				transition .2s ease all
+				vertical-align middle
+				display inline-block
+				
+		&__label
+			position absolute
+			background-color #DEC328
+			color #fff
+			padding 5px 20px
+			text-transform capitalize
+			font-size 16px
+			font-weight 300
+			top 0
+			left 0
+		&__button
+			position absolute
+			bottom 0px
+			left 0
+			right 0
+			text-align center
+			margin 0 auto
+			transition .2s ease all
+			z-index -1
+			
+			color $light-gold
+			&:hover
+				color #5a521f
+		&__title
+			color #646464
+			
+	.card-wrapper
+		&:hover
+			> .card-wrapper__image-wrapper
+				overflow hidden
+				.card-wrapper__image-wrapper--image
+					transform scale(1.1)
+			> .card-wrapper__button
+				margin 30px 0 20px
+				padding 10px 0 
+				z-index 1
+				background-color #fff
+				
+@media(max-width 1199px)
+	.cards-wrapper
+		padding-top 30px
+		.select
+			
+			right 34px
+			
+		// .card-wrapper
+		// 	width 31%
+
+@media(max-width 540px)
+	.cards-wrapper
+		width 100%
+		
+		.select
+			display block
+			position relative
+			left 25%
+			right 25%
+			
+		
+				
+			
+		

@@ -1,0 +1,13 @@
+include /mixins/main_mixins
+-var j = 0
+-var favorites = {id:'favorites-slider',href:'post.html', image:'assets/images/medved.webp',count: 3,title:'Завтрак с заместителем министра', date: '22.12.2016'}
+
+.posts-sidebar.clearfix
+	+b.favorites
+		+e.H4.heading.heading Избранные посты
+		+CreateSlider(favorites.id, favorites.href, favorites.image, favorites.count, favorites.title, favorites.date)
+	+b.recent
+		+e.H4.heading.heading Недавние посты
+		while j < 6
+			+CreatePostCard(item.title, item.date, item.image, '', 'thumb')
+			-j++
