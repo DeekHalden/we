@@ -24,8 +24,36 @@
     <link rel="stylesheet" href="assets/css/bundle.min.css">
   </head>
   <body>
+    <div class="container-fluid form-wrapper zoom-anim-dialog mfp-hide" id="login">
+      <div class="row">
+        <p class="title">Вход
+        </p>
+        <form class="login-form form" action="POST"><input class="login-form__form-control" type="email" placeholder="Email"/><input class="login-form__form-control" type="password" placeholder="Пароль"/>
+          <div class="login-form__checkbox"><input class="login-form__checkbox--remember-me" type="checkbox" id="remember-me" name="remember-me"/>
+            <label class="login-form__checkbox--label" for="remember-me">Запомнить меня
+            </label><a class="login-form__checkbox--forgot popup-with-zoom-anim" href="#forgot-password">Не помню пароль</a>
+          </div><span class="login-form__error"></span><a class="action-btn" href="">OK</a>
+        </form><span class="additional-action">У вас нет аккаунта? <a href="#register" class="additional-action__href popup-with-zoom-anim">Регистрация</a></span>
+      </div>
+    </div>
+    <div class="container-fluid form-wrapper zoom-anim-dialog mfp-hide" id="forgot-password">
+      <div class="row">
+        <p class="title">Смена пароля <br> <span class="subtitle">Пожалуйста, введите ваш email</span>
+        </p>
+        <form class="forgot-form form" action="POST"><input class="forgot-form__form-control" type="email" placeholder="Email"/><span class="forgot-form__error"></span><a class="action-btn" href="">OK</a>
+        </form>
+      </div>
+    </div>
+    <div class="container-fluid form-wrapper zoom-anim-dialog mfp-hide" id="register">
+      <div class="row">
+        <p class="title">Регистрация
+        </p>
+        <form class="register-form form" action="POST"><input class="register-form__form-control" type="email" placeholder="Email"/><input class="register-form__form-control" type="password" placeholder="Пароль"/><input class="register-form__form-control" type="password" placeholder="Повторите пароль"/><span class="register-form__error"></span><a class="action-btn" href="">OK</a>
+        </form><span class="additional-action">У меня уже есть аккаунт <a href="#login" class="additional-action__href popup-with-zoom-anim">Войти</a></span>
+      </div>
+    </div>
     <div class="navbar container-fluid">
-      <div class="row clearfix"><a class="login" href="login.html">Вход / Регистрация</a>
+      <div class="row clearfix"><a class="login popup-with-zoom-anim" href="#login">Вход / Регистрация</a>
         <div class="logo"><a class="logo__href" href="index.html"><img src="assets/images/logo.png"></a>
         </div>
         <h1 class="heading">Комбинат ОСНОВА <span class="heading-sub">- российский производитель высококачественных тканей</span>
@@ -35,7 +63,7 @@
       </div>
       <div class="row">
         <ul class="nav side-right">
-          <li class="nav__element lg-hidden"><a class="nav__element--href" href="login.html"> <span class="nav__element--href--text">Вход/ Регистрация</span></a>
+          <li class="nav__element lg-hidden"><a class="nav__element--href popup-with-zoom-anim" href="#login"> <span class="nav__element--href--text">Вход/ Регистрация</span></a>
           </li>
           <li class="nav__element icon-basket"><a class="nav__element--href" href="basket.html"> <span class="nav__element--href--text"> Корзина пуста</span><span class="nav__element--href--goods-count">0</span></a>
           </li>
