@@ -1,18 +1,36 @@
 .socials
 	margin 20px
 	display flex
-	justify-content flex-start
+	
+	flex-wrap wrap
+	text-align center
+	
 	&__icon
-		margin 0 20px
+	
+		margin 0 auto
+		
 		&.facebook
 			margin-top -1px
 		&.favorite
+			display block
+			float right
 			font-size 30px
 			margin-top -10px
-			float right
+			
 			.love
 				color black
 				vertical-align top
 			
 			.active
 				color red
+.fb-comments
+	
+	margin-bottom 20px
+	
+@media (max-width 1199px)
+	.socials
+		&__icon
+			margin-bottom 20px
+			
+				
+			

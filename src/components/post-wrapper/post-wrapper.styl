@@ -6,7 +6,6 @@
 		background-color #fff
 		padding 40px
 		.post-wrapper
-			
 			border 1px solid $light-gold
 			@extend .blog-wrapper .main-posts-wrapper
 			.post
@@ -30,6 +29,26 @@
 							margin-top 25px
 							&:first-of-type
 								text-indent 0
+@media (max-width 1199px)
+	.post-container
+		margin-top 120px
+		
+@media (max-width 991px)
+	.post-container
+		margin-top 110px
+		
+@media (max-width 480px)
+	.post-container
+		
+		.post-inner-container
+			padding 10px
+			.post-wrapper
+				.post
+					&__title
+						font-size 24px
+						text-align center
+					&__date
+						text-align center
 							
 	
 			

@@ -67,9 +67,9 @@ mixin CreateClothItem(title,image,href,label)
 mixin CreateGallery(id, image, count)
 	-var i = 0
 		+b.UL(id=id).gallery
-			+e.LI(data-thumb=image).item
-				+e.IMG(id='i' src=image  data-large=image).item--image.my-foto
 			while i < count
+				+e.LI(data-thumb=image).item.imgBox
+					+e.IMG(id='i' src=image  data-origin=image+'?w=5000px').item--image.my-foto
 				-i++
 
 mixin CreateCard(content, title)

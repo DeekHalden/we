@@ -1,8 +1,11 @@
--var nav = [{title:'Вход/ Регистрация',href:'login.html',elClass:'lg-hidden'},{title:' Корзина пуста', href:'basket.html',elClass:'icon-basket', goodsCount: 0},{title:'Главная', href:'index.html'},{title:'Комбинат',href:'about.html'},{title:'Ткани',href:'cloths.html'},{title:'Акции',href:'discounts.html'},{title:'Новости/ Презентации',href:'blog.html'},{title:'Контакты',href:'contacts.html'},{title: 'Партнерская программа', href:'partnership.html'}]
+-var nav = [{title:'Вход/ Регистрация',href:'#login',elClass:'lg-hidden',subclass:'popup-with-zoom-anim'},{title:' Корзина пуста', href:'basket.html',elClass:'icon-basket', goodsCount: 0},{title:'Главная', href:'index.html'},{title:'Комбинат',href:'about.html'},{title:'Ткани',href:'cloths.html'},{title:'Акции',href:'discounts.html'},{title:'Новости/ Презентации',href:'blog.html'},{title:'Контакты',href:'contacts.html'},{title: 'Партнерская программа', href:'partnership.html'}]
+
+include ../login/login
+
 
 +b.navbar.container-fluid
 	.row.clearfix
-		+b.A.login(href="login.html") Вход / Регистрация
+		+b.A.login.popup-with-zoom-anim(href="#login") Вход / Регистрация
 		+b.logo
 			+e.A(href="index.html").href
 				img(src="assets/images/logo.png")
@@ -21,6 +24,6 @@
 							+e.SPAN.element--href--text #{el.title}
 							+e.SPAN.element--href--goods-count #{el.goodsCount}
 					-} else {
-						+e.A(href=el.href).element--href 
+						+e.A.element--href(href=el.href class=el.subclass) 
 							+e.SPAN.element--href--text #{el.title}
 					-}

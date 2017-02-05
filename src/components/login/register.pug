@@ -1,0 +1,12 @@
+#register.container-fluid.form-wrapper.zoom-anim-dialog.mfp-hide
+	.row
+		+b.P.title Регистрация
+		+b.FORM(action="POST" ).register-form.form
+			+e.INPUT(type="email" placeholder="Email").form-control
+			+e.INPUT(type="password" placeholder="Пароль").form-control
+			+e.INPUT(type="password" placeholder="Повторите пароль").form-control
+			+e.SPAN.error
+			+CreateButton('', 'OK', 'action-btn')
+		+b.SPAN.additional-action У меня уже есть аккаунт <a href="#login" class="additional-action__href popup-with-zoom-anim">Войти</a>
+
+

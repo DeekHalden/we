@@ -1,47 +1,59 @@
 $(document).ready(function(e) {
     $('.subscribe-action').click(function(e) {
-        var email = $('#email').val();
+
         var name = $('#name').val();
-        if ($.trim(email).length == 0) {
-        	$('.subscribe-wrapper__form--error').empty();
-            $('.subscribe-wrapper__form--error').append('Введите правильный адрес');
-            e.preventDefault();
-        }
-        if (validateEmail(email)) {
-        	$('.subscribe-wrapper__form--error').empty();
-            // $('.subscribe-wrapper__form--error').append('Email правильный');
-        }
-        else {
-        	$('.subscribe-wrapper__form--error').empty();
-            $('.subscribe-wrapper__form--error').append('Введите адрес в формате username@domain.zone');
-            e.preventDefault();
-        }
+
+        checkForValidation($('.subscribe-wrapper__form--error'), e);
+
         if($.trim(name).length === 0 ){
             $('.subscribe-wrapper__form--error').empty();
             $('.subscribe-wrapper__form--error').append('Введите имя');
             e.preventDefault();
         }
+
     });
+
     $('.partnership-action').click(function(e) {
-        var email = $('#email').val();
-        var name = $('#name').val();
-        if ($.trim(email).length == 0) {
-            $('.partnership-wrapper__form--error').empty();
-            $('.partnership-wrapper__form--error').append('Введите адрес в формате username@domain.zone');
+
+        checkForValidation($('.partnership-wrapper__form--error'), e)
+
+    });
+
+    $('.login-form .action-btn').click(function(e) {
+
+        checkForValidation($('.login-form__error'), e)
+
+    });
+
+    $('.forgot-form .action-btn').click(function(e) {
+
+        checkForValidation($('.forgot-form__error'), e);
+
+    });
+    $('.register-form .action-btn').click(function(e) {
+
+        checkForValidation($('.register-form__error'), e);
+
+    });
+});
+
+function checkForValidation(selector, e) {
+    var email = $('#email').val();
+    if ($.trim(email).length == 0) {
+            selector.empty();
+            selector.append('Введите адрес в формате username@domain.zone');
             e.preventDefault();
         }
         if (validateEmail(email)) {
-            $('.partnership-wrapper__form--error').empty();
-            // $('.partnership-wrapper__form--error').append('Email правильный');
+            selector.empty();
+            // selector.append('Email правильный');
         }
         else {
-            $('.partnership-wrapper__form--error').empty();
-            $('.partnership-wrapper__form--error').append('Введите адрес в формате username@domain.zone');
+            selector.empty();
+            selector.append('Введите адрес в формате username@domain.zone');
             e.preventDefault();
         }
-    });
-
-});
+}
 
 
 function validateEmail(email) {

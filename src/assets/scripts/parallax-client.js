@@ -13,6 +13,10 @@ $(document).ready(function(){
         console.log($(parallax).height(), clientHeight)
     }
 
+    $('.imgBox').imgZoom({
+        origin: 'data-origin'
+    });
+
     // $('.love').hover(function() {
     //     $(this).attr('src','https://static.parastorage.com/services/santa/1.2080.14/static/images/new-blog-social-icons/like-post-hover.svg');
     // })
@@ -46,6 +50,8 @@ $(document).ready(function(){
     $('.easyPaginateNav a').on('click',function() {
         setParallaxHeight();
     })
+
+    
     if ($(window).width() < 1199) {
         var slides = $('.thumb')
         var slide;
@@ -158,14 +164,6 @@ $(document).ready(function(){
 
     });
 
-    
-   
-    $(".my-foto").imagezoomsl({
-
-     zoomrange: [3, 3]
-    }).click(function(){
-        console.log($(this))
-    });
 
 
     var max_chars = 500;
@@ -227,4 +225,20 @@ $(document).ready(function(){
 
     })()
     setParallaxHeight();
+
+    $('.popup-with-zoom-anim').magnificPopup({
+        type: 'inline',
+
+        fixedContentPos: false,
+        fixedBgPos: true,
+
+        overflowY: 'auto',
+
+        closeBtnInside: true,
+        preloader: false,
+        
+        midClick: true,
+        removalDelay: 300,
+        mainClass: 'my-mfp-zoom-in'
+    });
 })
