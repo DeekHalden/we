@@ -49,7 +49,7 @@
       <div class="row">
         <p class="title">Регистрация
         </p>
-        <form class="register-form form" action="POST"><input class="register-form__form-control" type="email" placeholder="Email"/><input class="register-form__form-control" type="password" placeholder="Пароль"/><input class="register-form__form-control" type="password" placeholder="Повторите пароль"/><span class="register-form__error"></span><a class="action-btn" href="">OK</a>
+        <form class="register-form form" action="POST"><input class="register-form__form-control" type="text" placeholder="Контактное лицо"/><input class="register-form__form-control" type="number" placeholder="Телефон"/><input class="register-form__form-control" type="email" placeholder="Email" id="email"/><input class="register-form__form-control important" type="text" placeholder="Наименование​ ​юр.​ ​лица"/><input class="register-form__form-control important" type="text" placeholder="Юр.​ ​адрес"/><input class="register-form__form-control important" type="number" placeholder="​ИНН"/><input class="register-form__form-control important" type="number" placeholder="​КПП"/><input class="register-form__form-control important" type="number" placeholder="ОРГН"/><input class="register-form__form-control important" type="text" placeholder="Банковские реквизиты"/><input class="register-form__form-control" type="password" placeholder="Пароль"/><input class="register-form__form-control" type="password" placeholder="Повторите пароль"/><span class="register-form__error"></span><a class="action-btn" href="">OK</a>
         </form><span class="additional-action">У меня уже есть аккаунт <a href="#login" class="additional-action__href popup-with-zoom-anim">Войти</a></span>
       </div>
     </div>
@@ -77,6 +77,8 @@
           <li class="nav__element"><a class="nav__element--href" href="discounts.html"> <span class="nav__element--href--text">Акции</span></a>
           </li>
           <li class="nav__element"><a class="nav__element--href" href="blog.html"> <span class="nav__element--href--text">Новости/ Презентации</span></a>
+          </li>
+          <li class="nav__element"><a class="nav__element--href" href="delivery.html"> <span class="nav__element--href--text">Доставка и оплата</span></a>
           </li>
           <li class="nav__element"><a class="nav__element--href" href="contacts.html"> <span class="nav__element--href--text">Контакты</span></a>
           </li>
@@ -111,25 +113,19 @@
           <p class="heading__subheading">Если вы не нашли подходящий рисунок, можете заказать собственный дизайн ткани.
           </p>
         </div>
-        <div class="media-container clearfix">
-          <div class="item"><span class="item__label">ХИТ</span>
-            <div class="item__image-wrapper"><img class="item__image-wrapper--image" src="assets/images/butterfly.jpg" alt="" role="presentation"/>
-            </div>
-            <p class="item__title">Баракан
-            </p>
-          </div>
-          <div class="item">
-            <div class="item__image-wrapper"><img class="item__image-wrapper--image" src="assets/images/butterfly.jpg" alt="" role="presentation"/>
-            </div>
-            <p class="item__title">Баракан
-            </p>
-          </div>
-          <div class="item"><span class="item__label">ХИТ</span>
-            <div class="item__image-wrapper"><img class="item__image-wrapper--image" src="assets/images/butterfly.jpg" alt="" role="presentation"/>
-            </div>
-            <p class="item__title">Баракан
-            </p>
-          </div>
+        <div class="media-container clearfix"><a class="item" href="item.html"><span class="item__label">ХИТ</span><span class="item__image-wrapper"><img class="item__image-wrapper--image" src="assets/images/butterfly.jpg" alt="" role="presentation"/></span>
+          <p class="item__title">Баракан
+          </p>
+          <p class="item__subtitle">Смотреть
+          </p></a><a class="item" href="item.html"><span class="item__image-wrapper"><img class="item__image-wrapper--image" src="assets/images/butterfly.jpg" alt="" role="presentation"/></span>
+          <p class="item__title">Баракан
+          </p>
+          <p class="item__subtitle">Смотреть
+          </p></a><a class="item" href="item.html"><span class="item__label">ХИТ</span><span class="item__image-wrapper"><img class="item__image-wrapper--image" src="assets/images/butterfly.jpg" alt="" role="presentation"/></span>
+          <p class="item__title">Баракан
+          </p>
+          <p class="item__subtitle">Смотреть
+          </p></a>
         </div>
       </div>
       <div class="row"><a class="collections-btn" href="cloths.html">Смотреть все коллекции</a>
@@ -204,15 +200,21 @@
         <div class="content">
               <h2 class="content__heading">Каталог тканей «Основа»: только последние тренды и современный взгляд
               </h2>
-              <p class="content__content">Комбинат «Основа» - это современное молодое предприятие, идущее не престо в ногу со временем, а задающее темп этому шагу. Мы в тренде, мы и есть тренд: Мы современное производство с новейшими вязальными,  печатными, сушильно-стабилизационными  машинами. Мы выпускаем современный экологичный материал для современной активной жизни. Мы -  талантливые молодые художники – студенты и выпускники  Высших учебных заведений, среди которых регулярно проводятся конкурсы на лучшие и оригинальные идеи для дизайнов тканей. Мы новое веяние в текстильной промышленности.
+              <h3 class="content__subheading">
+              </h3>
+              <p class="content__content">Комбинат «Основа» - это современное молодое предприятие, идущее не просто в ногу со временем, а задающее темп этому шагу. Мы в тренде, мы и есть тренд: Мы современное производство с новейшими вязальными,  печатными, сушильно-стабилизационными  машинами. Мы выпускаем современный экологичный материал для современной активной жизни. Мы -  талантливые молодые художники – студенты и выпускники  Высших учебных заведений, среди которых регулярно проводятся конкурсы на лучшие и оригинальные идеи для дизайнов тканей. Мы новое веяние в текстильной промышленности.
               </p>
               <h2 class="content__heading">Каталог тканей «Основа»: только последние тренды и современный взгляд
               </h2>
-              <p class="content__content">Комбинат «Основа» - это современное молодое предприятие, идущее не престо в ногу со временем, а задающее темп этому шагу. Мы в тренде, мы и есть тренд: Мы современное производство с новейшими вязальными,  печатными, сушильно-стабилизационными  машинами. Мы выпускаем современный экологичный материал для современной активной жизни. Мы -  талантливые молодые художники – студенты и выпускники  Высших учебных заведений, среди которых регулярно проводятся конкурсы на лучшие и оригинальные идеи для дизайнов тканей. Мы новое веяние в текстильной промышленности.
+              <h3 class="content__subheading">
+              </h3>
+              <p class="content__content">Комбинат «Основа» - это современное молодое предприятие, идущее не просто в ногу со временем, а задающее темп этому шагу. Мы в тренде, мы и есть тренд: Мы современное производство с новейшими вязальными,  печатными, сушильно-стабилизационными  машинами. Мы выпускаем современный экологичный материал для современной активной жизни. Мы -  талантливые молодые художники – студенты и выпускники  Высших учебных заведений, среди которых регулярно проводятся конкурсы на лучшие и оригинальные идеи для дизайнов тканей. Мы новое веяние в текстильной промышленности.
               </p>
               <h2 class="content__heading">Каталог тканей «Основа»: только последние тренды и современный взгляд
               </h2>
-              <p class="content__content">Комбинат «Основа» - это современное молодое предприятие, идущее не престо в ногу со временем, а задающее темп этому шагу. Мы в тренде, мы и есть тренд: Мы современное производство с новейшими вязальными,  печатными, сушильно-стабилизационными  машинами. Мы выпускаем современный экологичный материал для современной активной жизни. Мы -  талантливые молодые художники – студенты и выпускники  Высших учебных заведений, среди которых регулярно проводятся конкурсы на лучшие и оригинальные идеи для дизайнов тканей. Мы новое веяние в текстильной промышленности.
+              <h3 class="content__subheading">
+              </h3>
+              <p class="content__content">Комбинат «Основа» - это современное молодое предприятие, идущее не просто в ногу со временем, а задающее темп этому шагу. Мы в тренде, мы и есть тренд: Мы современное производство с новейшими вязальными,  печатными, сушильно-стабилизационными  машинами. Мы выпускаем современный экологичный материал для современной активной жизни. Мы -  талантливые молодые художники – студенты и выпускники  Высших учебных заведений, среди которых регулярно проводятся конкурсы на лучшие и оригинальные идеи для дизайнов тканей. Мы новое веяние в текстильной промышленности.
               </p>
         </div>
       </div>
