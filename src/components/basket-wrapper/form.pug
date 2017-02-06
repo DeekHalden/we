@@ -1,3 +1,5 @@
+-var countries = ['Россия','Беларусь','Казахстан','Украина','Узбекистан']
+
 .user.clearfix
 		+b.FORM(action="POST" ).order-form.form.clearfix
 			.info-row
@@ -7,14 +9,18 @@
 				+e.INPUT(type="email" placeholder="Email" id="email").form-control
 			.destination-row
 				p.heading Адрес доставки
-				+e.INPUT(type="text" placeholder="​Страна").form-control.important
+				+e.SELECT.form-control.important.country
+					each el, i in countries
+						+e.OPTION(value=el) #{el} 
 				+e.INPUT(type="text" placeholder="Город").form-control.important
 				+e.INPUT(type="text" placeholder="Улица").form-control.important
 				+e.SPAN.error
 			.note-row
 				+b.headings-row 
-					+e.SPAN.heading Способ доставки <br><input type="radio">По договоренности
-					+e.SPAN.heading Способ доставки <br><input type="radio">Офлайн оплата
+					+e.SPAN.heading Способ доставки <br>
+						<input class="radio-input" type="radio" id="delivery"><label for="delivery">По договоренности</label>
+					+e.SPAN.heading Способ оплаты <br>
+						<input class="radio-input" type="radio" id="payment"><label for="payment">Офлайн оплата</label>
 
 				p.heading Примечание
 				+e.TEXTAREA(type="text" placeholder="Примечание").form-control

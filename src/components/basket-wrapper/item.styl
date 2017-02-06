@@ -1,23 +1,38 @@
 .cards-row
-	margin-top 30px
+	
 	.card
-		// display flex
-		// justify-content space-between
+		padding-top 40px
+		position relative
+		display flex
+		justify-content space-between
 		&__image-container
-			width 100px
+			width 20%
 			float left
-			margin-right 100px
+			
 			&--image
 				max-width 100%
 				height auto	
 		&__title
+			text-align right
 			display inline-block
 			color $gold
 			font-size 26px
-			margin-right 100px
+			width 18%
 		&__sub
 			font-size 18px
 			color $light-gray
+			.select
+				float right
+		
+		&__remove
+			position absolute 
+			right 0
+			top 0
+			color $light-gray
+			cursor pointer
+			&:hover
+				color $dark-gray
+				transform scale(1.1)
 		// &__price
 			
 			
