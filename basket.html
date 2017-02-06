@@ -89,42 +89,84 @@
     </div>
     <div class="container-fluid basket-wrapper">
       <div class="title"> 
-        <p>Аббай</p>
+        <p>ОФОРМЛЕНИЕ ЗАКАЗА</p>
         <div class="cards-row">
           <div class="card clearfix">
             <div class="card__image-container"><img class="card__image-container--image" src="/assets/images/item.jpg" alt="" role="presentation"/>
             </div>
-            <div class="card__title">Аббай <br><span class="card__sub">Артикул: P00504TU
+            <div class="card__title">Название <br><span class="card__sub">Аббай<br>Артикул: P00504TU
             </div>
             <div class="card__title">Стоимость <br><span class="card__sub">7.215руб.</span>
             </div>
-            <div class="card__title">Количество  <br><span class="card__sub">1</span>
-            </div>
+            <div class="card__title">
+              Количество  <br><span class="card__sub"><select class="select">
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+</select>
+            </div></span>
             <div class="card__title">Сумма <br><span class="card__sub">7.215руб.</span>
+            </div>
+            <div class="card__remove">&#10005;
             </div>
           </div>
           <div class="card clearfix">
             <div class="card__image-container"><img class="card__image-container--image" src="/assets/images/item.jpg" alt="" role="presentation"/>
             </div>
-            <div class="card__title">Аббай <br><span class="card__sub">Артикул: P00504TU
+            <div class="card__title">Название <br><span class="card__sub">Аббай<br>Артикул: P00504TU
             </div>
             <div class="card__title">Стоимость <br><span class="card__sub">7.215руб.</span>
             </div>
-            <div class="card__title">Количество  <br><span class="card__sub">1</span>
-            </div>
+            <div class="card__title">
+              Количество  <br><span class="card__sub"><select class="select">
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+</select>
+            </div></span>
             <div class="card__title">Сумма <br><span class="card__sub">7.215руб.</span>
+            </div>
+            <div class="card__remove">&#10005;
             </div>
           </div>
           <div class="card clearfix">
             <div class="card__image-container"><img class="card__image-container--image" src="/assets/images/item.jpg" alt="" role="presentation"/>
             </div>
-            <div class="card__title">Аббай <br><span class="card__sub">Артикул: P00504TU
+            <div class="card__title">Название <br><span class="card__sub">Аббай<br>Артикул: P00504TU
             </div>
             <div class="card__title">Стоимость <br><span class="card__sub">7.215руб.</span>
             </div>
-            <div class="card__title">Количество  <br><span class="card__sub">1</span>
-            </div>
+            <div class="card__title">
+              Количество  <br><span class="card__sub"><select class="select">
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+</select>
+            </div></span>
             <div class="card__title">Сумма <br><span class="card__sub">7.215руб.</span>
+            </div>
+            <div class="card__remove">&#10005;
             </div>
           </div>
         </div>
@@ -139,10 +181,24 @@
             <p class="heading">Данные пользователя</p><input class="order-form__form-control" type="text" placeholder="Контактное лицо"/><input class="order-form__form-control" type="tel" placeholder="Телефон"/><input class="order-form__form-control" type="email" placeholder="Email" id="email"/>
           </div>
           <div class="destination-row">
-            <p class="heading">Адрес доставки</p><input class="order-form__form-control important" type="text" placeholder="​Страна"/><input class="order-form__form-control important" type="text" placeholder="Город"/><input class="order-form__form-control important" type="text" placeholder="Улица"/><span class="order-form__error"></span>
+            <p class="heading">Адрес доставки</p>
+            <select class="order-form__form-control important country">
+              <option value="Россия">Россия 
+              </option>
+              <option value="Беларусь">Беларусь 
+              </option>
+              <option value="Казахстан">Казахстан 
+              </option>
+              <option value="Украина">Украина 
+              </option>
+              <option value="Узбекистан">Узбекистан 
+              </option>
+            </select><input class="order-form__form-control important" type="text" placeholder="Город"/><input class="order-form__form-control important" type="text" placeholder="Улица"/><span class="order-form__error"></span>
           </div>
           <div class="note-row">
-            <div class="headings-row"> <span class="headings-row__heading">Способ доставки <br><input type="radio">По договоренности</span><span class="headings-row__heading">Способ доставки <br><input type="radio">Офлайн оплата</span>
+            <div class="headings-row"> <span class="headings-row__heading">
+              Способ доставки <br><input class="radio-input" type="radio" id="delivery"><label for="delivery">По договоренности</label></span><span class="headings-row__heading">
+              Способ оплаты <br><input class="radio-input" type="radio" id="payment"><label for="payment">Офлайн оплата</label></span>
             </div>
             <p class="heading">Примечание</p><textarea class="order-form__form-control" type="text" placeholder="Примечание"></textarea>
           </div>
