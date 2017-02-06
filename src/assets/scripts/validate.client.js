@@ -33,6 +33,19 @@ $(document).ready(function(e) {
     $('.register-form .action-btn').click(function(e) {
 
         checkForValidation($('.register-form__error'), e);
+        if($('.important').val.length < 4){
+            $('.important').css('border-color', 'red')
+            $('.register-form__error').append(('<br>Поля выделенные красным цветом не могут быть менее 4 символов'))
+        }
+
+    });
+    $('.order').click(function(e) {
+
+        checkForValidation($('.order-form__error'), e);
+        if($('.important').val.length < 4){
+            $('.important').css('border-color', 'red')
+            $('.order-form__error').append(('<br>Поля выделенные красным цветом не могут быть менее 4 символов'))
+        }
 
     });
 });
@@ -41,7 +54,7 @@ function checkForValidation(selector, e) {
     var email = $('#email').val();
     if ($.trim(email).length == 0) {
             selector.empty();
-            selector.append('Введите адрес в формате username@domain.zone');
+            selector.append('Введите email в формате username@domain.zone');
             e.preventDefault();
         }
         if (validateEmail(email)) {
@@ -50,7 +63,7 @@ function checkForValidation(selector, e) {
         }
         else {
             selector.empty();
-            selector.append('Введите адрес в формате username@domain.zone');
+            selector.append('Введите email в формате username@domain.zone');
             e.preventDefault();
         }
 }

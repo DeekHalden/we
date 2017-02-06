@@ -1,0 +1,33 @@
+include /mixins/main_mixins
+
+-var info = {heading:'Первый в России комбинат флисового полотна "ОСНОВА"', tel:'Телефон: +7 (920) 369-08-27',email:'info@osnova37.ru',address:'Наше производство: г.Родники, ул. Советская, д. 20',subheading:'Мы воплотим в жизнь все ваши дизайнерские мечты'}
+-var shop = {city: 'ИВАНОВО', address:'ул. Сосновая, 16 б, лит 1'}
+-var i = 0
+
+include ./map
+
+.container-fluid.main-contacts-wrapper
+	+b.contacts-wrapper.row
+		+CreateContacts(info.heading, info.tel, info.email,info.address, info.subheading)
+		+b.shops
+			+e.H5.title НАШИ МАГАЗИНЫ
+			.shops-wrapper
+				while i < 2
+					+b.shop-wrapper
+						+e.text
+							+e.P.text--city #{shop.city}
+							+e.P.text--address #{shop.address}
+						+CreateButton('','На карте','collections-btn map-btn')
+					-i++
+	.row
+		+b.contact-form.clearfix
+			+e.FORM(name="subscribe" action="POST").form.clearfix
+				.input-wrapper
+					+e.INPUT.form--form-control.form--name#name(placeholder="Контактное лицо (ФИО, должность)" type="text" name="name" )
+					+e.INPUT.form--form-control.form--email#email(placeholder="email для регистрации юр.лица" type="email" 
+					name="email")
+					+e.INPUT.form--form-control.form--tel#tel(placeholder="Тема" type="text" name="text" )
+				.textarea-wrapper
+					+e.TEXTAREA.form--form-control.form--message#message(placeholder="Сообщение" type="text" name="message" )
+			+CreateButton('#map','Отправить', 'action-btn contact-action')
+				+e.SPAN.form--error

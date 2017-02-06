@@ -26,9 +26,10 @@ mixin CreateLightbox(image, count, data_lightbox, className,  title, content, da
 
 
 
-mixin CreateSeo(title, content)
+mixin CreateSeo(title, content, subheading)
 	if title
 		+e.H2.heading #{title}
+		+e.H3.subheading #{subheading}
 	+e.P.content #{content}
 
 
@@ -55,14 +56,14 @@ mixin CreateLegend(title, content,className, author)
 			+e.P.content #{el}
 
 
-mixin CreateClothItem(title,image,href,label)
+mixin CreateClothItem(title,image,href,label, className)
 	+b.A(href=href).card-wrapper
 		+e.SPAN.image-wrapper
 			+e.IMG(src=image, data-lightbox=data_lightbox data-title="").image-wrapper--image
-		+e.SPAN.button Детальная информация
+		+e.SPAN.button Быстрый просмотр
 		+e.SPAN.title #{title}
 		if label
-			+e.SPAN.label #{label}
+			+e.SPAN(class="" + className).label #{label}
 
 mixin CreateGallery(id, image, count)
 	-var i = 0
@@ -105,6 +106,13 @@ mixin CreatePostCard(title, date, image, content, className)
 						each el, i in content
 							+e.P #{el} 
 
+mixin CreateContacts(title, tel,email,address, subtitle)
+	+e.H2.heading #{title}
+	+e.H3.subheading #{subtitle}
+	+e.contacts
+		+e.SPAN.contacts--content.tel #{tel}
+		+e.SPAN.contacts--content.email <a href="mailto:"#{email}" class="href">Email: #{email}</a>
+		+e.SPAN.contacts--content.address #{address}
 
 mixin CreateButton(href, text,button_class)
 	a(href=href class=button_class) #{text}

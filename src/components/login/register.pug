@@ -2,7 +2,17 @@
 	.row
 		+b.P.title Регистрация
 		+b.FORM(action="POST" ).register-form.form
-			+e.INPUT(type="email" placeholder="Email").form-control
+			+e.INPUT(type="text" placeholder="Контактное лицо").form-control
+			+e.INPUT(type="number" placeholder="Телефон").form-control
+			+e.INPUT(type="email" placeholder="Email" id="email").form-control
+			+e.INPUT(type="text" placeholder="Наименование​ ​юр.​ ​лица").form-control.important
+			
+			+e.INPUT(type="text" placeholder="Юр.​ ​адрес").form-control.important
+			+e.INPUT(type="number" placeholder="​ИНН").form-control.important
+			+e.INPUT(type="number" placeholder="​КПП").form-control.important
+			+e.INPUT(type="number" placeholder="ОРГН").form-control.important
+			+e.INPUT(type="text" placeholder="Банковские реквизиты").form-control.important
+
 			+e.INPUT(type="password" placeholder="Пароль").form-control
 			+e.INPUT(type="password" placeholder="Повторите пароль").form-control
 			+e.SPAN.error

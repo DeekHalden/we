@@ -60,12 +60,14 @@
 		position relative
 		&__element
 			border-left 1px solid $gold
-			padding-left 20px
+			padding-left 15px
 			&--href
-				font-size 24px
+				font-size 22px
 				text-decoration none
 				color $light-gold
 				transition .4s ease all
+				&.active 
+					color $light-gray
 			a:hover
 				color #4A410D
 		&__element:first-child,&__element:nth-child(2),&__element:nth-child(3) 
@@ -81,13 +83,14 @@
 			&--href
 				
 				position relative
+			
 			.nav__element--href--text
 					display none
 			.nav__element--href--goods-count
 					font-size 18px
 					position absolute
 					top 7px
-					left 27px
+					left 23px
 					color #fff
 			
 		&__element.lg-hidden
@@ -175,7 +178,7 @@
 			&__element, &__element:first-child
 			
 				border none 
-				border-bottom 1px solid #f4f4f4
+				border-bottom 1px solid #f4f4f4 !important
 			&__element.lg-hidden
 				display block
 			&__element.xs-hidden
@@ -199,7 +202,7 @@
 				.nav__element--href--text
 					display inline-block
 				.nav__element--href--goods-count
-					top 3px
+					top 0px
 					left -18px
 
 		

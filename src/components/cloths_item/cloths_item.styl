@@ -1,4 +1,4 @@
-	
+f	
 .cards-wrapper
 	padding 20px
 	display flex
@@ -9,12 +9,13 @@
 		width 250px
 		position absolute
 		top -10px
-		right 35px
+		right 42px
 		border 1px solid #212020
 		padding 5px 20px
 		z-index 5
 		background-color #fff
-		c
+		&:hover 
+			cursor pointer
 		.down-arrowhead
 			position absolute
 			right 10px
@@ -22,6 +23,8 @@
 		.select-wrapper
 			&__item
 				padding 10px 0
+				&:hover 
+					opacity .7
 				&--checked
 					position absolute
 					right 10px
@@ -44,10 +47,8 @@
 				transition .2s ease all
 				vertical-align middle
 				display inline-block
-				
-		&__label
+		.label
 			position absolute
-			background-color #DEC328
 			color #fff
 			padding 5px 20px
 			text-transform capitalize
@@ -55,6 +56,11 @@
 			font-weight 300
 			top 0
 			left 0
+		&__hot
+			background-color #DEC328
+		&__discount
+			background-color red
+			
 		&__button
 			position absolute
 			bottom 0px
@@ -87,7 +93,7 @@
 	.cards-wrapper
 		padding-top 30px
 		.select
-			
+			position relative
 			right 34px
 			
 		// .card-wrapper

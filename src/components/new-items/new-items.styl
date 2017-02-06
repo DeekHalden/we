@@ -36,6 +36,9 @@
 			color $gold
 			text-align center
 			transition .2s ease all
+			overflow hidden
+			text-decoration none
+			
 			&__label
 				width 68px
 				height 44px
@@ -47,6 +50,7 @@
 				background-color #fff
 				z-index 99
 			&__image-wrapper
+				display block
 				overflow hidden
 				&--image
 					transition .2s ease all
@@ -56,10 +60,20 @@
 				font-size 20px
 				font-weight 200
 				font-family "eb garamond", serif
+			&__subtitle
+				font-size 20px
+				display none
+				cursor pointer
 		.item:hover .item__image-wrapper--image
 			transform scale(1.1)
 		.item:hover
 			opacity .5
+		.item:hover .item__title
+			display none
+		.item:hover .item__subtitle
+			display block
+			
+			
 	
 		
 

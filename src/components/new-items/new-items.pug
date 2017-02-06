@@ -10,12 +10,13 @@ include /mixins/main_mixins
 			+e.P.subheading Если вы не нашли подходящий рисунок, можете заказать собственный дизайн ткани.
 		.media-container.clearfix
 			each item, i in items
-				+b.item
+				+b.A(href="item.html").item
 					-if(item.label.length > 0) {
 						+e.SPAN.label #{item.label}
 					-}
 					+e.image-wrapper
 						+e.IMG(src=item.img).image-wrapper--image
 					+e.P.title #{item.title}
+					+e.P.subtitle Смотреть
 	.row
 		+CreateButton('cloths.html','Смотреть все коллекции' ,'collections-btn')

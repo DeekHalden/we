@@ -1,0 +1,21 @@
+.user.clearfix
+		+b.FORM(action="POST" ).order-form.form.clearfix
+			.info-row
+				p.heading Данные пользователя
+				+e.INPUT(type="text" placeholder="Контактное лицо").form-control
+				+e.INPUT(type="tel" placeholder="Телефон").form-control
+				+e.INPUT(type="email" placeholder="Email" id="email").form-control
+			.destination-row
+				p.heading Адрес доставки
+				+e.INPUT(type="text" placeholder="​Страна").form-control.important
+				+e.INPUT(type="text" placeholder="Город").form-control.important
+				+e.INPUT(type="text" placeholder="Улица").form-control.important
+				+e.SPAN.error
+			.note-row
+				+b.headings-row 
+					+e.SPAN.heading Способ доставки <br><input type="radio">По договоренности
+					+e.SPAN.heading Способ доставки <br><input type="radio">Офлайн оплата
+
+				p.heading Примечание
+				+e.TEXTAREA(type="text" placeholder="Примечание").form-control
+		+CreateButton('', 'Заказать', 'order action-btn')

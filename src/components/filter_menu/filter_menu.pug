@@ -8,7 +8,7 @@
 			+e.UL.content--list 
 				+e.P.content--list-heading Все
 				each el, i in collection_sort
-					li.content--element #{el}
+					+e.LI.content--element #{el}
 
 	+b.filter-accordion.price-filter
 		+e.A().title Цена 

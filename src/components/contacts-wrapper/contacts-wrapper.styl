@@ -1,0 +1,153 @@
+@import 'map'
+
+.main-contacts-wrapper
+	margin-top 180px
+	
+	.contacts-wrapper
+		background-color rgba(255,255,255,.8)
+		border 15px solid #fff
+		padding 20px
+		&__heading
+			color $light-gold
+			font-size 32px
+		&__subheading
+			font-family lobster,cursive
+			font-weight 200
+			color $gold
+			font-size 29px
+		&__heading, &__subheading
+			text-align center
+			margin-bottom 20px
+		&__contacts
+			width 70%
+			margin 0 auto
+			display flex
+			flex-wrap wrap
+			justify-content space-around
+			font-size 22px
+			color $dark-gray
+			font-weight 500
+			&--content
+				text-align center
+				&:last-child
+					width 100%
+				& .href
+					text-decoration none
+					color $dark-gray
+					font-weight 600
+					&:hover
+						color $light-gray
+		.shops
+			
+			&__title
+				margin 40px 0
+				text-align center
+				color $light-gray
+				font-size 20px
+				font-weight 300
+			.shops-wrapper
+				display flex
+				justify-content space-around
+				flex-wrap wrap
+				padding 0 50px
+				position relative
+				&:after
+					content ''
+					position absolute
+					border 1px solid $gold
+					height 50px			
+								
+				.shop-wrapper
+					text-align center
+					&__text
+						&--city
+							text-align center
+							margin 0 auto
+							color $light-gold
+							font-size 22px
+						&--address
+							text-align center
+							font-size 20px
+							color $dark-gray
+							font-family basic,sans-serif
+							margin-bottom 30px
+	.contact-form
+		margin-top 30px
+		&__form
+			display flex
+			
+			&--form-control
+				width 100%
+				display block
+				height 30px
+				margin-bottom 3px
+				padding 10px 5px
+				&::-webkit-input-placeholder
+					font-style italic 
+				&.form--message
+					height 96px
+			.input-wrapper
+				width 50%
+				float left 
+				margin-right 3px
+			.textarea-wrapper
+				width 50%
+				height 99px
+				float right
+				.form--message
+					resize none
+		.action-btn
+			display inline
+			float right
+			width auto
+			padding-left 10px
+			padding-right 10px
+			
+				
+@media(max-width 791px)
+	.main-contacts-wrapper
+		.contacts-wrapper
+			.shops
+				.shops-wrapper
+					padding 0
+					&:after
+						border none
+					.shop-wrapper
+						width 100%
+						margin-bottom 40px
+		.contact-form
+			&__form
+				padding 10px
+				display block
+				.input-wrapper, .textarea-wrapper
+					float none
+					width 100%
+			.action-btn
+				margin-right 10px
+				
+
+				
+@media(max-width 640px)
+	.main-contacts-wrapper
+		.contacts-wrapper
+			.shop
+				.shops-wrapper
+					display block
+					.shop-wrapper
+						width 100%
+						
+					
+@media(max-width 480px)
+	.main-contacts-wrapper
+		.contacts-wrapper
+			margin-top 140px
+			&__heading
+				font-size 20px
+			padding 10px
+			&__contacts
+				width 100%
+				font-size 16px
+					
+
+
+		

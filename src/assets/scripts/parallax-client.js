@@ -1,17 +1,19 @@
-$(document).ready(function(){
-    // $('#posts').jPaginate({items: 10, paginaton_class: "myownclass"});
-    
-    if ($(window).width() > 1199) {
-        $('.parallax-container').parallax();
-
-    }
-    function setParallaxHeight(){
+function setParallaxHeight(){
         var $body = $('body');
         var parallax = $('.parallax-container')[0];
         var clientHeight = $body.outerHeight();
         $(parallax).css('height', clientHeight +700+ 'px');
         console.log($(parallax).height(), clientHeight)
     }
+    
+$(document).ready(function(){
+   
+    
+    if ($(window).width() > 1199) {
+        $('.parallax-container').parallax();
+
+    }
+    
 
     $('.imgBox').imgZoom({
         origin: 'data-origin'
@@ -209,7 +211,14 @@ $(document).ready(function(){
     });
     $('#current_menu').css('display', 'none')
     $("#current_page").click(function() {
+        if($("#current_menu").css('display') == 'none') {
+            $(".down-arrowhead").css('transform','rotate(180deg)')
+        } else {
+            $(".down-arrowhead").css('transform', 'rotate(360deg)')
+            
+        }
         $("#current_menu").slideToggle();
+
     });
 
     $("#current_menu a").click(function(event) {
@@ -217,7 +226,7 @@ $(document).ready(function(){
         var text = $(this).text();
         $(this).html(text + '<span class="select-wrapper__item--checked">&#10004;</span>');
         $("#current_page").html(text + '<span class="down-arrowhead">&#709;</span>');
-
+        
         $("#current_menu").slideToggle();
     });
     (function() {
