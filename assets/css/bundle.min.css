@@ -3980,6 +3980,9 @@ ul {
   font-size: 18px;
 }
 .partnership-wrapper .partnership-form {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
   margin-bottom: -40px;
   top: -91px;
 }
