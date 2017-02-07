@@ -5,5 +5,5 @@ include /mixins/main_mixins
 		+e.FORM(name="subscribe" action="POST").form.clearfix#subscribe-form
 			+e.INPUT.form--form-control.form--name#name(placeholder="Имя" type="text" name="name" )
 			+e.INPUT.form--form-control.form--email#email(placeholder="Укажите Ваш email" type="email" name="email")
-			+CreateButton('','Подписаться сейчас', 'action-btn subscribe-action', 'submit')
+			+CreateActionButton('Подписаться сейчас', 'action-btn subscribe-action', 'submit')
 			
