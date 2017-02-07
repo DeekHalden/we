@@ -1,6 +1,7 @@
 include /mixins/main_mixins
 -var j = 0
--var favorites = {id:'favorites-slider',href:'post.html', image:'assets/images/medved.webp',count: 3,title:'Завтрак с заместителем министра', date: '22.12.2016'}
+-var favorites = {id:'favorites-slider',href:'post.html', image:'assets/images/medved.webp',count: 3,title:'Завтрак с заместителем министра', date: '22 декабря 2016'}
+-var i = 0
 
 .posts-sidebar.clearfix
 	+b.favorites
@@ -11,3 +12,10 @@ include /mixins/main_mixins
 		while j < 6
 			+CreatePostCard(item.title, item.date, item.image, '', 'thumb')
 			-j++
+	+b.socials
+		+e.H4.heading.heading Мы в соцсетях
+		while i < 3
+			+e.A(href="vkontakte.com").item
+				+e.IMG(src="https://static.wixstatic.com/media/9c4b521dd2404cd5a05ed6115f3a0dc8.png/v1/fill/w_23,h_23,al_c,usm_0.66_1.00_0.01/9c4b521dd2404cd5a05ed6115f3a0dc8.png").item--image
+			-i++
+		

@@ -1,11 +1,5 @@
  $('#current_menu').css('display', 'none')
  $("#current_page").click(function() {
-     if ($("#current_menu").css('display') == 'none') {
-         $(".down-arrowhead").css('transform', 'rotate(180deg)')
-     } else {
-         $(".down-arrowhead").css('transform', 'rotate(360deg)')
-
-     }
      $("#current_menu").slideToggle();
 
  });

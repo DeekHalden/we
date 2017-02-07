@@ -1,27 +1,27 @@
 -var countries = ['Россия','Беларусь','Казахстан','Украина','Узбекистан']
 
 .user.clearfix
-		+b.FORM(action="POST" ).order-form.form.clearfix
+		+b.FORM(method="POST" action="" novalidate).order-form.form.clearfix#order-from
 			.info-row
 				p.heading Данные пользователя
-				+e.INPUT(type="text" placeholder="Контактное лицо").form-control
-				+e.INPUT(type="tel" placeholder="Телефон").form-control
-				+e.INPUT(type="email" placeholder="Email" id="email").form-control
+				+e.INPUT(type="text" placeholder="Контактное лицо" id="name" name="name").form-control
+				+e.INPUT(type="number" placeholder="Телефон" id="tel" name="tel").form-control
+				+e.INPUT(type="email" placeholder="Email" id="email" name="email").form-control
 			.destination-row
 				p.heading Адрес доставки
 				+e.SELECT.form-control.important.country
 					each el, i in countries
-						+e.OPTION(value=el) #{el} 
-				+e.INPUT(type="text" placeholder="Город").form-control.important
-				+e.INPUT(type="text" placeholder="Улица").form-control.important
+						+e.OPTION(value=el name="country") #{el} 
+				+e.INPUT(type="text" placeholder="Город" name="city" id="city").form-control.important
+				+e.INPUT(type="text" placeholder="Улица" name="street" id="street").form-control.important
 				+e.SPAN.error
 			.note-row
 				+b.headings-row 
 					+e.SPAN.heading Способ доставки <br>
-						<input class="radio-input" type="radio" id="delivery"><label for="delivery">По договоренности</label>
+						<input class="radio-input" type="radio" name="delivery" id="delivery"><label for="delivery">По договоренности</label>
 					+e.SPAN.heading Способ оплаты <br>
-						<input class="radio-input" type="radio" id="payment" data-color="green"><label for="payment">Офлайн оплата</label>
+						<input class="radio-input" type="radio" name ="payment" id="payment" data-color="green"><label for="payment">Офлайн оплата</label>
 
 				p.heading Примечание
 				+e.TEXTAREA(type="text" placeholder="Примечание").form-control
-		+CreateButton('', 'Заказать', 'order action-btn')
+			+CreateActionButton('Заказать', 'order action-btn', 'submit')

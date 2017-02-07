@@ -93,21 +93,24 @@
 								display block
 			.action-btn
 				
-				width 400px
+				width 100%
+				height 50px
 				margin 20px 0
 				text-transform uppercase
 				font-size 14px
-				padding 15px 90px
-				display inline
+				padding 7px 90px
+				display block
 				
 			&__item-description
 				padding 30px 0 30px
 				border-bottom 1px solid #C7C5C5
+				color #212020
+				
 				&--title
 					color #214040
 					padding-bottom 10px
 				&--content
-					font-size 18px
+					font-size 16px
 					line-height 22px
 					
 			&__delivery
@@ -116,10 +119,93 @@
 					font-size 18px
 					padding 10px 0
 				.action-btn 
+				
 					float right 
 					width auto
-					padding 0 40px
+					padding 7px 40px
 					margin 0
+	.checkout-sidebar
+		width 350px
+		right -350px
+		display block
+		position fixed
+		top 0
+		height 100%
+		z-index 999999
+		overflow-x hidden
+		overflow-y auto
+		background rgba(255,255,255, 1)
+		color #fff
+		font-style italic
+		transition .4s ease all
+		box-shadow 0 0 5px rgba(0, 0, 0, 0.7)
+		border-left 0px solid rgba(47, 46, 46, 1)
+		font-style normal
+		&__title
+			height 80px
+			line-height 80px
+			background-color #000
+			text-align center
+			font-size 23px
+			font-weight lighter
+		&__item
+			padding 40px 0
+			margin 0 40px
+			font-size 16px
+			&--image
+				width 80px
+				height 80px
+				float left
+				
+				img
+					width 100%
+					height 100%
+			&--title,&--quantity,&--price
+				
+				width 130px
+				float left
+				margin-bottom 5px
+				margin-left 30px
+				color $light-gray
+				font-weight 700
+				.disabled
+					text-decoration  line-through
+					color $light-gray
+					opacity .5
+				.quantity
+					text-transform uppercase
+					font-weight 500
+			&:not(:first-of-type)
+				border-top 1px solid #C7C5C5
+		&__total
+			position absolute
+			width 100%
+			bottom 90px
+			padding-left 40px
+			padding-bottom 10px
+			color $dark-gray
+			font-size 25px
+			border-bottom 1px solid #C7C5C5
+		.action-btn
+			width 80%
+			margin 0 auto
+			left 0
+			right 0
+			display block
+			position absolute
+			bottom 25px
+			font-size 16px
+			text-transform uppercase
+			
+			
+					
+					
+			
+				
+			
+	.checkout-sidebar.open
+		transform translateX(-350px)
+		background-color #fff
 				
 @media (max-width 1199px)
 	.item
@@ -130,7 +216,7 @@
 			.lSSlideOuter
 				max-width 70%
 				height auto
-				margin 0 auto
+				
 				.gallery
 					height 100%
 					&__item
@@ -142,7 +228,7 @@
 			.description
 				> .action-btn
 					width auto
-					padding 0	
+					
 					display block
 @media (max-width 800px)
 	.item

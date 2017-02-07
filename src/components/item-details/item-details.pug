@@ -25,7 +25,7 @@ include /mixins/main_mixins
 							each el, i in select
 								+e.LI.item
 									+e.A(value = el) #{el}
-				+CreateButton('','Добавить в корзину','action-btn')
+				+CreateActionButton('Добавить в корзину','action-btn checkout', 'submit')
 				+e.item-description
 					+e.H4.item-description--title О ТКАНИ
 					+e.P.item-description--content #{item.about}
@@ -33,6 +33,26 @@ include /mixins/main_mixins
 					each el, i in item.delivery
 						+e.P.delivery--content #{el} 
 					+CreateButton('', 'Калькулятор','action-btn')
+	+b.checkout-sidebar
+		+e.title Корзина
+		+e.item.clearfix
+			+e.item--image
+				img(src=item.image)
+			+e.item--title Атташе
+			+e.item--quantity <span class="quantity">Количество:</span> 1
+			+e.item--price <span class="disabled">#{item.old_price}</span> #{item.price}
+		+e.item.clearfix
+			+e.item--image
+				img(src=item.image)
+			+e.item--title Атташе
+			+e.item--quantity <span class="quantity">Количество:</span> 1
+			+e.item--price <span class="disabled">#{item.old_price}</span> #{item.price}
+		+e.total
+			+e.total--title
+				p Сумма
+			+e.total--cost
+				p 14.430руб.
+		+CreateButton('basket.html','Перейти в корзину', 'action-btn' )
 
 
 

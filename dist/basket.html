@@ -29,11 +29,12 @@
       <div class="row">
         <p class="title">Вход
         </p>
-        <form class="login-form form" action="POST"><input class="login-form__form-control" type="email" placeholder="Email"/><input class="login-form__form-control" type="password" placeholder="Пароль"/>
+        <form class="login-form form" action="me.html" method="GET" novalidate="novalidate" name="login-form" id="login-form"><input class="login-form__form-control" id="email" type="email" placeholder="Email" name="email"/><input class="login-form__form-control" id="password" type="password" placeholder="Пароль" name="password"/>
           <div class="login-form__checkbox"><input class="login-form__checkbox--remember-me" type="checkbox" id="remember-me" name="remember-me"/>
             <label class="login-form__checkbox--label" for="remember-me">Запомнить меня
             </label><a class="login-form__checkbox--forgot popup-with-zoom-anim" href="#forgot-password">Не помню пароль</a>
-          </div><span class="login-form__error"></span><a class="action-btn" href="">OK</a>
+          </div>
+              <input class="action-btn login-action" name="submit" type="submit" value="OK">
         </form><span class="additional-action">У вас нет аккаунта? <a href="#register" class="additional-action__href popup-with-zoom-anim">Регистрация</a></span>
       </div>
     </div>
@@ -41,7 +42,7 @@
       <div class="row">
         <p class="title">Смена пароля <br> <span class="subtitle">Пожалуйста, введите ваш email</span>
         </p>
-        <form class="forgot-form form" action="POST"><input class="forgot-form__form-control" type="email" placeholder="Email"/><span class="forgot-form__error"></span><a class="action-btn" href="">OK</a>
+        <form class="forgot-form form" action="POST" novalidate="novalidate" id="change-form"><input class="forgot-form__form-control" type="email" placeholder="Email" name="email" id="email"/><span class="forgot-form__error"></span><a class="action-btn" href="#">OK</a>
         </form>
       </div>
     </div>
@@ -49,12 +50,15 @@
       <div class="row">
         <p class="title">Регистрация
         </p>
-        <form class="register-form form" action="POST"><input class="register-form__form-control" type="text" placeholder="Контактное лицо"/><input class="register-form__form-control" type="number" placeholder="Телефон"/><input class="register-form__form-control" type="email" placeholder="Email" id="email"/><input class="register-form__form-control important" type="text" placeholder="Наименование​ ​юр.​ ​лица"/><input class="register-form__form-control important" type="text" placeholder="Юр.​ ​адрес"/><input class="register-form__form-control important" type="number" placeholder="​ИНН"/><input class="register-form__form-control important" type="number" placeholder="​КПП"/><input class="register-form__form-control important" type="number" placeholder="ОРГН"/><input class="register-form__form-control important" type="text" placeholder="Банковские реквизиты"/><input class="register-form__form-control" type="password" placeholder="Пароль"/><input class="register-form__form-control" type="password" placeholder="Повторите пароль"/><span class="register-form__error"></span><a class="action-btn" href="">OK</a>
+        <form class="register-form form" action="me.html" method="GET" novalidate="novalidate" id="register-form"><input class="register-form__form-control" type="text" placeholder="Контактное лицо" name="name" id="name"/><input class="register-form__form-control" type="number" placeholder="Телефон" name="tel" id="tel"/><input class="register-form__form-control" type="email" placeholder="Email" name="email" id="email"/><input class="register-form__form-control important" type="text" placeholder="Наименование​ ​юр.​ ​лица" name="entity" id="entity"/><input class="register-form__form-control important" type="text" placeholder="Юр.​ ​адрес" name="entity_address" id="entity_address"/><input class="register-form__form-control important" type="number" placeholder="​ИНН" name="id_number" id="id_number"/><input class="register-form__form-control important" type="number" placeholder="​КПП" name="KPP" id="KPP"/><input class="register-form__form-control important" type="number" placeholder="ОРГН" name="ORGN" id="ORGN"/><input class="register-form__form-control important" type="text" placeholder="Банковские реквизиты" name="requisites" id="requisites"/><input class="register-form__form-control" type="password" placeholder="Пароль" name="password" id="password"/><input class="register-form__form-control" type="password" placeholder="Повторите пароль" name="password" id="password"/><span class="register-form__error"></span>
+              <input class="action-btn" name="submit" type="submit" value="OK">
         </form><span class="additional-action">У меня уже есть аккаунт <a href="#login" class="additional-action__href popup-with-zoom-anim">Войти</a></span>
       </div>
     </div>
     <div class="navbar container-fluid">
-      <div class="row clearfix"><a class="login popup-with-zoom-anim" href="#login">Вход / Регистрация</a>
+      <div class="row clearfix">
+        <div class="login"> <a class="login__me" href="me.html">Привет, Юзер  </a><a class="login__logout">Выйти</a>
+        </div>
         <div class="logo"><a class="logo__href" href="index.html"><img src="assets/images/logo.png"></a>
         </div>
         <h1 class="heading">Комбинат ОСНОВА <span class="heading-sub">- российский производитель высококачественных тканей</span>
@@ -87,122 +91,89 @@
         </ul>
       </div>
     </div>
-    <div class="container-fluid basket-wrapper">
-      <div class="title"> 
-        <p>ОФОРМЛЕНИЕ ЗАКАЗА</p>
-        <div class="cards-row">
-          <div class="card clearfix">
-            <div class="card__image-container"><img class="card__image-container--image" src="/assets/images/item.jpg" alt="" role="presentation"/>
+    <div class="container-fluid">
+      <div class="row basket-wrapper">
+        <div class="title"> 
+          <p>ОФОРМЛЕНИЕ ЗАКАЗА</p>
+          <div class="cards-row clearfix">
+            <div class="card clearfix">
+              <div class="card__image-container"><img class="card__image-container--image" src="/assets/images/item.jpg" alt="" role="presentation"/>
+              </div>
+              <div class="card__title item-title">Название <br><span class="card__sub"><a class="card__sub--title" href=item.html>Аббай</a><br>Артикул: P00504TU
+              </div>
+              <div class="card__title item-price"> Стоимость <br><span class="card__sub">7.215руб.</span>
+              </div>
+              <div class="card__title item-quantity"> Количество  <br><span class="card__sub"><input class="card__sub--quantity" type="number" min="0" step="1" value="1"/>
+              </div></span>
+              <div class="card__title item-total"> Сумма <br><span class="card__sub">7.215руб. </span>
+              </div>
+              <div class="card__remove">&#10005;
+              </div>
             </div>
-            <div class="card__title">Название <br><span class="card__sub">Аббай<br>Артикул: P00504TU
+            <div class="card clearfix">
+              <div class="card__image-container"><img class="card__image-container--image" src="/assets/images/item.jpg" alt="" role="presentation"/>
+              </div>
+              <div class="card__title item-title">Название <br><span class="card__sub"><a class="card__sub--title" href=item.html>Аббай</a><br>Артикул: P00504TU
+              </div>
+              <div class="card__title item-price"> Стоимость <br><span class="card__sub">7.215руб.</span>
+              </div>
+              <div class="card__title item-quantity"> Количество  <br><span class="card__sub"><input class="card__sub--quantity" type="number" min="0" step="1" value="1"/>
+              </div></span>
+              <div class="card__title item-total"> Сумма <br><span class="card__sub">7.215руб. </span>
+              </div>
+              <div class="card__remove">&#10005;
+              </div>
             </div>
-            <div class="card__title">Стоимость <br><span class="card__sub">7.215руб.</span>
+            <div class="card clearfix">
+              <div class="card__image-container"><img class="card__image-container--image" src="/assets/images/item.jpg" alt="" role="presentation"/>
+              </div>
+              <div class="card__title item-title">Название <br><span class="card__sub"><a class="card__sub--title" href=item.html>Аббай</a><br>Артикул: P00504TU
+              </div>
+              <div class="card__title item-price"> Стоимость <br><span class="card__sub">7.215руб.</span>
+              </div>
+              <div class="card__title item-quantity"> Количество  <br><span class="card__sub"><input class="card__sub--quantity" type="number" min="0" step="1" value="1"/>
+              </div></span>
+              <div class="card__title item-total"> Сумма <br><span class="card__sub">7.215руб. </span>
+              </div>
+              <div class="card__remove">&#10005;
+              </div>
             </div>
-            <div class="card__title">
-              Количество  <br><span class="card__sub"><select class="select">
-<option value="1">1</option>
-<option value="2">2</option>
-<option value="3">3</option>
-<option value="4">4</option>
-<option value="5">5</option>
-<option value="6">6</option>
-<option value="7">7</option>
-<option value="8">8</option>
-<option value="9">9</option>
-<option value="10">10</option>
-</select>
-            </div></span>
-            <div class="card__title">Сумма <br><span class="card__sub">7.215руб.</span>
-            </div>
-            <div class="card__remove">&#10005;
-            </div>
-          </div>
-          <div class="card clearfix">
-            <div class="card__image-container"><img class="card__image-container--image" src="/assets/images/item.jpg" alt="" role="presentation"/>
-            </div>
-            <div class="card__title">Название <br><span class="card__sub">Аббай<br>Артикул: P00504TU
-            </div>
-            <div class="card__title">Стоимость <br><span class="card__sub">7.215руб.</span>
-            </div>
-            <div class="card__title">
-              Количество  <br><span class="card__sub"><select class="select">
-<option value="1">1</option>
-<option value="2">2</option>
-<option value="3">3</option>
-<option value="4">4</option>
-<option value="5">5</option>
-<option value="6">6</option>
-<option value="7">7</option>
-<option value="8">8</option>
-<option value="9">9</option>
-<option value="10">10</option>
-</select>
-            </div></span>
-            <div class="card__title">Сумма <br><span class="card__sub">7.215руб.</span>
-            </div>
-            <div class="card__remove">&#10005;
-            </div>
-          </div>
-          <div class="card clearfix">
-            <div class="card__image-container"><img class="card__image-container--image" src="/assets/images/item.jpg" alt="" role="presentation"/>
-            </div>
-            <div class="card__title">Название <br><span class="card__sub">Аббай<br>Артикул: P00504TU
-            </div>
-            <div class="card__title">Стоимость <br><span class="card__sub">7.215руб.</span>
-            </div>
-            <div class="card__title">
-              Количество  <br><span class="card__sub"><select class="select">
-<option value="1">1</option>
-<option value="2">2</option>
-<option value="3">3</option>
-<option value="4">4</option>
-<option value="5">5</option>
-<option value="6">6</option>
-<option value="7">7</option>
-<option value="8">8</option>
-<option value="9">9</option>
-<option value="10">10</option>
-</select>
-            </div></span>
-            <div class="card__title">Сумма <br><span class="card__sub">7.215руб.</span>
-            </div>
-            <div class="card__remove">&#10005;
-            </div>
+            <div class="total clearfix">
+              <div class="total__price">Всего 7.215руб.
+              </div>
+            </div><a class="order action-btn" href="">Заказать</a>
           </div>
         </div>
-        <div class="total">
-          <div class="total__price">
-          </div>
-        </div>
-      </div>
-      <div class="user clearfix">
-        <form class="order-form form clearfix" action="POST">
-          <div class="info-row">
-            <p class="heading">Данные пользователя</p><input class="order-form__form-control" type="text" placeholder="Контактное лицо"/><input class="order-form__form-control" type="tel" placeholder="Телефон"/><input class="order-form__form-control" type="email" placeholder="Email" id="email"/>
-          </div>
-          <div class="destination-row">
-            <p class="heading">Адрес доставки</p>
-            <select class="order-form__form-control important country">
-              <option value="Россия">Россия 
-              </option>
-              <option value="Беларусь">Беларусь 
-              </option>
-              <option value="Казахстан">Казахстан 
-              </option>
-              <option value="Украина">Украина 
-              </option>
-              <option value="Узбекистан">Узбекистан 
-              </option>
-            </select><input class="order-form__form-control important" type="text" placeholder="Город"/><input class="order-form__form-control important" type="text" placeholder="Улица"/><span class="order-form__error"></span>
-          </div>
-          <div class="note-row">
-            <div class="headings-row"> <span class="headings-row__heading">
-              Способ доставки <br><input class="radio-input" type="radio" id="delivery"><label for="delivery">По договоренности</label></span><span class="headings-row__heading">
-              Способ оплаты <br><input class="radio-input" type="radio" id="payment" data-color="green"><label for="payment">Офлайн оплата</label></span>
+        <div class="user clearfix">
+          <form class="order-form form clearfix" method="POST" action="" novalidate="novalidate" id="order-from">
+            <div class="info-row">
+              <p class="heading">Данные пользователя</p><input class="order-form__form-control" type="text" placeholder="Контактное лицо" id="name" name="name"/><input class="order-form__form-control" type="number" placeholder="Телефон" id="tel" name="tel"/><input class="order-form__form-control" type="email" placeholder="Email" id="email" name="email"/>
             </div>
-            <p class="heading">Примечание</p><textarea class="order-form__form-control" type="text" placeholder="Примечание"></textarea>
-          </div>
-        </form><a class="order action-btn" href="">Заказать</a>
+            <div class="destination-row">
+              <p class="heading">Адрес доставки</p>
+              <select class="order-form__form-control important country">
+                <option value="Россия" name="country">Россия 
+                </option>
+                <option value="Беларусь" name="country">Беларусь 
+                </option>
+                <option value="Казахстан" name="country">Казахстан 
+                </option>
+                <option value="Украина" name="country">Украина 
+                </option>
+                <option value="Узбекистан" name="country">Узбекистан 
+                </option>
+              </select><input class="order-form__form-control important" type="text" placeholder="Город" name="city" id="city"/><input class="order-form__form-control important" type="text" placeholder="Улица" name="street" id="street"/><span class="order-form__error"></span>
+            </div>
+            <div class="note-row">
+              <div class="headings-row"> <span class="headings-row__heading">
+                Способ доставки <br><input class="radio-input" type="radio" name="delivery" id="delivery"><label for="delivery">По договоренности</label></span><span class="headings-row__heading">
+                Способ оплаты <br><input class="radio-input" type="radio" name ="payment" id="payment" data-color="green"><label for="payment">Офлайн оплата</label></span>
+              </div>
+              <p class="heading">Примечание</p><textarea class="order-form__form-control" type="text" placeholder="Примечание"></textarea>
+            </div>
+                <input class="order action-btn" name="submit" type="submit" value="Заказать">
+          </form>
+        </div>
       </div>
     </div>
     <div class="footer-container contaier-fluid">

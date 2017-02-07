@@ -24,19 +24,28 @@
 			display flex
 			flex-wrap wrap
 			justify-content space-around
-			font-size 22px
-			color $dark-gray
-			font-weight 500
+			color $light-gray
+			
 			&--content
+				font-size 22px
 				text-align center
+				font-family georgia, sans-serif
+				font-weight 200	
+				margin-bottom 10px
+				& .georgia
+					font-family basic	
 				&:last-child
 					width 100%
 				& .href
 					text-decoration none
 					color $dark-gray
-					font-weight 600
+					font-weight 500
 					&:hover
 						color $light-gray
+				&.address
+					& .margined
+						margin-right 55px
+			
 		.shops
 			
 			&__title
@@ -71,11 +80,13 @@
 							color $dark-gray
 							font-family basic,sans-serif
 							margin-bottom 30px
+							
 	.contact-form
 		margin-top 30px
 		&__form
 			display flex
-			
+			flex-wrap wrap
+			justify-content flex-end
 			&--form-control
 				width 100%
 				display block
@@ -87,21 +98,24 @@
 				&.form--message
 					height 96px
 			.input-wrapper
-				width 50%
+				width 49.8%
 				float left 
-				margin-right 3px
+				margin-right .2%
 			.textarea-wrapper
 				width 50%
 				height 99px
 				float right
 				.form--message
 					resize none
-		.action-btn
-			display inline
-			float right
-			width auto
-			padding-left 10px
-			padding-right 10px
+			.action-btn
+				display block
+				float right
+				padding-left 10px
+				padding-right 10px
+			.error
+				color red
+				font-weight 600
+				font-size 18px
 			
 				
 @media(max-width 791px)

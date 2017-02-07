@@ -1,34 +1,23 @@
--var data = {heading:'ОФОРМЛЕНИЕ ЗАКАЗА', image:'/assets/images/item.jpg', title:'Аббай', article:'Артикул: P00504TU' , price:'7.215руб.', quantity: 1 , total:'7.215руб.'}
+-var data = {heading:'ОФОРМЛЕНИЕ ЗАКАЗА', image:'/assets/images/item.jpg', title:'Аббай', article:'Артикул: P00504TU' , price:'7.215руб.', quantity: 1 , total:'7.215руб.', href:'item.html'}
 -var i = 0
 
 .title 
 	p #{data.heading}
-	.cards-row
+	.cards-row.clearfix
 		while i < 3
 			+b.card.clearfix
 				+e.image-container
 					+e.IMG(src= data.image).image-container--image
-				+e.title Название <br><span class="card__sub">#{data.title}<br>#{data.article}
+				+e.title.item-title Название <br><span class="card__sub"><a class="card__sub--title" href=#{data.href}>#{data.title}</a><br>#{data.article}
 				
-				+e.title Стоимость <br><span class="card__sub">#{data.price}</span>
+				+e.title.item-price  Стоимость <br><span class="card__sub">#{data.price}</span>
 
-				+e.title Количество  <br><span class="card__sub">
-					<select class="select">
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-						<option value="5">5</option>
-						<option value="6">6</option>
-						<option value="7">7</option>
-						<option value="8">8</option>
-						<option value="9">9</option>
-						<option value="10">10</option>
-					</select>
+				+e.title.item-quantity  Количество  <br><span class="card__sub">
+					+e.INPUT(type="number" min="0" step="1" value="1").sub--quantity
 				</span>
-				+e.title Сумма <br><span class="card__sub">#{data.total}</span>
+				+e.title.item-total  Сумма <br><span class="card__sub">#{data.price} </span>
 				+e.remove &#10005;
 			-i++
-
-	+b.total
-		+e.price
+		+b.total.clearfix
+			+e.price Всего #{data.price}
+		+CreateButton('', 'Заказать', 'order action-btn')

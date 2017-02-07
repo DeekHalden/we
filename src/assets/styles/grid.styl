@@ -49,26 +49,30 @@ ul
 	margin-top -550px
 	
 .collections-btn
-		height 48px
+	height 48px
+	
+	padding  0px 20px
+	text-align center
+	margin 0 auto
+	border 1px solid $gold
+	text-decoration none
+	background-color #fff
+	color $gold
+	font-family 'Marck Script', cursive
+	font-weight 700
+	font-size 29px
+	cursor pointer
+	transition  .4s ease all
+	box-shadow -0.29px 0.96px 4px 0px rgba(0, 0, 0, 0.6)
 		
-		padding  0px 20px
-		text-align center
-		margin 0 auto
-		border 1px solid $gold
-		text-decoration none
-		color $gold
-		font-family 'Marck Script', cursive
-		font-weight 700
-		font-size 29px
-		transition  .4s ease all
-		box-shadow -0.29px 0.96px 4px 0px rgba(0, 0, 0, 0.6)
-		
-	.collections-btn:hover
+	&:hover
 			background-color $gold
 			color #fff	
+	&:focus
+		outline none
 .action-btn
 	margin-top 25px
-	display block
+	
 	color #fff
 	background-color $gold
 	text-decoration none
@@ -77,9 +81,14 @@ ul
 	line-height 36px
 	font-size 20px
 	transition .2s ease all
+	border none
+	cursor pointer
 	&:hover
+		cursor pointer
 		background-color rgba(176,161,113,.8)
 		font-size 20px
+	&:focus
+		outline none
 
 .cloths-main-container
 	background-image none
@@ -99,7 +108,7 @@ ul
 
 @media (max-width 767px)
 	.row	 
-		width 100%
+		width 95%
 		margin 0 auto
 		
 

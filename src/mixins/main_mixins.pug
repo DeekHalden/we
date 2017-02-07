@@ -8,9 +8,24 @@ mixin CreateLightboxContainer(heading, first_subheading, second_subheading, thir
 				+e.P.third-subheading #{third_subheading}
 				+CreateLightbox(image, count, data_lightbox)
 				-if(createButton){
-					+CreateButton('discounts.html','Смотреть все акции', 'collections-btn') 
+					+CreateButton('discounts.html','Смотреть все акции', 'collections-btn' ,'button') 
 				-}
 
+mixin CreateContainer(heading, first_subheading, second_subheading, third_subheading, image, count, href , createButton)
+	.container-fluid.fan-of-images
+		.row
+			+b.main-wrapper
+				+e.H1.heading #{heading}
+				+e.P.first-subheading #{first_subheading}
+				+e.P.second-subheading #{second_subheading}
+				+e.P.third-subheading #{third_subheading}
+				- for (var i =0; i < count; i++) {
+					+e.A(href=href).image-container
+						+e.IMG(src=image)
+				- }
+				-if(createButton){
+					+CreateButton('discounts.html','Смотреть все акции', 'collections-btn' ,'button') 
+				-}
 
 mixin CreateLightbox(image, count, data_lightbox, className,  title, content, data_title)
 	- for (var i =0; i < count; i++) {
@@ -60,7 +75,6 @@ mixin CreateClothItem(title,image,href,label, className)
 	+b.A(href=href).card-wrapper
 		+e.SPAN.image-wrapper
 			+e.IMG(src=image, data-lightbox=data_lightbox data-title="").image-wrapper--image
-		+e.SPAN.button Быстрый просмотр
 		+e.SPAN.title #{title}
 		if label
 			+e.SPAN(class="" + className).label #{label}
@@ -70,7 +84,7 @@ mixin CreateGallery(id, image, count)
 		+b.UL(id=id).gallery
 			while i < count
 				+e.LI(data-thumb=image).item.imgBox
-					+e.IMG(id='i' src=image  data-origin=image+'?w=5000px').item--image.my-foto
+					+e.IMG(id='i' src=image  data-origin=image+'?w=5000px').item--image
 				-i++
 
 mixin CreateCard(content, title)
@@ -110,10 +124,13 @@ mixin CreateContacts(title, tel,email,address, subtitle)
 	+e.H2.heading #{title}
 	+e.H3.subheading #{subtitle}
 	+e.contacts
-		+e.SPAN.contacts--content.tel #{tel}
-		+e.SPAN.contacts--content.email <a href="mailto:"#{email}" class="href">Email: #{email}</a>
-		+e.SPAN.contacts--content.address #{address}
+		+e.SPAN.contacts--content.tel Телефон: <span class="georgia">#{tel}</span>
+		+e.SPAN.contacts--content.email Email:<a href="mailto:"#{email}" class="href georgia"> #{email}</a>
+		+e.SPAN.contacts--content.address <span class="margined">Наше производство:</span>  #{address}
 
 mixin CreateButton(href, text,button_class)
 	a(href=href class=button_class) #{text}
 	
+	
+mixin CreateActionButton(text, button_class, type)
+	input(class=button_class name=type type=type value=text) 

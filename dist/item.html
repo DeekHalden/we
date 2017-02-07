@@ -27,11 +27,12 @@
       <div class="row">
         <p class="title">Вход
         </p>
-        <form class="login-form form" action="POST"><input class="login-form__form-control" type="email" placeholder="Email"/><input class="login-form__form-control" type="password" placeholder="Пароль"/>
+        <form class="login-form form" action="me.html" method="GET" novalidate="novalidate" name="login-form" id="login-form"><input class="login-form__form-control" id="email" type="email" placeholder="Email" name="email"/><input class="login-form__form-control" id="password" type="password" placeholder="Пароль" name="password"/>
           <div class="login-form__checkbox"><input class="login-form__checkbox--remember-me" type="checkbox" id="remember-me" name="remember-me"/>
             <label class="login-form__checkbox--label" for="remember-me">Запомнить меня
             </label><a class="login-form__checkbox--forgot popup-with-zoom-anim" href="#forgot-password">Не помню пароль</a>
-          </div><span class="login-form__error"></span><a class="action-btn" href="">OK</a>
+          </div>
+              <input class="action-btn login-action" name="submit" type="submit" value="OK">
         </form><span class="additional-action">У вас нет аккаунта? <a href="#register" class="additional-action__href popup-with-zoom-anim">Регистрация</a></span>
       </div>
     </div>
@@ -39,7 +40,7 @@
       <div class="row">
         <p class="title">Смена пароля <br> <span class="subtitle">Пожалуйста, введите ваш email</span>
         </p>
-        <form class="forgot-form form" action="POST"><input class="forgot-form__form-control" type="email" placeholder="Email"/><span class="forgot-form__error"></span><a class="action-btn" href="">OK</a>
+        <form class="forgot-form form" action="POST" novalidate="novalidate" id="change-form"><input class="forgot-form__form-control" type="email" placeholder="Email" name="email" id="email"/><span class="forgot-form__error"></span><a class="action-btn" href="#">OK</a>
         </form>
       </div>
     </div>
@@ -47,12 +48,15 @@
       <div class="row">
         <p class="title">Регистрация
         </p>
-        <form class="register-form form" action="POST"><input class="register-form__form-control" type="text" placeholder="Контактное лицо"/><input class="register-form__form-control" type="number" placeholder="Телефон"/><input class="register-form__form-control" type="email" placeholder="Email" id="email"/><input class="register-form__form-control important" type="text" placeholder="Наименование​ ​юр.​ ​лица"/><input class="register-form__form-control important" type="text" placeholder="Юр.​ ​адрес"/><input class="register-form__form-control important" type="number" placeholder="​ИНН"/><input class="register-form__form-control important" type="number" placeholder="​КПП"/><input class="register-form__form-control important" type="number" placeholder="ОРГН"/><input class="register-form__form-control important" type="text" placeholder="Банковские реквизиты"/><input class="register-form__form-control" type="password" placeholder="Пароль"/><input class="register-form__form-control" type="password" placeholder="Повторите пароль"/><span class="register-form__error"></span><a class="action-btn" href="">OK</a>
+        <form class="register-form form" action="me.html" method="GET" novalidate="novalidate" id="register-form"><input class="register-form__form-control" type="text" placeholder="Контактное лицо" name="name" id="name"/><input class="register-form__form-control" type="number" placeholder="Телефон" name="tel" id="tel"/><input class="register-form__form-control" type="email" placeholder="Email" name="email" id="email"/><input class="register-form__form-control important" type="text" placeholder="Наименование​ ​юр.​ ​лица" name="entity" id="entity"/><input class="register-form__form-control important" type="text" placeholder="Юр.​ ​адрес" name="entity_address" id="entity_address"/><input class="register-form__form-control important" type="number" placeholder="​ИНН" name="id_number" id="id_number"/><input class="register-form__form-control important" type="number" placeholder="​КПП" name="KPP" id="KPP"/><input class="register-form__form-control important" type="number" placeholder="ОРГН" name="ORGN" id="ORGN"/><input class="register-form__form-control important" type="text" placeholder="Банковские реквизиты" name="requisites" id="requisites"/><input class="register-form__form-control" type="password" placeholder="Пароль" name="password" id="password"/><input class="register-form__form-control" type="password" placeholder="Повторите пароль" name="password" id="password"/><span class="register-form__error"></span>
+              <input class="action-btn" name="submit" type="submit" value="OK">
         </form><span class="additional-action">У меня уже есть аккаунт <a href="#login" class="additional-action__href popup-with-zoom-anim">Войти</a></span>
       </div>
     </div>
     <div class="navbar container-fluid">
-      <div class="row clearfix"><a class="login popup-with-zoom-anim" href="#login">Вход / Регистрация</a>
+      <div class="row clearfix">
+        <div class="login"> <a class="login__me" href="me.html">Привет, Юзер  </a><a class="login__logout">Выйти</a>
+        </div>
         <div class="logo"><a class="logo__href" href="index.html"><img src="assets/images/logo.png"></a>
         </div>
         <h1 class="heading">Комбинат ОСНОВА <span class="heading-sub">- российский производитель высококачественных тканей</span>
@@ -90,11 +94,11 @@
         <div class="item-details clearfix">
           <div class="gallery-wrapper">
                 <ul class="gallery" id="item-gallery">
-                  <li class="gallery__item imgBox" data-thumb="assets/images/item.jpg"><img class="gallery__item--image my-foto" id="i" src="assets/images/item.jpg" data-origin="assets/images/item.jpg?w=5000px" alt="" role="presentation"/>
+                  <li class="gallery__item imgBox" data-thumb="assets/images/item.jpg"><img class="gallery__item--image" id="i" src="assets/images/item.jpg" data-origin="assets/images/item.jpg?w=5000px" alt="" role="presentation"/>
                   </li>
-                  <li class="gallery__item imgBox" data-thumb="assets/images/item.jpg"><img class="gallery__item--image my-foto" id="i" src="assets/images/item.jpg" data-origin="assets/images/item.jpg?w=5000px" alt="" role="presentation"/>
+                  <li class="gallery__item imgBox" data-thumb="assets/images/item.jpg"><img class="gallery__item--image" id="i" src="assets/images/item.jpg" data-origin="assets/images/item.jpg?w=5000px" alt="" role="presentation"/>
                   </li>
-                  <li class="gallery__item imgBox" data-thumb="assets/images/item.jpg"><img class="gallery__item--image my-foto" id="i" src="assets/images/item.jpg" data-origin="assets/images/item.jpg?w=5000px" alt="" role="presentation"/>
+                  <li class="gallery__item imgBox" data-thumb="assets/images/item.jpg"><img class="gallery__item--image" id="i" src="assets/images/item.jpg" data-origin="assets/images/item.jpg?w=5000px" alt="" role="presentation"/>
                   </li>
                 </ul>
             <div class="short-about">
@@ -145,7 +149,8 @@
                   </li>
                 </ul>
               </div>
-            </div><a class="action-btn" href="">Добавить в корзину</a>
+            </div>
+                <input class="action-btn checkout" name="submit" type="submit" value="Добавить в корзину">
             <div class="description__item-description">
               <h4 class="description__item-description--title">О ТКАНИ
               </h4>
@@ -160,6 +165,38 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="checkout-sidebar">
+        <div class="checkout-sidebar__title">Корзина
+        </div>
+        <div class="checkout-sidebar__item clearfix">
+          <div class="checkout-sidebar__item--image"><img src="assets/images/item.jpg">
+          </div>
+          <div class="checkout-sidebar__item--title">Атташе
+          </div>
+          <div class="checkout-sidebar__item--quantity"><span class="quantity">Количество:</span> 1
+          </div>
+          <div class="checkout-sidebar__item--price"><span class="disabled">7.800руб.</span> 7.215руб.
+          </div>
+        </div>
+        <div class="checkout-sidebar__item clearfix">
+          <div class="checkout-sidebar__item--image"><img src="assets/images/item.jpg">
+          </div>
+          <div class="checkout-sidebar__item--title">Атташе
+          </div>
+          <div class="checkout-sidebar__item--quantity"><span class="quantity">Количество:</span> 1
+          </div>
+          <div class="checkout-sidebar__item--price"><span class="disabled">7.800руб.</span> 7.215руб.
+          </div>
+        </div>
+        <div class="checkout-sidebar__total">
+          <div class="checkout-sidebar__total--title">
+            <p>Сумма</p>
+          </div>
+          <div class="checkout-sidebar__total--cost">
+            <p>14.430руб.</p>
+          </div>
+        </div><a class="action-btn" href="basket.html">Перейти в корзину</a>
       </div>
     </div>
     <div class="footer-container contaier-fluid">

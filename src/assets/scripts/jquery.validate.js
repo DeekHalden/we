@@ -1,1426 +1,1532 @@
-/**
-* Smoke form validation and components for Bootstrap
-* @package Smoke
-* @version 3.0
-* @link https://github.com/alfredobarron/smoke The Smoke GitHub project
-* @author Alfredo Barron <alfredobarronc@gmail.com>
-* @copyright 2015 Alfredo Barron
-* @license https://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License
-* @note This program is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-* GNU Lesser General Public License for more details.
-*/
-
-(function($) {
-  /**
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  * Validate all inputs
-  * if($('#form').smkValidate()){}
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  */
-  $.fn.smkValidate = function() {
-
-    var settings = $.extend({}, $.fn.smkValidate.Languaje);
-
-    var languaje = $.fn.smkValidate.Languaje;
-
-    if (languaje === undefined) {
-
-      languaje =  {
-        // Mensaje de error para los input vacíos
-        textEmpty        : 'Required field',
-        // Mensaje de error para el input email
-        textEmail        : 'Enter a valid email',
-        // Mensaje de error para el input alphanumeric
-        textAlphanumeric : 'Only numbers and/or letters allowed',
-        // Mensaje de error para el input number
-        textNumber       : 'Only numbers are allowed',
-        // Mensaje de error para el input number range
-        textNumberRange  : 'The numerical range must be greater than <b> {@} </b> and less than <b> {@} </b>',
-        // Mensaje de error para el input decimal
-        textDecimal      : 'Only decimal numbers are allowed',
-        // Mensaje de error para el input currency
-        textCurrency     : 'Please enter a valid monetary amount',
-        // Mensaje de error para el input select
-        textSelect       : 'It is necessary that you select an option',
-        // Mensaje de error para el input checkbox y radio
-        textCheckbox     : 'It is necessary that you select an option',
-        // Mensaje de error para longitud de caracteres
-        textLength       : 'The number of characters is equal to <b> {@} </b>',
-        // Mensaje de error para rango de caracteres
-        textRange        : 'The number of characters must be greater than <b> {@} </b> and less than <b> {@} </b>',
-        // Mensaje de error para strongPass Default
-        textSPassDefault : 'Minimum 4 characters',
-        // Mensaje de error para strongPass Weak
-        textSPassWeak    : 'Minimum 6 characters',
-        // Mensaje de error para strongPass Madium
-        textSPassMedium  : 'Minimum 6 characters and a number',
-        // Mensaje de error para strongPass Strong
-        textSPassStrong  : 'Minimum 6 characters a number and a capital',
-        textUrl          : 'Please enter a valid url',
-        textTel          : 'Please enter a valid phone number',
-        textColor        : 'Please enter a valid hex color',
-        textDate         : 'Please enter a valid date',
-        textDatetime     : 'Please enter a valid date and time',
-        textMonth        : 'Please enter a valid month',
-        textWeek         : 'Please enter a valid week',
-        textTime         : 'Please enter a valid time',
-        textPattern      : 'Enter a valid string'
-      };
-    }
-
-    // Se agrega el attr novalidate al form
-    if (this.is('form')) {
-      this.attr('novalidate', 'novalidate');
-    }
-
-    // Se inicializan las variables globales
-    var result = true;
-
-    // Se obtienen todos los inputs
-    var inputs = (this.is(':input')) ? $(this) : $(':input:not(:button):not(:disabled):not(.novalidate)', this);
-
-    // Se recorren todos los inputs del formulario
-    inputs.each(function(k,v) {
-      // Se obtiene el objeto input
-      var input = $(v);
-      // Se obtiene el type
-      var type = $(v).attr('type');
-      // Se obtiene el type smk
-      var smkType = $(v).attr('data-smk-type');
-      // Se obtiene el tag
-      var tag = v.tagName.toLowerCase();
-      // Se obtiene el value
-      var value = $(v).val();
-      // Se obtiene el name
-      var name = $(v).attr('name');
-      // Se obtiene el attr requerido
-      var required = $(v).attr('required');
-      // Se obtiene el valor de longitud menor aceptada
-      var minlength = $(v).attr('minlength');
-      // Se obtiene el valor de longitud mayor aceptada
-      var maxlength = $(v).attr('maxlength');
-      // Se obtiene el valor de longitud menor aceptada
-      var smkMin = $(v).attr('data-smk-min');
-      // Se obtiene el valor de longitud mayor aceptada
-      var smkMax = $(v).attr('data-smk-max');
-      // Se obtiene el nivel de la fuerza de la contraseña
-      var smkStrongPass = $(v).attr('data-smk-strongPass');
-      // Se obtiene el pattern de una expresión regular
-      var smkPattern = $(v).attr('data-smk-pattern');
-      // Se obtiene el valor pestaña centavos
-      var smkDecimalSeparator = $(v).attr('data-smk-decimal-separator');
-      // Se obtiene el valor pestaña miles
-      var smkThousandSeparator = $(v).attr('data-smk-thousand-separator');
-
-      //Obtiene las fichas de los valores por defecto de miles y centavos
-      if (typeof(smkDecimalSeparator) === 'undefined'){
-        //Valor por defecto
-        smkDecimalSeparator = '.'; //Default
-      }
-      if (typeof(smkThousandSeparator) === 'undefined'){
-        //Valor por defecto
-        smkThousandSeparator = ','; //Default
-      }
-
-      // Se eliminan los mensajes de error
-      $.smkRemoveError(input);
-
-      // Se obtiene el value de los input RADIO y/o CHECKBOX
-      if (type === 'radio' || type === 'checkbox') {
-        // Se obtiene el value del grupo de checks o radios
-        //value = $("input[name=" + name + "]:checked").val();
-        value = $("input[name='" + name + "']:checked").val();
-      }
-
-      // Se validan los INPUTS que son requeridos y estan vacios
-      if (required === 'required' && (value === '' || value === undefined)) {
-        // Se agrega el mensaje de error
-        result =  $.smkAddError(input, languaje.textEmpty);
-      }
-
-      // Si el input no esta vacio
-      if (value !== '') {
-
-        // Se valida el input EMAIL
-        if (type === 'email') {
-          //Se crea la expresión regular para el input mail
-          var emailRegex = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
-          // Se valida que el value del input cumpla con la expresión regular
-          if (!emailRegex.test(value)) {
-            // Se agrega el mensaje de error
-            result =  $.smkAddError(input, languaje.textEmail);
-          }
-        }
-
-        // Se valida el input ALPHANUMERIC
-        if (smkType === 'alphanumeric') {
-          // Se crea la expresión regular para el input alphanumeric
-          var alphanumericRegex = /^[a-z0-9]+$/i;
-          // Se valida que el value del input cumpla con la expresión regular
-          if (!alphanumericRegex.test(value)) {
-            // Se agrega el mensaje de error
-            result = $.smkAddError(input, languaje.textAlphanumeric);
-          }
-        }
-
-        // Se valida el input NUMBER
-        if (type === 'number' || smkType === 'number') {
-          // Se crea la expresión regular para el input number
-          var numberRegex = /^\d+$/;
-          // Se valida que el value del input cumpla con la expresión regular
-          if (!numberRegex.test(value)) {
-            // Se agrega el mensaje de error
-            result = $.smkAddError(input, languaje.textNumber);
-          } else {
-
-            // Se valida el input NUMBER RANGE
-            if ((typeof(smkMin) !== 'undefined' || typeof(smkMax) !== 'undefined')) {
-              if((value < smkMin) || (value > smkMax)){
-                var arrayTextNumberRange = [];
-                arrayTextNumberRange[0] = parseInt(smkMin-1);
-                arrayTextNumberRange[1] = parseInt(smkMax)+1;
-                var textNumberRange = $.smokeCustomizeMsg(languaje.textNumberRange, arrayTextNumberRange);
-                // Se agrega el mensaje de error
-                result = $.smkAddError(input, textNumberRange);
-              }
-            }
-
-          }
-        }
-
-        // Se valida el input DECIMAL
-        if (smkType === 'decimal') {
-          // Se crea la expresión regular para el input decimal
-          //var decimalRegex = /^\d+(?:\.\d{1,4})?$/;
-          var decimalRegex = (smkDecimalSeparator === ',') ? (/^\d+(?:\,\d{1,4})?$/) :  (/^\d+(?:\.\d{1,4})?$/);
-          // Se valida que el value del input cumpla con la expresión regular
-          if (!decimalRegex.test(value)) {
-            // Se agrega el mensaje de error
-            result = $.smkAddError(input, languaje.textDecimal);
-          }
-        }
-
-        // Se valida el input CURRENCY
-        if (smkType === 'currency') {
-          // Se crea la expresión regular para el input currency con $ al inicio
-          //var currencyRegex = /^\$?(?:\d+|\d{1,3}(?:,\d{3})*)(?:\.\d{1,2}){0,1}$/;
-          // Se crea la expresión regular para el input currency
-          //var currencyRegex = /^(?:\d+|\d{1,3}(?:,\d{3})*)(?:\.\d{1,4}){0,1}$/;
-          var currencyRegex = (smkDecimalSeparator === ',' && smkThousandSeparator === '.') ? (/^(?:\d+|\d{1,3}(?:.\d{3})*)(?:\,\d{1,4}){0,1}$/) : (/^(?:\d+|\d{1,3}(?:,\d{3})*)(?:\.\d{1,4}){0,1}$/) ;
-          // Se valida que el value del input cumpla con la expresión regular
-          if (!currencyRegex.test(value)) {
-            // Se agrega el mensaje de error
-            result = $.smkAddError(input, languaje.textCurrency);
-          }
-        }
-
-        // Se valida el input longitud o rango de caracteres MINLENGTH o MAXLENGTH
-        if ((typeof(minlength) !== 'undefined' || typeof(maxlength) !== 'undefined')) {
-          // Si contiene ambos y son iguales
-          if (minlength === maxlength) {
-            if ((value.length != minlength) && (value.length != maxlength)) {
-              // Se personaliza el mensaje de error
-              var textLength = $.smokeCustomizeMsg(languaje.textLength, maxlength);
-              // Se agrega el mensaje de error
-              result = $.smkAddError(input, textLength);
-            }
-            // Si contiene ambos y son diferentes
-          } else if (minlength !== maxlength) {
-            if ((value.length < minlength) || (value.length > maxlength)) {
-              var arrayTextRange = [];
-              arrayTextRange[0] = parseInt(minlength-1);
-              arrayTextRange[1] = parseInt(maxlength)+1;
-              // Se personaliza el mensaje de error
-              var textRange = $.smokeCustomizeMsg(languaje.textRange, arrayTextRange);
-              // Se agrega el mensaje de error
-              result = $.smkAddError(input, textRange);
-            }
-          }
-        }
-
-        // Se valida el input PASSWORD
-        if (type === 'password') {
-          var strongPassRegex = '';
-          var textPass = '';
-          // Se obtiene el nivel de fuerza de la contraseña
-          switch (smkStrongPass) {
-            case ('weak'):// Debe contener al menos 4 caracteres
-            strongPassRegex = /^(?=.*[a-z0-9])\w{6,}$/;
-            textPass = languaje.textSPassWeak;
-            break;
-            case ('medium'):// Debe contener al menos 6 caracteres y un numero
-            strongPassRegex = /^(?=.*\d)(?=.*[a-z])\w{6,}$/;
-            textPass = languaje.textSPassMedium;
-            break;
-            case ('strong'):// Debe contener al menos 6 caracteres, un numero y una mayúscula
-            strongPassRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}$/;
-            textPass = languaje.textSPassStrong;
-            break;
-            default:// Debe contener al menos 4 caracteres
-            strongPassRegex = /^(?=.*[a-z0-9])\w{4,}$/;
-            textPass = languaje.textSPassDefault;
-          }
-          // Se valida que el value del input cumpla con la expresión regular
-          if (!strongPassRegex.test(value)) {
-            // Se agrega el mensaje de error
-            result = $.smkAddError(input, textPass);
-          }
-        }
-
-        // Se valida el input URL
-        if (type === 'url') {
-          //Se crea la expresión regular para el input url
-          var urlRegex = /^(http|ftp|https):\/\/[\w-]+(\.[\w-]+)*([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?$/;
-          // Se valida que el value del input cumpla con la expresión regular
-          if (!urlRegex.test(value)) {
-            // Se agrega el mensaje de error
-            result =  $.smkAddError(input, languaje.textUrl);
-          }
-        }
-
-        // Se valida el input TEL
-        if (type === 'tel') {
-          //Se crea la expresión regular para el input tel
-          var telRegex = /^(\+?)\d{10,15}$/;
-          // Se valida que el value del input cumpla con la expresión regular
-          if (!telRegex.test(value)) {
-            // Se agrega el mensaje de error
-            result =  $.smkAddError(input, languaje.textTel);
-          }
-        }
-
-        // Se valida el input COLOR
-        if (type === 'color') {
-          //Se crea la expresión regular para el input color
-          var colorRegex = /^#([0-9a-f]{3}){1,2}$/i;
-          // Se valida que el value del input cumpla con la expresión regular
-          if (!colorRegex.test(value)) {
-            // Se agrega el mensaje de error
-            result =  $.smkAddError(input, languaje.textColor);
-          }
-        }
-
-        // Se valida el input DATE
-        if (type === 'date') {
-          //Se crea la expresión regular para el input date
-          var dateRegex = /^([0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|0[1-9]|[1-2][0-9])$/;
-          // Se valida que el value del input cumpla con la expresión regular
-          if (!dateRegex.test(value)) {
-            // Se agrega el mensaje de error
-            result =  $.smkAddError(input, languaje.textDate);
-          }
-        }
-
-        // Se valida el input DATETIME
-        if (type === 'datetime') {
-          //Se crea la expresión regular para el input datetime
-          var datetimeRegex = /^([0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|0[1-9]|[1-2][0-9])T(2[0-3]|[0-1][0-9]):([0-5][0-9]):([0-5][0-9])(Z|[+-](?:2[0-3]|[0-1][0-9]):[0-5][0-9])?$/;
-          // Se valida que el value del input cumpla con la expresión regular
-          if (!datetimeRegex.test(value)) {
-            // Se agrega el mensaje de error
-            result =  $.smkAddError(input, languaje.textDatetime);
-          }
-        }
-
-        // Se valida el input MONTH
-        if (type === 'month') {
-          //Se crea la expresión regular para el input month
-          var monthRegex = /^([0-9]{4})-(1[0-2]|0[1-9])$/;
-          // Se valida que el value del input cumpla con la expresión regular
-          if (!monthRegex.test(value)) {
-            // Se agrega el mensaje de error
-            result =  $.smkAddError(input, languaje.textMonth);
-          }
-        }
-
-        // Se valida el input WEEK
-        if (type === 'week') {
-          //Se crea la expresión regular para el input week
-          var weekRegex = /^([0-9]{4})-?W(5[0-3]|[1-4][0-9]|0[1-9])$/;
-          // Se valida que el value del input cumpla con la expresión regular
-          if (!weekRegex.test(value)) {
-            // Se agrega el mensaje de error
-            result =  $.smkAddError(input, languaje.textWeek);
-          }
-        }
-
-        // Se valida el input TIME
-        if (type === 'time') {
-          //Se crea la expresión regular para el input time
-          var timeRegex = /^(2[0-3]|[01]?[0-9]):([0-5]?[0-9])(:([0-5]?[0-9]))?$/;
-          // Se valida que el value del input cumpla con la expresión regular
-          if (!timeRegex.test(value)) {
-            // Se agrega el mensaje de error
-            result =  $.smkAddError(input, languaje.textTime);
-          }
-        }
-
-        // Se valida el pattern de una expresión regular
-        if (smkPattern !== '' && smkPattern !== undefined) {
-          // Se valida que el value del input cumpla con la expresión regular
-          var patternRegex = new RegExp('^(' + smkPattern + ')$');
-          // Se valida que el value del input cumpla con la expresión regular
-          if (!patternRegex.test(value)) {
-            // Se agrega el mensaje de error
-            result = $.smkAddError(input, languaje.textPattern);
-          }
-        }
-
-      }
-
-      input
-      .off('.validation') // remove all events in namespace validation
-      .on('keyup.validation change.validation click.validation', function(e) {
-        // Check for validation
-        $(this).smkValidate();
-      });
-
-    });
-
-    // Se posiciona el focus en el primer input con error
-    this.find('.form-group.has-feedback.has-error').first().find(':input:not(:button):not(:disabled):not(.novalidate)').first().focus();
-
-    //Se retorna el resultado
-    return result;
-  };
-
-
-
-
-
-
-  /**
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  * Validate Equal passwords
-  * if($.smkEqualPass('#password', '#repassword')){}
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  */
-  $.smkEqualPass = function(password, repassword) {
-
-    // Se crea el mensaje de error para el input repassword
-    var languaje = $.smkEqualPass.Languaje;
-
-    if (languaje === undefined) {
-      languaje =  {
-        textEqualPass: 'Passwords do not match'
-      };
-    }
-
-    if($(password).val() !== undefined){
-      password = $(password).val();
-    }else{
-      password = password;
-    }
-
-    // Si los password son diferentes se retorna false
-    if (password !== $(repassword).val()) {
-      // Se agrega el mensaje de error
-      return $.smkAddError($(repassword), languaje.textEqualPass);
-      // Si los passwords son iguales se retorna true
-    } else {
-      return true;
-    }
-
-  };
-
-
-
-
-
-
-  /**
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  * Clear form
-  * $('#form').smkClear();
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  */
-  $.fn.smkClear = function() {
-
-    // Se obtienen todos los inputs
-    var inputs = (this.is(':input')) ? $(this) : $(':input:not(:button)', this);
-
-    // Se recorren todos los inputs del formulario
-    inputs.each(function(k,v) {
-
-      // Se eliminan los mensajes de error
-      $.smkRemoveError(v);
-
-      // Si el input no contiene el attr data-smk-noclear
-      if ( $(v).attr('data-smk-noclear') === undefined ) {
-        //Se obtiene el type y el tag del input
-        var type = this.type;
-        var tag = this.tagName.toLowerCase();
-        //Si el tag trae el valor 'input' se sustituye por el valor type
-        if (tag == 'input') {
-          tag = type;
-        }
-        //Se compara el type y se limpia
-        switch (type) {
-          case 'text':
-          case 'password':
-          case 'email':
-          case 'number':
-          case 'hidden':
-          case 'date':
-          case 'datetime':
-          case 'datetime-local':
-          case 'month':
-          case 'week':
-          case 'time':
-          case 'tel':
-          case 'url':
-          case 'search':
-          case 'range':
-          case 'color':
-            this.value = '';
-          break;
-          case 'checkbox':
-          case 'radio':
-            this.checked = false;
-          break;
-        }
-        //Se compara el tag y se limpia
-        switch (tag) {
-          case 'textarea':
-            this.value = '';
-          break;
-          case 'select':
-            this.selectedIndex = 0;
-            if($(this).hasClass('select2')){
-              //$(this).select2('val', '');
-              // new version
-              $(this).val('').trigger("change.select2");
-            }
-          break;
-        }
-      }
-    });
-    //$(this)[0].reset();
-  };
-
-
-
-
-
-
-  /*
-  |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  |   Se crea el método que agrega el mensaje de error
-  |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  */
-  $.smkAddError = function (obj, message)
-  {
-    // Se obtiene el icono
-    var icon = $(obj).parents('form').attr('data-smk-icon');
-    // Se obtiene el elemento form-group
-    var formGroup = $(obj).parents('.form-group');
-    // Se obtiene el elemento padre
-    var parent = $(obj).parent();
-    // Se obtiene el type
-    var type = $(obj).attr('type');
-    // Se obtiene el mensaje de error
-    var smkMsg = $(obj).attr('data-smk-msg');
-    // Se crea el template del icono de error
-    var ico = '<span class="glyphicon '+ icon +' form-control-feedback smk-error-icon"></span>';
-
-    // Si type es indefinido se asigna el nombre del tag
-    if(type === undefined) type = $(obj).prop('tagName').toLowerCase();
-
-    // Si el form no contiene icono
-    if (icon === '' || icon === undefined) ico = '';
-
-    // Si el input no contiene mensaje de error se asigna uno
-    if (smkMsg === '' || smkMsg === undefined) smkMsg = message;
-
-    // Se crea el template del mensaje de error
-    var msg = '<span class="help-block smk-error-msg">' + smkMsg + '</span>';
-
-    if(type == 'select'){
-      // Se agrega la clase de error
-      formGroup.addClass('has-feedback has-error smk-' + type);
-      // Se agrega el icono y el mensaje de error
-      formGroup.append(ico + msg);
-    }else if(type == 'checkbox' || type == 'radio'){
-      // Se agrega la clase de error
-      formGroup.addClass('has-feedback has-error smk-' + type);
-      // Se agrega el icono y el mensaje de error
-      formGroup.append(msg);
-    }else{
-      // Se agrega la clase de error
-      formGroup.addClass('has-feedback has-error');
-      // Si el form tiene la clase form-horizontal
-      if (formGroup.parent().hasClass('form-horizontal')) {
-        // Se agrega el icono y el mensaje de error
-        parent.append(ico + msg);
-      } else {
-        // Se agrega el icono y el mensaje de error
-        formGroup.append(ico + msg);
-      }
-    }
-
-    // Se retorna false
-    return false;
-  };
-  /*
-  |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  |   Se crea el método que remueve el mensaje de error
-  |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  */
-  $.smkRemoveError = function(obj)
-  {
-    // Se obtiene el elemento padre
-    var parent = $(obj).parents('.form-group');
-    // Se remueven el icono y el mensaje de error
-    parent.find('.smk-error-msg, .smk-error-icon').remove();
-    // Se remueve la clase de error
-    parent.removeClass('has-error has-feedback');
-    // Se retorna false
-    return false;
-  };
-  /*
-  |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  |   Se crea el método que personaliza los mensaje de error
-  |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  */
-  $.smokeCustomizeMsg = function(msg, arrayMsg){
-    var customMsg = '';
-    if(typeof(arrayMsg) == 'string'){
-      customMsg = msg.replace('{@}', arrayMsg);
-    }else{
-      var split = msg.split('{@}');
-      $.each(arrayMsg, function(index, val) {
-        customMsg += split[index] + val;
-      });
-      customMsg += split[split.length - 1];
-    }
-    return customMsg;
-  };
-
-
-
-
-
-
-  /**
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  * Alerts
-  * $.smkAlert({
-  *   text: 'Hello world',
-  *   icon: 'glyphicon-time',
-  *   position: 'top-right'
-  *   type: 'success',
-  *   time: 5,
-  *   permanent: false
-  * });
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  */
-  // Se crea la funcion smkAlert
-  $.smkAlert = function(options) {
-
-    // Variables default
-    var settings = $.extend({
-      text: 'Hola Mundo',
-      type: 'warning',
-      icon: '',
-      position: 'top-right',
-      time: 5,
-      permanent: false
-    }, options);
-
-    var smk_alert_content_class = 'smk-alert-content';
-    var available_positions = ['top-left', 'top-center', 'top-right', 'bottom-left', 'bottom-center', 'bottom-right'];
-
-    if ($.inArray(settings.position, available_positions) >= 0){
-      smk_alert_content_class += '-' + settings.position;
-    }
-
-    // Se compara el tipo de alerta y se asigna la clase
-    switch (settings.type) {
-      case 'warning':
-      settings.type = 'alert-warning';
-      if (settings.icon === '') settings.icon = 'glyphicon-exclamation-sign';
-      break;
-      case 'success':
-      settings.type = 'alert-success';
-      if (settings.icon === '') settings.icon = 'glyphicon-ok-sign';
-      break;
-      case 'danger':
-      settings.type = 'alert-danger';
-      if (settings.icon === '') settings.icon = 'glyphicon-remove-sign';
-      break;
-      case 'info':
-      settings.type = 'alert-info';
-      if (settings.icon === '') settings.icon = 'glyphicon-info-sign';
-      break;
-    }
-
-    // Se agrega el contenedor de las alertas en el body
-    if(!$('body > .' + smk_alert_content_class).length) {
-      $('body').append('<div class="smk-alert-content ' + smk_alert_content_class + '"></div>');
-    }
-    // Se crea la alerta en el contenedor
-    var obj = $('<div class="alert alert-dismissable ' + settings.type + ' smk-alert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><span class="glyphicon ' + settings.icon + '"></span><p>' + settings.text + '</p></div>');
-
-    $('.' + smk_alert_content_class).prepend(obj);
-
-    // Se aplica la animación de entrada a la alerta
-    obj.animate({
-      opacity: '1',
-    }, 300);
-
-    // Si el mensaje no es permanente
-    if(settings.permanent === false){
-      var timer = 0;
-      // Si se posiciona el cursor en la alerta se restablece el TimeOut
-      $(obj).mouseenter(function(){
-        clearTimeout(timer);
-        // Si sale el cursor de la alerta se ejecuta el método smkAlertHide
-      }).mouseleave(function(){
-        smkAlertHide();
-      });
-
-      smkAlertHide();
-    }
-
-    // Se crea el método que elimina la alerta del contenedor
-    function smkAlertHide(){
-      timer = setTimeout(function() {
-        obj.animate({
-          opacity: '0',
-        }, 300, function() {
-          obj.remove();
-        });
-      }, (settings.time * 1000) );
-    }
-
-  };
-
-
-
-
-
-
-  /**
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  * Confirmation
-  * $.smkConfirm({
-  *   text: 'are you sure?',
-  *   accept: 'Accept',
-  *   cancel: 'Cancel'
-  * },function(e){
-  *   if(res){
-  *     // Code here
-  *   }
-  * });
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  */
-  $.smkConfirm = function(options, callback) {
-    // Variables default
-    var settings = $.extend({
-      text: 'are you sure?',
-      accept: 'Accept',
-      cancel: 'Cancel'
-    }, options);
-    // Se agrega el panel de confirmacion en el body
-    $('body').append('<div class="smk-confirm-back"><div class="panel panel-default smk-confirm" tabindex="1"><div class="panel-body">' + settings.text + '</div><div class="panel-footer text-right"><a class="btn btn-default btn-sm smk-cancel" href="#" >' + settings.cancel + '</a> <a class="btn btn-primary btn-sm smk-accept" href="#">' + settings.accept + '</a></div></div></div>');
-    // Se aplica la animacion de entrada del panel de confirmacion
-    $('.smk-confirm').animate({
-      top: "-5px",
-      opacity: '1'
-    }, 400, function(){
-      $('.smk-confirm').focus();
-    }).on('keydown', function(e) {
-      if (e.which === 27) {
-        $('.smk-cancel').click();
-      } else if (e.which === 13) {
-        if (!$('.smk-accept').is(":focus"))
-        $('.smk-accept').click();
-      }
-    });
-    // Si se presiona el boton .smk-cancel se retorna false
-    $('.smk-cancel').click(function(e) {
-      e.preventDefault();
-      smkConfirmHide();
-      //return false;
-      callback(false);
-    });
-    // Si se presiona el boton .smk-accept se retorna true
-    $('.smk-accept').click(function(e) {
-      e.preventDefault();
-      smkConfirmHide();
-      //return true;
-      callback(true);
-    });
-    // Se remueve el panel de confirmacion del body
-    function smkConfirmHide(){
-      $('.smk-confirm-back').fadeOut(200, function() {
-        $('.smk-confirm-back').remove();
-      });
-      $('.smk-confirm').animate({
-        top: "-500px",
-        opacity: '0'
-      }, 400, function() {
-        $('.smk-confirm').remove();
-      });
-    }
-  };
-
-
-
-
-
-  /**
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  * Prompt
-  * $.smkPrompt({
-  *   text: 'What is your name?',
-  *   defaultValue: '',
-  *   accept: 'Accept',
-  *   cancel: 'Cancel'
-  * },function(res){
-  *   if(res){
-  *     // Code here
-  *   } else {
-  *    // Code here
-  *   }
-  * });
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  */
-  $.smkPrompt = function(options, callback) {
-    // Variables default
-    var settings = $.extend({
-      text: 'Enter value',
-      defaultValue: '',
-      accept: 'Accept',
-      cancel: 'Cancel'
-    }, options);
-    // Se agrega el panel de confirmacion en el body
-    $('body').append('<div class="smk-confirm-back"><div class="panel panel-default smk-prompt" tabindex="1"><div class="panel-body"><div class="form-group"><label for="smkPromptInput">' + settings.text + '</label><input class="form-control" id="smkPromptInput" autocomplete="off" type="text" value="' + settings.defaultValue + '"></div></div><div class="panel-footer text-right"><a class="btn btn-default btn-sm smk-cancel" href="#" >' + settings.cancel + '</a> <a class="btn btn-primary btn-sm smk-accept" href="#">' + settings.accept + '</a></div></div></div>');
-    // Se aplica la animacion de entrada del panel de confirmacion
-    $('.smk-prompt').animate({
-      top: "-5px",
-      opacity: '1'
-    }, 400, function(){
-      $('.smk-prompt input[type="text"]').focus().select();
-    }).on('keydown', function(e) {
-      if (e.which === 27) {
-        $('.smk-cancel').click();
-      } else if (e.which === 13) {
-        if (!$('.smk-accept').is(":focus"))
-        $('.smk-accept').click();
-      }
-    });
-    // Si se presiona el boton .smk-cancel se retorna false
-    $('.smk-cancel').click(function(e) {
-      e.preventDefault();
-      smkConfirmHide();
-      //return false;
-      callback(false);
-    });
-    // Si se presiona el boton .smk-accept se retorna true or false
-    $('.smk-accept').click(function(e) {
-      e.preventDefault();
-      smkConfirmHide();
-      //return the value;
-      var ret = ($('.smk-prompt input').val() !== '') ? $('.smk-prompt input').val() : false;
-      callback(ret);
-    });
-    // Se remueve el panel de confirmacion del body
-    function smkConfirmHide(){
-      $('.smk-confirm-back').fadeOut(200, function() {
-        $('.smk-confirm-back').remove();
-      });
-      $('.smk-prompt').animate({
-        top: "-500px",
-        opacity: '0'
-      }, 400, function() {
-        $('.smk-prompt').remove();
-      });
-    }
-  };
-
-
-
-
-
-
-  /**
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  * Float
-  * var float = $.smkFloat('1,0000.00');
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  */
-  $.smkFloat = function(number) {
-    if(typeof number === 'string'){
-      number = number.replace(',', '');
-    }
-    return parseFloat(number);
-  };
-
-
-
-
-
-  /**
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  * Currency
-  * var currency = $.smkCurrency(10000, '$');
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  */
-  $.smkCurrency = function(number, prefix) {
-    if (typeof number !== 'string') {
-      number = number.toString();
-    }
-    var num = number.replace(',', '');
-    if(num !== ''&& !isNaN(num)){
-      num = Math.round(parseFloat(num) * Math.pow(10, 2)) / Math.pow(10, 2);
-      prefix = prefix || '';
-      num += '';
-      var splitStr = num.split('.');
-      var splitLeft = splitStr[0];
-      var splitRight = splitStr.length > 1 ? '.' + splitStr[1] : '.00';
-      splitRight = splitRight + '00';
-      splitRight = splitRight.substr(0, 3);
-      var regx = /(\d+)(\d{3})/;
-      while (regx.test(splitLeft)) {
-        splitLeft = splitLeft.replace(regx, '$1' + ',' + '$2');
-      }
-      return prefix + splitLeft + splitRight;
-    }else{
-      return 0;
-    }
-  };
-
-
-
-
-
-
-  /**
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  * GetURL
-  * var url = $.smkGetURL(1);
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  */
-  $.smkGetURL = function(folder) {
-    //Se obtiene el protocolo http o https
-    var protocol = $(location).attr('protocol');
-    //Se obtiene el nombre del servidor o dominio
-    var hostname = $(location).attr('hostname');
-    //Se obtiene la o las subcarpetas
-    var pathname = $(location).attr('pathname');
-    //Se explota el pathname para obtener todos sus elementos separados por /
-    pathname = pathname.split('/');
-    //Se obtiene el ultimo elemento
-    var last = pathname.pop();
-    //Si el ultimo elemento no esta vacio
-    if (last !== '') {
-      //Se explota el ultimo elemento
-      file = last.split('.');
-      //Si el ultimo elemento no es un archivo
-      if (file.length < 2) {
-        //Se agrega el ultimo elemento
-        pathname.push(last);
-      }
-    }
-    //Se dejan unicamente el numero de folders que se obtienen de la variable folders
-    pathname = pathname.slice(0, folder + 1);
-    //Se unen los elementos de el pathname separados por /
-    pathname = pathname.join('/');
-    //Se unen los elementos que forman la url
-    var url = protocol + '//' + hostname + pathname;
-    //Se retorna la url
-    return url;
-  };
-
-
-
-
-
-  /**
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  * ShowPass
-  * $('.panel').smkShowPass();
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  */
-  $.fn.smkShowPass = function(options) {
-
-    var self = $(this);
-    var parent = self.parent('.form-group');
-    var btnShow = '<span class="glyphicon glyphicon-eye-open smk-btn-show-pass" aria-hidden="true"></span>';
-
-    parent.addClass('smk-show-pass');
-    parent.append( btnShow );
-
-    // Evento del boton Remove
-    parent.find('.smk-btn-show-pass').click(function(event) {
-      event.preventDefault();
-      if (self.prop('type') == 'password') {
-        self.prop('type', 'text');
-        $(this).addClass('glyphicon-eye-close');
-        $(this).removeClass('glyphicon-eye-open');
-      } else {
-        self.prop('type', 'password');
-        $(this).removeClass('glyphicon-eye-close');
-        $(this).addClass('glyphicon-eye-open');
-      }
-    });
-
-  };
-
-
-
-
-  /**
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  * Hide email
-  * var email = $.smkHideEmail('alfredobarronc@gmail.com');
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  */
-  $.smkHideEmail = function(string) {
-    var parts = string.split('@');
-    var first = parts[0].charAt(0);
-    var last = parts[0].slice(-1);
-    var arterisk = '';
-    for (var i = 0; i < parts[0].length - 2; i++) {
-      arterisk = arterisk + '*';
-    }
-    var email = first + arterisk + last + '@' + parts[1];
-    return email;
-  };
-
-
-
-
-
-  /**
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  * DatePicker
-  * var date = $.smkDatePicker( $('.datepicker').datepicker('getDate') );
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  */
-  $.smkDatePicker = function(date) {
-
-    if(date !== ''){
-      // Se obtiene el dia
-      var day   = (date.getDate() < 10 ? '0' : '') + date.getDate();
-      // Se obtiene el mes
-      var month = ((date.getMonth() + 1) < 10 ? '0' : '') + (date.getMonth() + 1);
-      // Se obtiene el año
-      var year = date.getFullYear();
-      // Se construye la fecha con el formato para BD yyyy-mm-dd
-      result = year + '-' + month + '-' + day;
-    }else{
-      result = '';
-    }
-
-    // Se retorna la fecha formateada
-    return result;
-  };
-
-
-
-
-
-
-  /**
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  * Date
-  * var date = $.smkDate({date:new Date(), format:'yyyy-mm-dd' });
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  */
-  $.smkDate = function(options) {
-    var today = $.smkDatePicker( new Date() );
-    var settings = $.extend({
-      date: today,
-      format: 'yyyy-mm-dd'
-    }, $.smkDate.Languaje, options);
-
-    var languaje = $.smkDate.Languaje;
-
-    if (languaje === undefined) {
-      languaje =  {
-        shortMonthNames : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        monthNames : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-      };
-    }
-    //Se obtienen los separadores
-    var validDate = /\d+|[a-zA-z]/g;
-    var separator = settings.date.replace(validDate, '\0').split('\0');
-    // Se obtiene las partes de la fecha
-    var splitDate = settings.date.match(validDate);
-
-    if(settings.lang == 'es'){
-      // Se formatea la fecha (yyyy,mm,dd) para poder instanciar el método new Date()
-      if(splitDate[0].length == 4){
-        // Formato yyyy-mm-dd => yyyy,mm,dd
-        settings.date = new Date(splitDate[0],(splitDate[1]-1),splitDate[2]);
-      }else{
-        // Formato dd-mm-yyyy => yyyy,mm,dd
-        settings.date = new Date(splitDate[2],(splitDate[1]-1),splitDate[0]);
-      }
-    }else{
-      // Se formatea la fecha (yyyy,mm,dd) para poder instanciar el método new Date()
-      if(splitDate[0].length == 4){
-        // Formato yyyy-dd-mm => yyyy,mm,dd
-        settings.date = new Date(splitDate[0],(splitDate[2]-1),splitDate[1]);
-      }else{
-        // Formato mm-dd-yyyy => yyyy,mm,dd
-        settings.date = new Date(splitDate[2],(splitDate[0]-1),splitDate[1]);
-      }
-    }
-
-    var result = '';
-
-    if(settings.date != 'Invalid Date'){
-
-      // Se crea el array que contiene el día, mes y año
-      var arrayDate = {
-        // Se obtiene el dia
-        'd'    : settings.date.getDate(),
-        'dd'   : (settings.date.getDate() < 10 ? '0' : '') + settings.date.getDate(),
-        // Se obtiene el mes
-        'm'    : settings.date.getMonth() + 1, //January is 0!
-        'mm'   : ((settings.date.getMonth() + 1) < 10 ? '0' : '') + (settings.date.getMonth() + 1),
-        'M'    : languaje.shortMonthNames[settings.date.getMonth()],
-        'MM'   : languaje.monthNames[settings.date.getMonth()],
-        // Se obtiene el año
-        'yyyy' : settings.date.getFullYear(),
-        // Se obtiene el año 2 digitos
-        'yy'   : settings.date.getFullYear().toString().substring(2),
-        // Se obtiene la hora
-        'hh'   : settings.date.getHours(),
-        // Se obtienen los minutos
-        'mi'   : settings.date.getMinutes(),
-        // Se obtienen los segundos
-        'ss'   : settings.date.getSeconds()
-      };
-
-      // Se obtienen los separadores
-      var validFormat = /dd?|DD?|mm?|MM?|yy(?:yy)?/g;
-      var separators = settings.format.replace(validFormat, '\0').split('\0');
-      // Se obtienen las partes del formato
-      var splitFormat = settings.format.match(validFormat);
-
-      // Se construye la fecha con el formato y los separadores indicados
-      $.each(splitFormat, function(key, val) {
-        result += separators[key] + arrayDate[val];
-      });
-
-    }else{
-      result = '';
-      console.log('Invalid Date');
-    }
-
-    // Se retorna la fecha formateada
-    return result;
-  };
-
-
-
-
-
-
-  /**
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  * DateDiff
-  * var dif = $.smkDateDiff({fromDate:'01/01/2013 12:00:00', toDate:'12/31/2014 12:30:00', interval:'days'});
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  */
-  $.smkDateDiff = function(options) {
-    //Variables default
-    var settings = $.extend({
-      fromDate: new Date(),
-      toDate: new Date(),
-      interval: 'days'
-    }, options);
-    var second = 1000,
-    minute = second * 60,
-    hour = minute * 60,
-    day = hour * 24,
-    week = day * 7;
-    var fromDate = new Date(settings.fromDate);
-    var toDate = new Date(settings.toDate);
-    var timediff = toDate - fromDate;
-    if (isNaN(timediff)) return NaN;
-    switch (settings.interval) {
-      case "years":
-      return toDate.getFullYear() - fromDate.getFullYear();
-      case "months":
-      return ((toDate.getFullYear() * 12 + toDate.getMonth()) - (fromDate.getFullYear() * 12 + fromDate.getMonth()));
-      case "weeks":
-      return Math.floor(timediff / week);
-      case "days":
-      return Math.floor(timediff / day);
-      case "hours":
-      return Math.floor(timediff / hour);
-      case "minutes":
-      return Math.floor(timediff / minute);
-      case "seconds":
-      return Math.floor(timediff / second);
-      default:
-      return undefined;
-    }
-  };
-
-
-
-
-
-
-  /**
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  * Scrolling
-  * $.smkScrolling({speed:1000});
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  */
-  $.smkScrolling = function(options) {
-    //Variables default
-    var settings = $.extend({
-      speed: 1000
-    }, options);
-    $('a[href*=#]:not([href=#])').click(function() {
-      if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
-        var target = $(this.hash);
-        target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-        if (target.length) {
-          $('html,body').animate({
-            scrollTop: target.offset().top
-          }, settings.speed);
-          return false;
-        }
-      }
-    });
-  };
-
-
-
-
-
-  /**
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  * ProgressBar
-  * $.smkProgressBar({
-  *   element:'body',
-  *   status:'start',
-  *   bgColor:'#fff',
-  *   barColor:'#000',
-  *   content:'Loading...'
-  * });
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  */
-  $.smkProgressBar = function(options) {
-    //Variables default
-    var settings = $.extend({
-      element: 'body',
-      status: 'start',
-      bgColor: '#fff',
-      barColor: '',
-      content: ''
-    }, options);
-
-    if(settings.status == 'start'){
-      // Se crea el template de la progressbar
-      var progressbar = '<div class="smk-progressbar">';
-      progressbar +='<div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"><span class="sr-only">0% Complete</span></div></div>';
-      progressbar += '<div class="smk-progressbar-content">' + settings.content + '</div>';
-      progressbar += '</div>';
-
-      // Se carga la progressbar al dom
-      //$(settings.element).prepend($(progressbar).fadeIn('fast'));
-      $(settings.element).prepend($(progressbar));
-
-      $('.smk-progressbar').css('background-color', settings.bgColor);
-
-      $('.smk-progressbar .progress-bar').css('background-color', settings.barColor);
-
-      if(settings.element == 'body'){
-        $('.smk-progressbar').css('position', 'fixed');
-      }else{
-        $(settings.element).css('position', 'relative');
-        $('.smk-progressbar').css('position', 'absolute');
-      }
-      // Se comienza a simular el progreso de la carga de la pagina
-      $(settings.element +' .smk-progressbar .progress .progress-bar').width((50 + Math.random() * 30) + '%');
-
-    }else if(settings.status ==  'end'){
-      // Se completa el progreso de carga
-      $(settings.element +' .smk-progressbar .progress .progress-bar').width('110%').delay(200, function(){
-        // Se remueve la progressbar del dom
-        $(settings.element +' .smk-progressbar').fadeOut('slow', function() { $(this).remove(); });
-      });
-    }
-
-  };
-
-
-
-
-
-
-  /**
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  * Fullscreen
-  * $('div').smkFullscreen();
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  */
-  $.fn.smkFullscreen = function() {
-
-    // Se crea el boton fullscreen
-    var btnFullscreen = '<a class="btn smk-fullscreen" href="#"><span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span></a>';
-
-    // Se agrega el boton fullscreen en el elemento
-    $(this).append(btnFullscreen);
-
-    // Evento del boton fullscreen
-    $('.smk-fullscreen').click(function(event) {
-      event.preventDefault();
-      toggleFullScreen();
-    });
-
-    // Se crea el metodo que dispara el fullscreen
-    function toggleFullScreen() {
-      if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {  // current working methods
-        if (document.documentElement.requestFullscreen) {
-          document.documentElement.requestFullscreen();
-        } else if (document.documentElement.msRequestFullscreen) {
-          document.documentElement.msRequestFullscreen();
-        } else if (document.documentElement.mozRequestFullScreen) {
-          document.documentElement.mozRequestFullScreen();
-        } else if (document.documentElement.webkitRequestFullscreen) {
-          document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
-        }
-      } else {
-        if (document.exitFullscreen) {
-          document.exitFullscreen();
-        } else if (document.msExitFullscreen) {
-          document.msExitFullscreen();
-        } else if (document.mozCancelFullScreen) {
-          document.mozCancelFullScreen();
-        } else if (document.webkitExitFullscreen) {
-          document.webkitExitFullscreen();
-        }
-      }
-    }
-
-    // Se crea el metodo que cambia el icono del boton
-    var changeFullscreen = function(){
-      $('.smk-fullscreen').children('.glyphicon').toggleClass('glyphicon-fullscreen').toggleClass('glyphicon-resize-small');
-    };
-
-    // Se escuchan los cambios del fullscreen
-    document.addEventListener("fullscreenchange", changeFullscreen, false);
-    document.addEventListener("msfullscreenchange", changeFullscreen, false);
-    document.addEventListener("mozfullscreenchange", changeFullscreen, false);
-    document.addEventListener("webkitfullscreenchange", changeFullscreen, false);
-  };
-
-
-
-
-  /**
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  * Panel
-  * $('.panel').smkPanel({hide: 'min,remove,full', class: 'name-class'});
-  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  */
-  $.fn.smkPanel = function(options) {
-    // Variables default
-    var settings = $.extend({
-      hide: ''
-    }, options);
-    var thisPanel = $(this);
-    // Se eliminan los espacios en blanco de la variable settings.hide
-    var hideSinEspacios = settings.hide.replace(/\s/g, '');
-    // Se quiebra la variable hideSinEspacios para obtener sus valores y se agregan en el array arrayHide
-    var arrayHide = hideSinEspacios.split(',');
-    // Se obtiene el .panel-title de cada panel
-    var panelHeading = $(this).children('.panel-heading');
-    if (!panelHeading.length){
-      panelHeading = $("<div>", {class: 'panel-heading'});
-      $(this).prepend(panelHeading);
-    }
-    var panelTitle = panelHeading.children('.panel-title');
-    panelHeading.addClass('clearfix');
-    if(panelTitle.length){
-      panelTitle.addClass('pull-left');
-    }
-
-    // Se crea el btn-group
-    var btnGroup = '<div class="btn-group btn-group-xs pull-right" role="group">';
-    // Se valida que no exista en el array el boton min para poder agregarlo dentro de btnGroup
-    if($.inArray('min', arrayHide) == -1){
-      btnGroup += '<a class="btn smk-min" href="#"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></a>';
-    }
-    // Se valida que no exista en el array el boton remove para poder agregarlo dentro de btnGroup
-    if($.inArray('remove', arrayHide) == -1){
-      btnGroup += '<a class="btn smk-remove" href="#"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>';
-    }
-    // Se valida que no exista en el array el boton full para poder agregarlo dentro de btnGroup
-    if($.inArray('full', arrayHide) == -1){
-      btnGroup += '<a class="btn smk-full" href="#"><span class="glyphicon glyphicon-resize-full" aria-hidden="true"></span></a>';
-    }
-    btnGroup += '</div>';
-
-    // Se inserta dentro de .panel-heading
-    $(this).children('.panel-heading').append( btnGroup );
-
-    // Evento del boton Min
-    thisPanel.find('.smk-min').click(function(event) {
-      event.preventDefault();
-      var body = $(this).parents('.panel-heading').siblings('.panel-body');
-      var footer = $(this).parents('.panel-heading').siblings('.panel-footer');
-      var icon = $(this).children('.glyphicon');
-      $(footer).slideToggle('fast');
-      $(body).slideToggle('fast', function(){
-        icon.toggleClass('glyphicon-minus').toggleClass('glyphicon-plus');
-      });
-
-    });
-    // Evento del boton Remove
-    thisPanel.find('.smk-remove').click(function(event) {
-      event.preventDefault();
-      var panel = $(this).parents('.panel');
-      panel.fadeOut(400, function(){
-        //this.remove();
-      });
-    });
-    // Evento del boton Full
-    thisPanel.find('.smk-full').click(function(event) {
-      event.preventDefault();
-      var panel = $(this).parents('.panel');
-      var body = $(this).parents('.panel-heading').siblings('.panel-body');
-      var icon = $(this).children('.glyphicon');
-      var iconPlus = $(this).siblings('.btn').children('.glyphicon-plus');
-
-      if(panel.hasClass('panel-full')){
-        panel.removeClass('panel-full');
-        $(this).siblings('.btn').show();
-        if(iconPlus.length == 1){
-          body.hide();
-        }
-        $('body').css({'overflow':'auto'});
-        // $('.container-fluid').css({'display':'block'});
-        // $('#content').css({'position':'fixed'});
-      }else{
-        panel.addClass('panel-full');
-        $(this).siblings('.btn').hide();
-        if(iconPlus.length == 1){
-          body.show();
-        }
-        $('body').css({'overflow':'hidden'});
-        // $('.container-fluid').css({'display':'initial'});
-        // $('#content').css({'position':'initial'});
-      }
-      icon.toggleClass('glyphicon-resize-full').toggleClass('glyphicon-resize-small');
-    });
-  };
-
-
-})(jQuery);
+/*!
+ * jQuery Validation Plugin v1.15.0
+ *
+ * http://jqueryvalidation.org/
+ *
+ * Copyright (c) 2016 Jörn Zaefferer
+ * Released under the MIT license
+ */
+(function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+		define( ["jquery"], factory );
+	} else if (typeof module === "object" && module.exports) {
+		module.exports = factory( require( "jquery" ) );
+	} else {
+		factory( jQuery );
+	}
+}(function( $ ) {
+
+$.extend( $.fn, {
+
+	// http://jqueryvalidation.org/validate/
+	validate: function( options ) {
+
+		// If nothing is selected, return nothing; can't chain anyway
+		if ( !this.length ) {
+			if ( options && options.debug && window.console ) {
+				console.warn( "Nothing selected, can't validate, returning nothing." );
+			}
+			return;
+		}
+
+		// Check if a validator for this form was already created
+		var validator = $.data( this[ 0 ], "validator" );
+		if ( validator ) {
+			return validator;
+		}
+
+		// Add novalidate tag if HTML5.
+		this.attr( "novalidate", "novalidate" );
+
+		validator = new $.validator( options, this[ 0 ] );
+		$.data( this[ 0 ], "validator", validator );
+
+		if ( validator.settings.onsubmit ) {
+
+			this.on( "click.validate", ":submit", function( event ) {
+				if ( validator.settings.submitHandler ) {
+					validator.submitButton = event.target;
+				}
+
+				// Allow suppressing validation by adding a cancel class to the submit button
+				if ( $( this ).hasClass( "cancel" ) ) {
+					validator.cancelSubmit = true;
+				}
+
+				// Allow suppressing validation by adding the html5 formnovalidate attribute to the submit button
+				if ( $( this ).attr( "formnovalidate" ) !== undefined ) {
+					validator.cancelSubmit = true;
+				}
+			} );
+
+			// Validate the form on submit
+			this.on( "submit.validate", function( event ) {
+				if ( validator.settings.debug ) {
+
+					// Prevent form submit to be able to see console output
+					event.preventDefault();
+				}
+				function handle() {
+					var hidden, result;
+					if ( validator.settings.submitHandler ) {
+						if ( validator.submitButton ) {
+
+							// Insert a hidden input as a replacement for the missing submit button
+							hidden = $( "<input type='hidden'/>" )
+								.attr( "name", validator.submitButton.name )
+								.val( $( validator.submitButton ).val() )
+								.appendTo( validator.currentForm );
+						}
+						result = validator.settings.submitHandler.call( validator, validator.currentForm, event );
+						if ( validator.submitButton ) {
+
+							// And clean up afterwards; thanks to no-block-scope, hidden can be referenced
+							hidden.remove();
+						}
+						if ( result !== undefined ) {
+							return result;
+						}
+						return false;
+					}
+					return true;
+				}
+
+				// Prevent submit for invalid forms or custom submit handlers
+				if ( validator.cancelSubmit ) {
+					validator.cancelSubmit = false;
+					return handle();
+				}
+				if ( validator.form() ) {
+					if ( validator.pendingRequest ) {
+						validator.formSubmitted = true;
+						return false;
+					}
+					return handle();
+				} else {
+					validator.focusInvalid();
+					return false;
+				}
+			} );
+		}
+
+		return validator;
+	},
+
+	// http://jqueryvalidation.org/valid/
+	valid: function() {
+		var valid, validator, errorList;
+
+		if ( $( this[ 0 ] ).is( "form" ) ) {
+			valid = this.validate().form();
+		} else {
+			errorList = [];
+			valid = true;
+			validator = $( this[ 0 ].form ).validate();
+			this.each( function() {
+				valid = validator.element( this ) && valid;
+				if ( !valid ) {
+					errorList = errorList.concat( validator.errorList );
+				}
+			} );
+			validator.errorList = errorList;
+		}
+		return valid;
+	},
+
+	// http://jqueryvalidation.org/rules/
+	rules: function( command, argument ) {
+
+		// If nothing is selected, return nothing; can't chain anyway
+		if ( !this.length ) {
+			return;
+		}
+
+		var element = this[ 0 ],
+			settings, staticRules, existingRules, data, param, filtered;
+
+		if ( command ) {
+			settings = $.data( element.form, "validator" ).settings;
+			staticRules = settings.rules;
+			existingRules = $.validator.staticRules( element );
+			switch ( command ) {
+			case "add":
+				$.extend( existingRules, $.validator.normalizeRule( argument ) );
+
+				// Remove messages from rules, but allow them to be set separately
+				delete existingRules.messages;
+				staticRules[ element.name ] = existingRules;
+				if ( argument.messages ) {
+					settings.messages[ element.name ] = $.extend( settings.messages[ element.name ], argument.messages );
+				}
+				break;
+			case "remove":
+				if ( !argument ) {
+					delete staticRules[ element.name ];
+					return existingRules;
+				}
+				filtered = {};
+				$.each( argument.split( /\s/ ), function( index, method ) {
+					filtered[ method ] = existingRules[ method ];
+					delete existingRules[ method ];
+					if ( method === "required" ) {
+						$( element ).removeAttr( "aria-required" );
+					}
+				} );
+				return filtered;
+			}
+		}
+
+		data = $.validator.normalizeRules(
+		$.extend(
+			{},
+			$.validator.classRules( element ),
+			$.validator.attributeRules( element ),
+			$.validator.dataRules( element ),
+			$.validator.staticRules( element )
+		), element );
+
+		// Make sure required is at front
+		if ( data.required ) {
+			param = data.required;
+			delete data.required;
+			data = $.extend( { required: param }, data );
+			$( element ).attr( "aria-required", "true" );
+		}
+
+		// Make sure remote is at back
+		if ( data.remote ) {
+			param = data.remote;
+			delete data.remote;
+			data = $.extend( data, { remote: param } );
+		}
+
+		return data;
+	}
+} );
+
+// Custom selectors
+$.extend( $.expr[ ":" ], {
+
+	// http://jqueryvalidation.org/blank-selector/
+	blank: function( a ) {
+		return !$.trim( "" + $( a ).val() );
+	},
+
+	// http://jqueryvalidation.org/filled-selector/
+	filled: function( a ) {
+		var val = $( a ).val();
+		return val !== null && !!$.trim( "" + val );
+	},
+
+	// http://jqueryvalidation.org/unchecked-selector/
+	unchecked: function( a ) {
+		return !$( a ).prop( "checked" );
+	}
+} );
+
+// Constructor for validator
+$.validator = function( options, form ) {
+	this.settings = $.extend( true, {}, $.validator.defaults, options );
+	this.currentForm = form;
+	this.init();
+};
+
+// http://jqueryvalidation.org/jQuery.validator.format/
+$.validator.format = function( source, params ) {
+	if ( arguments.length === 1 ) {
+		return function() {
+			var args = $.makeArray( arguments );
+			args.unshift( source );
+			return $.validator.format.apply( this, args );
+		};
+	}
+	if ( params === undefined ) {
+		return source;
+	}
+	if ( arguments.length > 2 && params.constructor !== Array  ) {
+		params = $.makeArray( arguments ).slice( 1 );
+	}
+	if ( params.constructor !== Array ) {
+		params = [ params ];
+	}
+	$.each( params, function( i, n ) {
+		source = source.replace( new RegExp( "\\{" + i + "\\}", "g" ), function() {
+			return n;
+		} );
+	} );
+	return source;
+};
+
+$.extend( $.validator, {
+
+	defaults: {
+		messages: {},
+		groups: {},
+		rules: {},
+		errorClass: "error",
+		pendingClass: "pending",
+		validClass: "valid",
+		errorElement: "label",
+		focusCleanup: false,
+		focusInvalid: true,
+		errorContainer: $( [] ),
+		errorLabelContainer: $( [] ),
+		onsubmit: true,
+		ignore: ":hidden",
+		ignoreTitle: false,
+		onfocusin: function( element ) {
+			this.lastActive = element;
+
+			// Hide error label and remove error class on focus if enabled
+			if ( this.settings.focusCleanup ) {
+				if ( this.settings.unhighlight ) {
+					this.settings.unhighlight.call( this, element, this.settings.errorClass, this.settings.validClass );
+				}
+				this.hideThese( this.errorsFor( element ) );
+			}
+		},
+		onfocusout: function( element ) {
+			if ( !this.checkable( element ) && ( element.name in this.submitted || !this.optional( element ) ) ) {
+				this.element( element );
+			}
+		},
+		onkeyup: function( element, event ) {
+
+			// Avoid revalidate the field when pressing one of the following keys
+			// Shift       => 16
+			// Ctrl        => 17
+			// Alt         => 18
+			// Caps lock   => 20
+			// End         => 35
+			// Home        => 36
+			// Left arrow  => 37
+			// Up arrow    => 38
+			// Right arrow => 39
+			// Down arrow  => 40
+			// Insert      => 45
+			// Num lock    => 144
+			// AltGr key   => 225
+			var excludedKeys = [
+				16, 17, 18, 20, 35, 36, 37,
+				38, 39, 40, 45, 144, 225
+			];
+
+			if ( event.which === 9 && this.elementValue( element ) === "" || $.inArray( event.keyCode, excludedKeys ) !== -1 ) {
+				return;
+			} else if ( element.name in this.submitted || element.name in this.invalid ) {
+				this.element( element );
+			}
+		},
+		onclick: function( element ) {
+
+			// Click on selects, radiobuttons and checkboxes
+			if ( element.name in this.submitted ) {
+				this.element( element );
+
+			// Or option elements, check parent select in that case
+			} else if ( element.parentNode.name in this.submitted ) {
+				this.element( element.parentNode );
+			}
+		},
+		highlight: function( element, errorClass, validClass ) {
+			if ( element.type === "radio" ) {
+				this.findByName( element.name ).addClass( errorClass ).removeClass( validClass );
+			} else {
+				$( element ).addClass( errorClass ).removeClass( validClass );
+			}
+		},
+		unhighlight: function( element, errorClass, validClass ) {
+			if ( element.type === "radio" ) {
+				this.findByName( element.name ).removeClass( errorClass ).addClass( validClass );
+			} else {
+				$( element ).removeClass( errorClass ).addClass( validClass );
+			}
+		}
+	},
+
+	// http://jqueryvalidation.org/jQuery.validator.setDefaults/
+	setDefaults: function( settings ) {
+		$.extend( $.validator.defaults, settings );
+	},
+
+	messages: {
+		required: "Это поле обязательно для заполнения",
+		remote: "Please fix this field.",
+		email: "Введите email в формате username@domain.zone",
+		url: "Please enter a valid URL.",
+		date: "Please enter a valid date.",
+		dateISO: "Please enter a valid date ( ISO ).",
+		number: "Please enter a valid number.",
+		digits: "Please enter only digits.",
+		equalTo: "Please enter the same value again.",
+		maxlength: $.validator.format( "Please enter no more than {0} characters." ),
+		minlength: $.validator.format( "Please enter at least {0} characters." ),
+		rangelength: $.validator.format( "Please enter a value between {0} and {1} characters long." ),
+		range: $.validator.format( "Please enter a value between {0} and {1}." ),
+		max: $.validator.format( "Please enter a value less than or equal to {0}." ),
+		min: $.validator.format( "Please enter a value greater than or equal to {0}." ),
+		step: $.validator.format( "Please enter a multiple of {0}." )
+	},
+
+	autoCreateRanges: false,
+
+	prototype: {
+
+		init: function() {
+			this.labelContainer = $( this.settings.errorLabelContainer );
+			this.errorContext = this.labelContainer.length && this.labelContainer || $( this.currentForm );
+			this.containers = $( this.settings.errorContainer ).add( this.settings.errorLabelContainer );
+			this.submitted = {};
+			this.valueCache = {};
+			this.pendingRequest = 0;
+			this.pending = {};
+			this.invalid = {};
+			this.reset();
+
+			var groups = ( this.groups = {} ),
+				rules;
+			$.each( this.settings.groups, function( key, value ) {
+				if ( typeof value === "string" ) {
+					value = value.split( /\s/ );
+				}
+				$.each( value, function( index, name ) {
+					groups[ name ] = key;
+				} );
+			} );
+			rules = this.settings.rules;
+			$.each( rules, function( key, value ) {
+				rules[ key ] = $.validator.normalizeRule( value );
+			} );
+
+			function delegate( event ) {
+				var validator = $.data( this.form, "validator" ),
+					eventType = "on" + event.type.replace( /^validate/, "" ),
+					settings = validator.settings;
+				if ( settings[ eventType ] && !$( this ).is( settings.ignore ) ) {
+					settings[ eventType ].call( validator, this, event );
+				}
+			}
+
+			$( this.currentForm )
+				.on( "focusin.validate focusout.validate keyup.validate",
+					":text, [type='password'], [type='file'], select, textarea, [type='number'], [type='search'], " +
+					"[type='tel'], [type='url'], [type='email'], [type='datetime'], [type='date'], [type='month'], " +
+					"[type='week'], [type='time'], [type='datetime-local'], [type='range'], [type='color'], " +
+					"[type='radio'], [type='checkbox'], [contenteditable]", delegate )
+
+				// Support: Chrome, oldIE
+				// "select" is provided as event.target when clicking a option
+				.on( "click.validate", "select, option, [type='radio'], [type='checkbox']", delegate );
+
+			if ( this.settings.invalidHandler ) {
+				$( this.currentForm ).on( "invalid-form.validate", this.settings.invalidHandler );
+			}
+
+			// Add aria-required to any Static/Data/Class required fields before first validation
+			// Screen readers require this attribute to be present before the initial submission http://www.w3.org/TR/WCAG-TECHS/ARIA2.html
+			$( this.currentForm ).find( "[required], [data-rule-required], .required" ).attr( "aria-required", "true" );
+		},
+
+		// http://jqueryvalidation.org/Validator.form/
+		form: function() {
+			this.checkForm();
+			$.extend( this.submitted, this.errorMap );
+			this.invalid = $.extend( {}, this.errorMap );
+			if ( !this.valid() ) {
+				$( this.currentForm ).triggerHandler( "invalid-form", [ this ] );
+			}
+			this.showErrors();
+			return this.valid();
+		},
+
+		checkForm: function() {
+			this.prepareForm();
+			for ( var i = 0, elements = ( this.currentElements = this.elements() ); elements[ i ]; i++ ) {
+				this.check( elements[ i ] );
+			}
+			return this.valid();
+		},
+
+		// http://jqueryvalidation.org/Validator.element/
+		element: function( element ) {
+			var cleanElement = this.clean( element ),
+				checkElement = this.validationTargetFor( cleanElement ),
+				v = this,
+				result = true,
+				rs, group;
+
+			if ( checkElement === undefined ) {
+				delete this.invalid[ cleanElement.name ];
+			} else {
+				this.prepareElement( checkElement );
+				this.currentElements = $( checkElement );
+
+				// If this element is grouped, then validate all group elements already
+				// containing a value
+				group = this.groups[ checkElement.name ];
+				if ( group ) {
+					$.each( this.groups, function( name, testgroup ) {
+						if ( testgroup === group && name !== checkElement.name ) {
+							cleanElement = v.validationTargetFor( v.clean( v.findByName( name ) ) );
+							if ( cleanElement && cleanElement.name in v.invalid ) {
+								v.currentElements.push( cleanElement );
+								result = result && v.check( cleanElement );
+							}
+						}
+					} );
+				}
+
+				rs = this.check( checkElement ) !== false;
+				result = result && rs;
+				if ( rs ) {
+					this.invalid[ checkElement.name ] = false;
+				} else {
+					this.invalid[ checkElement.name ] = true;
+				}
+
+				if ( !this.numberOfInvalids() ) {
+
+					// Hide error containers on last error
+					this.toHide = this.toHide.add( this.containers );
+				}
+				this.showErrors();
+
+				// Add aria-invalid status for screen readers
+				$( element ).attr( "aria-invalid", !rs );
+			}
+
+			return result;
+		},
+
+		// http://jqueryvalidation.org/Validator.showErrors/
+		showErrors: function( errors ) {
+			if ( errors ) {
+				var validator = this;
+
+				// Add items to error list and map
+				$.extend( this.errorMap, errors );
+				this.errorList = $.map( this.errorMap, function( message, name ) {
+					return {
+						message: message,
+						element: validator.findByName( name )[ 0 ]
+					};
+				} );
+
+				// Remove items from success list
+				this.successList = $.grep( this.successList, function( element ) {
+					return !( element.name in errors );
+				} );
+			}
+			if ( this.settings.showErrors ) {
+				this.settings.showErrors.call( this, this.errorMap, this.errorList );
+			} else {
+				this.defaultShowErrors();
+			}
+		},
+
+		// http://jqueryvalidation.org/Validator.resetForm/
+		resetForm: function() {
+			if ( $.fn.resetForm ) {
+				$( this.currentForm ).resetForm();
+			}
+			this.invalid = {};
+			this.submitted = {};
+			this.prepareForm();
+			this.hideErrors();
+			var elements = this.elements()
+				.removeData( "previousValue" )
+				.removeAttr( "aria-invalid" );
+
+			this.resetElements( elements );
+		},
+
+		resetElements: function( elements ) {
+			var i;
+
+			if ( this.settings.unhighlight ) {
+				for ( i = 0; elements[ i ]; i++ ) {
+					this.settings.unhighlight.call( this, elements[ i ],
+						this.settings.errorClass, "" );
+					this.findByName( elements[ i ].name ).removeClass( this.settings.validClass );
+				}
+			} else {
+				elements
+					.removeClass( this.settings.errorClass )
+					.removeClass( this.settings.validClass );
+			}
+		},
+
+		numberOfInvalids: function() {
+			return this.objectLength( this.invalid );
+		},
+
+		objectLength: function( obj ) {
+			/* jshint unused: false */
+			var count = 0,
+				i;
+			for ( i in obj ) {
+				if ( obj[ i ] ) {
+					count++;
+				}
+			}
+			return count;
+		},
+
+		hideErrors: function() {
+			this.hideThese( this.toHide );
+		},
+
+		hideThese: function( errors ) {
+			errors.not( this.containers ).text( "" );
+			this.addWrapper( errors ).hide();
+		},
+
+		valid: function() {
+			return this.size() === 0;
+		},
+
+		size: function() {
+			return this.errorList.length;
+		},
+
+		focusInvalid: function() {
+			if ( this.settings.focusInvalid ) {
+				try {
+					$( this.findLastActive() || this.errorList.length && this.errorList[ 0 ].element || [] )
+					.filter( ":visible" )
+					.focus()
+
+					// Manually trigger focusin event; without it, focusin handler isn't called, findLastActive won't have anything to find
+					.trigger( "focusin" );
+				} catch ( e ) {
+
+					// Ignore IE throwing errors when focusing hidden elements
+				}
+			}
+		},
+
+		findLastActive: function() {
+			var lastActive = this.lastActive;
+			return lastActive && $.grep( this.errorList, function( n ) {
+				return n.element.name === lastActive.name;
+			} ).length === 1 && lastActive;
+		},
+
+		elements: function() {
+			var validator = this,
+				rulesCache = {};
+
+			// Select all valid inputs inside the form (no submit or reset buttons)
+			return $( this.currentForm )
+			.find( "input, select, textarea, [contenteditable]" )
+			.not( ":submit, :reset, :image, :disabled" )
+			.not( this.settings.ignore )
+			.filter( function() {
+				var name = this.name || $( this ).attr( "name" ); // For contenteditable
+				if ( !name && validator.settings.debug && window.console ) {
+					console.error( "%o has no name assigned", this );
+				}
+
+				// Set form expando on contenteditable
+				if ( this.hasAttribute( "contenteditable" ) ) {
+					this.form = $( this ).closest( "form" )[ 0 ];
+				}
+
+				// Select only the first element for each name, and only those with rules specified
+				if ( name in rulesCache || !validator.objectLength( $( this ).rules() ) ) {
+					return false;
+				}
+
+				rulesCache[ name ] = true;
+				return true;
+			} );
+		},
+
+		clean: function( selector ) {
+			return $( selector )[ 0 ];
+		},
+
+		errors: function() {
+			var errorClass = this.settings.errorClass.split( " " ).join( "." );
+			return $( this.settings.errorElement + "." + errorClass, this.errorContext );
+		},
+
+		resetInternals: function() {
+			this.successList = [];
+			this.errorList = [];
+			this.errorMap = {};
+			this.toShow = $( [] );
+			this.toHide = $( [] );
+		},
+
+		reset: function() {
+			this.resetInternals();
+			this.currentElements = $( [] );
+		},
+
+		prepareForm: function() {
+			this.reset();
+			this.toHide = this.errors().add( this.containers );
+		},
+
+		prepareElement: function( element ) {
+			this.reset();
+			this.toHide = this.errorsFor( element );
+		},
+
+		elementValue: function( element ) {
+			var $element = $( element ),
+				type = element.type,
+				val, idx;
+
+			if ( type === "radio" || type === "checkbox" ) {
+				return this.findByName( element.name ).filter( ":checked" ).val();
+			} else if ( type === "number" && typeof element.validity !== "undefined" ) {
+				return element.validity.badInput ? "NaN" : $element.val();
+			}
+
+			if ( element.hasAttribute( "contenteditable" ) ) {
+				val = $element.text();
+			} else {
+				val = $element.val();
+			}
+
+			if ( type === "file" ) {
+
+				// Modern browser (chrome & safari)
+				if ( val.substr( 0, 12 ) === "C:\\fakepath\\" ) {
+					return val.substr( 12 );
+				}
+
+				// Legacy browsers
+				// Unix-based path
+				idx = val.lastIndexOf( "/" );
+				if ( idx >= 0 ) {
+					return val.substr( idx + 1 );
+				}
+
+				// Windows-based path
+				idx = val.lastIndexOf( "\\" );
+				if ( idx >= 0 ) {
+					return val.substr( idx + 1 );
+				}
+
+				// Just the file name
+				return val;
+			}
+
+			if ( typeof val === "string" ) {
+				return val.replace( /\r/g, "" );
+			}
+			return val;
+		},
+
+		check: function( element ) {
+			element = this.validationTargetFor( this.clean( element ) );
+
+			var rules = $( element ).rules(),
+				rulesCount = $.map( rules, function( n, i ) {
+					return i;
+				} ).length,
+				dependencyMismatch = false,
+				val = this.elementValue( element ),
+				result, method, rule;
+
+			// If a normalizer is defined for this element, then
+			// call it to retreive the changed value instead
+			// of using the real one.
+			// Note that `this` in the normalizer is `element`.
+			if ( typeof rules.normalizer === "function" ) {
+				val = rules.normalizer.call( element, val );
+
+				if ( typeof val !== "string" ) {
+					throw new TypeError( "The normalizer should return a string value." );
+				}
+
+				// Delete the normalizer from rules to avoid treating
+				// it as a pre-defined method.
+				delete rules.normalizer;
+			}
+
+			for ( method in rules ) {
+				rule = { method: method, parameters: rules[ method ] };
+				try {
+					result = $.validator.methods[ method ].call( this, val, element, rule.parameters );
+
+					// If a method indicates that the field is optional and therefore valid,
+					// don't mark it as valid when there are no other rules
+					if ( result === "dependency-mismatch" && rulesCount === 1 ) {
+						dependencyMismatch = true;
+						continue;
+					}
+					dependencyMismatch = false;
+
+					if ( result === "pending" ) {
+						this.toHide = this.toHide.not( this.errorsFor( element ) );
+						return;
+					}
+
+					if ( !result ) {
+						this.formatAndAdd( element, rule );
+						return false;
+					}
+				} catch ( e ) {
+					if ( this.settings.debug && window.console ) {
+						console.log( "Exception occurred when checking element " + element.id + ", check the '" + rule.method + "' method.", e );
+					}
+					if ( e instanceof TypeError ) {
+						e.message += ".  Exception occurred when checking element " + element.id + ", check the '" + rule.method + "' method.";
+					}
+
+					throw e;
+				}
+			}
+			if ( dependencyMismatch ) {
+				return;
+			}
+			if ( this.objectLength( rules ) ) {
+				this.successList.push( element );
+			}
+			return true;
+		},
+
+		// Return the custom message for the given element and validation method
+		// specified in the element's HTML5 data attribute
+		// return the generic message if present and no method specific message is present
+		customDataMessage: function( element, method ) {
+			return $( element ).data( "msg" + method.charAt( 0 ).toUpperCase() +
+				method.substring( 1 ).toLowerCase() ) || $( element ).data( "msg" );
+		},
+
+		// Return the custom message for the given element name and validation method
+		customMessage: function( name, method ) {
+			var m = this.settings.messages[ name ];
+			return m && ( m.constructor === String ? m : m[ method ] );
+		},
+
+		// Return the first defined argument, allowing empty strings
+		findDefined: function() {
+			for ( var i = 0; i < arguments.length; i++ ) {
+				if ( arguments[ i ] !== undefined ) {
+					return arguments[ i ];
+				}
+			}
+			return undefined;
+		},
+
+		defaultMessage: function( element, rule ) {
+			var message = this.findDefined(
+					this.customMessage( element.name, rule.method ),
+					this.customDataMessage( element, rule.method ),
+
+					// 'title' is never undefined, so handle empty string as undefined
+					!this.settings.ignoreTitle && element.title || undefined,
+					$.validator.messages[ rule.method ],
+					"<strong>Warning: No message defined for " + element.name + "</strong>"
+				),
+				theregex = /\$?\{(\d+)\}/g;
+			if ( typeof message === "function" ) {
+				message = message.call( this, rule.parameters, element );
+			} else if ( theregex.test( message ) ) {
+				message = $.validator.format( message.replace( theregex, "{$1}" ), rule.parameters );
+			}
+
+			return message;
+		},
+
+		formatAndAdd: function( element, rule ) {
+			var message = this.defaultMessage( element, rule );
+
+			this.errorList.push( {
+				message: message,
+				element: element,
+				method: rule.method
+			} );
+
+			this.errorMap[ element.name ] = message;
+			this.submitted[ element.name ] = message;
+		},
+
+		addWrapper: function( toToggle ) {
+			if ( this.settings.wrapper ) {
+				toToggle = toToggle.add( toToggle.parent( this.settings.wrapper ) );
+			}
+			return toToggle;
+		},
+
+		defaultShowErrors: function() {
+			var i, elements, error;
+			for ( i = 0; this.errorList[ i ]; i++ ) {
+				error = this.errorList[ i ];
+				if ( this.settings.highlight ) {
+					this.settings.highlight.call( this, error.element, this.settings.errorClass, this.settings.validClass );
+				}
+				this.showLabel( error.element, error.message );
+			}
+			if ( this.errorList.length ) {
+				this.toShow = this.toShow.add( this.containers );
+			}
+			if ( this.settings.success ) {
+				for ( i = 0; this.successList[ i ]; i++ ) {
+					this.showLabel( this.successList[ i ] );
+				}
+			}
+			if ( this.settings.unhighlight ) {
+				for ( i = 0, elements = this.validElements(); elements[ i ]; i++ ) {
+					this.settings.unhighlight.call( this, elements[ i ], this.settings.errorClass, this.settings.validClass );
+				}
+			}
+			this.toHide = this.toHide.not( this.toShow );
+			this.hideErrors();
+			this.addWrapper( this.toShow ).show();
+		},
+
+		validElements: function() {
+			return this.currentElements.not( this.invalidElements() );
+		},
+
+		invalidElements: function() {
+			return $( this.errorList ).map( function() {
+				return this.element;
+			} );
+		},
+
+		showLabel: function( element, message ) {
+			var place, group, errorID, v,
+				error = this.errorsFor( element ),
+				elementID = this.idOrName( element ),
+				describedBy = $( element ).attr( "aria-describedby" );
+
+			if ( error.length ) {
+
+				// Refresh error/success class
+				error.removeClass( this.settings.validClass ).addClass( this.settings.errorClass );
+
+				// Replace message on existing label
+				error.html( message );
+			} else {
+
+				// Create error element
+				error = $( "<" + this.settings.errorElement + ">" )
+					.attr( "id", elementID + "-error" )
+					.addClass( this.settings.errorClass )
+					.html( message || "" );
+
+				// Maintain reference to the element to be placed into the DOM
+				place = error;
+				if ( this.settings.wrapper ) {
+
+					// Make sure the element is visible, even in IE
+					// actually showing the wrapped element is handled elsewhere
+					place = error.hide().show().wrap( "<" + this.settings.wrapper + "/>" ).parent();
+				}
+				if ( this.labelContainer.length ) {
+					this.labelContainer.append( place );
+				} else if ( this.settings.errorPlacement ) {
+					this.settings.errorPlacement( place, $( element ) );
+				} else {
+					place.insertAfter( element );
+				}
+
+				// Link error back to the element
+				if ( error.is( "label" ) ) {
+
+					// If the error is a label, then associate using 'for'
+					error.attr( "for", elementID );
+
+					// If the element is not a child of an associated label, then it's necessary
+					// to explicitly apply aria-describedby
+				} else if ( error.parents( "label[for='" + this.escapeCssMeta( elementID ) + "']" ).length === 0 ) {
+					errorID = error.attr( "id" );
+
+					// Respect existing non-error aria-describedby
+					if ( !describedBy ) {
+						describedBy = errorID;
+					} else if ( !describedBy.match( new RegExp( "\\b" + this.escapeCssMeta( errorID ) + "\\b" ) ) ) {
+
+						// Add to end of list if not already present
+						describedBy += " " + errorID;
+					}
+					$( element ).attr( "aria-describedby", describedBy );
+
+					// If this element is grouped, then assign to all elements in the same group
+					group = this.groups[ element.name ];
+					if ( group ) {
+						v = this;
+						$.each( v.groups, function( name, testgroup ) {
+							if ( testgroup === group ) {
+								$( "[name='" + v.escapeCssMeta( name ) + "']", v.currentForm )
+									.attr( "aria-describedby", error.attr( "id" ) );
+							}
+						} );
+					}
+				}
+			}
+			if ( !message && this.settings.success ) {
+				error.text( "" );
+				if ( typeof this.settings.success === "string" ) {
+					error.addClass( this.settings.success );
+				} else {
+					this.settings.success( error, element );
+				}
+			}
+			this.toShow = this.toShow.add( error );
+		},
+
+		errorsFor: function( element ) {
+			var name = this.escapeCssMeta( this.idOrName( element ) ),
+				describer = $( element ).attr( "aria-describedby" ),
+				selector = "label[for='" + name + "'], label[for='" + name + "'] *";
+
+			// 'aria-describedby' should directly reference the error element
+			if ( describer ) {
+				selector = selector + ", #" + this.escapeCssMeta( describer )
+					.replace( /\s+/g, ", #" );
+			}
+
+			return this
+				.errors()
+				.filter( selector );
+		},
+
+		// See https://api.jquery.com/category/selectors/, for CSS
+		// meta-characters that should be escaped in order to be used with JQuery
+		// as a literal part of a name/id or any selector.
+		escapeCssMeta: function( string ) {
+			return string.replace( /([\\!"#$%&'()*+,./:;<=>?@\[\]^`{|}~])/g, "\\$1" );
+		},
+
+		idOrName: function( element ) {
+			return this.groups[ element.name ] || ( this.checkable( element ) ? element.name : element.id || element.name );
+		},
+
+		validationTargetFor: function( element ) {
+
+			// If radio/checkbox, validate first element in group instead
+			if ( this.checkable( element ) ) {
+				element = this.findByName( element.name );
+			}
+
+			// Always apply ignore filter
+			return $( element ).not( this.settings.ignore )[ 0 ];
+		},
+
+		checkable: function( element ) {
+			return ( /radio|checkbox/i ).test( element.type );
+		},
+
+		findByName: function( name ) {
+			return $( this.currentForm ).find( "[name='" + this.escapeCssMeta( name ) + "']" );
+		},
+
+		getLength: function( value, element ) {
+			switch ( element.nodeName.toLowerCase() ) {
+			case "select":
+				return $( "option:selected", element ).length;
+			case "input":
+				if ( this.checkable( element ) ) {
+					return this.findByName( element.name ).filter( ":checked" ).length;
+				}
+			}
+			return value.length;
+		},
+
+		depend: function( param, element ) {
+			return this.dependTypes[ typeof param ] ? this.dependTypes[ typeof param ]( param, element ) : true;
+		},
+
+		dependTypes: {
+			"boolean": function( param ) {
+				return param;
+			},
+			"string": function( param, element ) {
+				return !!$( param, element.form ).length;
+			},
+			"function": function( param, element ) {
+				return param( element );
+			}
+		},
+
+		optional: function( element ) {
+			var val = this.elementValue( element );
+			return !$.validator.methods.required.call( this, val, element ) && "dependency-mismatch";
+		},
+
+		startRequest: function( element ) {
+			if ( !this.pending[ element.name ] ) {
+				this.pendingRequest++;
+				$( element ).addClass( this.settings.pendingClass );
+				this.pending[ element.name ] = true;
+			}
+		},
+
+		stopRequest: function( element, valid ) {
+			this.pendingRequest--;
+
+			// Sometimes synchronization fails, make sure pendingRequest is never < 0
+			if ( this.pendingRequest < 0 ) {
+				this.pendingRequest = 0;
+			}
+			delete this.pending[ element.name ];
+			$( element ).removeClass( this.settings.pendingClass );
+			if ( valid && this.pendingRequest === 0 && this.formSubmitted && this.form() ) {
+				$( this.currentForm ).submit();
+				this.formSubmitted = false;
+			} else if ( !valid && this.pendingRequest === 0 && this.formSubmitted ) {
+				$( this.currentForm ).triggerHandler( "invalid-form", [ this ] );
+				this.formSubmitted = false;
+			}
+		},
+
+		previousValue: function( element, method ) {
+			return $.data( element, "previousValue" ) || $.data( element, "previousValue", {
+				old: null,
+				valid: true,
+				message: this.defaultMessage( element, { method: method } )
+			} );
+		},
+
+		// Cleans up all forms and elements, removes validator-specific events
+		destroy: function() {
+			this.resetForm();
+
+			$( this.currentForm )
+				.off( ".validate" )
+				.removeData( "validator" )
+				.find( ".validate-equalTo-blur" )
+					.off( ".validate-equalTo" )
+					.removeClass( "validate-equalTo-blur" );
+		}
+
+	},
+
+	classRuleSettings: {
+		required: { required: true },
+		email: { email: true },
+		url: { url: true },
+		date: { date: true },
+		dateISO: { dateISO: true },
+		number: { number: true },
+		digits: { digits: true },
+		creditcard: { creditcard: true }
+	},
+
+	addClassRules: function( className, rules ) {
+		if ( className.constructor === String ) {
+			this.classRuleSettings[ className ] = rules;
+		} else {
+			$.extend( this.classRuleSettings, className );
+		}
+	},
+
+	classRules: function( element ) {
+		var rules = {},
+			classes = $( element ).attr( "class" );
+
+		if ( classes ) {
+			$.each( classes.split( " " ), function() {
+				if ( this in $.validator.classRuleSettings ) {
+					$.extend( rules, $.validator.classRuleSettings[ this ] );
+				}
+			} );
+		}
+		return rules;
+	},
+
+	normalizeAttributeRule: function( rules, type, method, value ) {
+
+		// Convert the value to a number for number inputs, and for text for backwards compability
+		// allows type="date" and others to be compared as strings
+		if ( /min|max|step/.test( method ) && ( type === null || /number|range|text/.test( type ) ) ) {
+			value = Number( value );
+
+			// Support Opera Mini, which returns NaN for undefined minlength
+			if ( isNaN( value ) ) {
+				value = undefined;
+			}
+		}
+
+		if ( value || value === 0 ) {
+			rules[ method ] = value;
+		} else if ( type === method && type !== "range" ) {
+
+			// Exception: the jquery validate 'range' method
+			// does not test for the html5 'range' type
+			rules[ method ] = true;
+		}
+	},
+
+	attributeRules: function( element ) {
+		var rules = {},
+			$element = $( element ),
+			type = element.getAttribute( "type" ),
+			method, value;
+
+		for ( method in $.validator.methods ) {
+
+			// Support for <input required> in both html5 and older browsers
+			if ( method === "required" ) {
+				value = element.getAttribute( method );
+
+				// Some browsers return an empty string for the required attribute
+				// and non-HTML5 browsers might have required="" markup
+				if ( value === "" ) {
+					value = true;
+				}
+
+				// Force non-HTML5 browsers to return bool
+				value = !!value;
+			} else {
+				value = $element.attr( method );
+			}
+
+			this.normalizeAttributeRule( rules, type, method, value );
+		}
+
+		// 'maxlength' may be returned as -1, 2147483647 ( IE ) and 524288 ( safari ) for text inputs
+		if ( rules.maxlength && /-1|2147483647|524288/.test( rules.maxlength ) ) {
+			delete rules.maxlength;
+		}
+
+		return rules;
+	},
+
+	dataRules: function( element ) {
+		var rules = {},
+			$element = $( element ),
+			type = element.getAttribute( "type" ),
+			method, value;
+
+		for ( method in $.validator.methods ) {
+			value = $element.data( "rule" + method.charAt( 0 ).toUpperCase() + method.substring( 1 ).toLowerCase() );
+			this.normalizeAttributeRule( rules, type, method, value );
+		}
+		return rules;
+	},
+
+	staticRules: function( element ) {
+		var rules = {},
+			validator = $.data( element.form, "validator" );
+
+		if ( validator.settings.rules ) {
+			rules = $.validator.normalizeRule( validator.settings.rules[ element.name ] ) || {};
+		}
+		return rules;
+	},
+
+	normalizeRules: function( rules, element ) {
+
+		// Handle dependency check
+		$.each( rules, function( prop, val ) {
+
+			// Ignore rule when param is explicitly false, eg. required:false
+			if ( val === false ) {
+				delete rules[ prop ];
+				return;
+			}
+			if ( val.param || val.depends ) {
+				var keepRule = true;
+				switch ( typeof val.depends ) {
+				case "string":
+					keepRule = !!$( val.depends, element.form ).length;
+					break;
+				case "function":
+					keepRule = val.depends.call( element, element );
+					break;
+				}
+				if ( keepRule ) {
+					rules[ prop ] = val.param !== undefined ? val.param : true;
+				} else {
+					$.data( element.form, "validator" ).resetElements( $( element ) );
+					delete rules[ prop ];
+				}
+			}
+		} );
+
+		// Evaluate parameters
+		$.each( rules, function( rule, parameter ) {
+			rules[ rule ] = $.isFunction( parameter ) && rule !== "normalizer" ? parameter( element ) : parameter;
+		} );
+
+		// Clean number parameters
+		$.each( [ "minlength", "maxlength" ], function() {
+			if ( rules[ this ] ) {
+				rules[ this ] = Number( rules[ this ] );
+			}
+		} );
+		$.each( [ "rangelength", "range" ], function() {
+			var parts;
+			if ( rules[ this ] ) {
+				if ( $.isArray( rules[ this ] ) ) {
+					rules[ this ] = [ Number( rules[ this ][ 0 ] ), Number( rules[ this ][ 1 ] ) ];
+				} else if ( typeof rules[ this ] === "string" ) {
+					parts = rules[ this ].replace( /[\[\]]/g, "" ).split( /[\s,]+/ );
+					rules[ this ] = [ Number( parts[ 0 ] ), Number( parts[ 1 ] ) ];
+				}
+			}
+		} );
+
+		if ( $.validator.autoCreateRanges ) {
+
+			// Auto-create ranges
+			if ( rules.min != null && rules.max != null ) {
+				rules.range = [ rules.min, rules.max ];
+				delete rules.min;
+				delete rules.max;
+			}
+			if ( rules.minlength != null && rules.maxlength != null ) {
+				rules.rangelength = [ rules.minlength, rules.maxlength ];
+				delete rules.minlength;
+				delete rules.maxlength;
+			}
+		}
+
+		return rules;
+	},
+
+	// Converts a simple string to a {string: true} rule, e.g., "required" to {required:true}
+	normalizeRule: function( data ) {
+		if ( typeof data === "string" ) {
+			var transformed = {};
+			$.each( data.split( /\s/ ), function() {
+				transformed[ this ] = true;
+			} );
+			data = transformed;
+		}
+		return data;
+	},
+
+	// http://jqueryvalidation.org/jQuery.validator.addMethod/
+	addMethod: function( name, method, message ) {
+		$.validator.methods[ name ] = method;
+		$.validator.messages[ name ] = message !== undefined ? message : $.validator.messages[ name ];
+		if ( method.length < 3 ) {
+			$.validator.addClassRules( name, $.validator.normalizeRule( name ) );
+		}
+	},
+
+	// http://jqueryvalidation.org/jQuery.validator.methods/
+	methods: {
+
+		// http://jqueryvalidation.org/required-method/
+		required: function( value, element, param ) {
+
+			// Check if dependency is met
+			if ( !this.depend( param, element ) ) {
+				return "dependency-mismatch";
+			}
+			if ( element.nodeName.toLowerCase() === "select" ) {
+
+				// Could be an array for select-multiple or a string, both are fine this way
+				var val = $( element ).val();
+				return val && val.length > 0;
+			}
+			if ( this.checkable( element ) ) {
+				return this.getLength( value, element ) > 0;
+			}
+			return value.length > 0;
+		},
+
+		// http://jqueryvalidation.org/email-method/
+		email: function( value, element ) {
+
+			// From https://html.spec.whatwg.org/multipage/forms.html#valid-e-mail-address
+			// Retrieved 2014-01-14
+			// If you have a problem with this implementation, report a bug against the above spec
+			// Or use custom methods to implement your own email validation
+			return this.optional( element ) || /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test( value );
+		},
+
+		// http://jqueryvalidation.org/url-method/
+		url: function( value, element ) {
+
+			// Copyright (c) 2010-2013 Diego Perini, MIT licensed
+			// https://gist.github.com/dperini/729294
+			// see also https://mathiasbynens.be/demo/url-regex
+			// modified to allow protocol-relative URLs
+			return this.optional( element ) || /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})).?)(?::\d{2,5})?(?:[/?#]\S*)?$/i.test( value );
+		},
+
+		// http://jqueryvalidation.org/date-method/
+		date: function( value, element ) {
+			return this.optional( element ) || !/Invalid|NaN/.test( new Date( value ).toString() );
+		},
+
+		// http://jqueryvalidation.org/dateISO-method/
+		dateISO: function( value, element ) {
+			return this.optional( element ) || /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/.test( value );
+		},
+
+		// http://jqueryvalidation.org/number-method/
+		number: function( value, element ) {
+			return this.optional( element ) || /^(?:-?\d+|-?\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/.test( value );
+		},
+
+		// http://jqueryvalidation.org/digits-method/
+		digits: function( value, element ) {
+			return this.optional( element ) || /^\d+$/.test( value );
+		},
+
+		// http://jqueryvalidation.org/minlength-method/
+		minlength: function( value, element, param ) {
+			var length = $.isArray( value ) ? value.length : this.getLength( value, element );
+			return this.optional( element ) || length >= param;
+		},
+
+		// http://jqueryvalidation.org/maxlength-method/
+		maxlength: function( value, element, param ) {
+			var length = $.isArray( value ) ? value.length : this.getLength( value, element );
+			return this.optional( element ) || length <= param;
+		},
+
+		// http://jqueryvalidation.org/rangelength-method/
+		rangelength: function( value, element, param ) {
+			var length = $.isArray( value ) ? value.length : this.getLength( value, element );
+			return this.optional( element ) || ( length >= param[ 0 ] && length <= param[ 1 ] );
+		},
+
+		// http://jqueryvalidation.org/min-method/
+		min: function( value, element, param ) {
+			return this.optional( element ) || value >= param;
+		},
+
+		// http://jqueryvalidation.org/max-method/
+		max: function( value, element, param ) {
+			return this.optional( element ) || value <= param;
+		},
+
+		// http://jqueryvalidation.org/range-method/
+		range: function( value, element, param ) {
+			return this.optional( element ) || ( value >= param[ 0 ] && value <= param[ 1 ] );
+		},
+
+		// http://jqueryvalidation.org/step-method/
+		step: function( value, element, param ) {
+			var type = $( element ).attr( "type" ),
+				errorMessage = "Step attribute on input type " + type + " is not supported.",
+				supportedTypes = [ "text", "number", "range" ],
+				re = new RegExp( "\\b" + type + "\\b" ),
+				notSupported = type && !re.test( supportedTypes.join() );
+
+			// Works only for text, number and range input types
+			// TODO find a way to support input types date, datetime, datetime-local, month, time and week
+			if ( notSupported ) {
+				throw new Error( errorMessage );
+			}
+			return this.optional( element ) || ( value % param === 0 );
+		},
+
+		// http://jqueryvalidation.org/equalTo-method/
+		equalTo: function( value, element, param ) {
+
+			// Bind to the blur event of the target in order to revalidate whenever the target field is updated
+			var target = $( param );
+			if ( this.settings.onfocusout && target.not( ".validate-equalTo-blur" ).length ) {
+				target.addClass( "validate-equalTo-blur" ).on( "blur.validate-equalTo", function() {
+					$( element ).valid();
+				} );
+			}
+			return value === target.val();
+		},
+
+		// http://jqueryvalidation.org/remote-method/
+		remote: function( value, element, param, method ) {
+			if ( this.optional( element ) ) {
+				return "dependency-mismatch";
+			}
+
+			method = typeof method === "string" && method || "remote";
+
+			var previous = this.previousValue( element, method ),
+				validator, data, optionDataString;
+
+			if ( !this.settings.messages[ element.name ] ) {
+				this.settings.messages[ element.name ] = {};
+			}
+			previous.originalMessage = previous.originalMessage || this.settings.messages[ element.name ][ method ];
+			this.settings.messages[ element.name ][ method ] = previous.message;
+
+			param = typeof param === "string" && { url: param } || param;
+			optionDataString = $.param( $.extend( { data: value }, param.data ) );
+			if ( previous.old === optionDataString ) {
+				return previous.valid;
+			}
+
+			previous.old = optionDataString;
+			validator = this;
+			this.startRequest( element );
+			data = {};
+			data[ element.name ] = value;
+			$.ajax( $.extend( true, {
+				mode: "abort",
+				port: "validate" + element.name,
+				dataType: "json",
+				data: data,
+				context: validator.currentForm,
+				success: function( response ) {
+					var valid = response === true || response === "true",
+						errors, message, submitted;
+
+					validator.settings.messages[ element.name ][ method ] = previous.originalMessage;
+					if ( valid ) {
+						submitted = validator.formSubmitted;
+						validator.resetInternals();
+						validator.toHide = validator.errorsFor( element );
+						validator.formSubmitted = submitted;
+						validator.successList.push( element );
+						validator.invalid[ element.name ] = false;
+						validator.showErrors();
+					} else {
+						errors = {};
+						message = response || validator.defaultMessage( element, { method: method, parameters: value } );
+						errors[ element.name ] = previous.message = message;
+						validator.invalid[ element.name ] = true;
+						validator.showErrors( errors );
+					}
+					previous.valid = valid;
+					validator.stopRequest( element, valid );
+				}
+			}, param ) );
+			return "pending";
+		}
+	}
+
+} );
+
+// Ajax mode: abort
+// usage: $.ajax({ mode: "abort"[, port: "uniqueport"]});
+// if mode:"abort" is used, the previous request on that port (port can be undefined) is aborted via XMLHttpRequest.abort()
+
+var pendingRequests = {},
+	ajax;
+
+// Use a prefilter if available (1.5+)
+if ( $.ajaxPrefilter ) {
+	$.ajaxPrefilter( function( settings, _, xhr ) {
+		var port = settings.port;
+		if ( settings.mode === "abort" ) {
+			if ( pendingRequests[ port ] ) {
+				pendingRequests[ port ].abort();
+			}
+			pendingRequests[ port ] = xhr;
+		}
+	} );
+} else {
+
+	// Proxy ajax
+	ajax = $.ajax;
+	$.ajax = function( settings ) {
+		var mode = ( "mode" in settings ? settings : $.ajaxSettings ).mode,
+			port = ( "port" in settings ? settings : $.ajaxSettings ).port;
+		if ( mode === "abort" ) {
+			if ( pendingRequests[ port ] ) {
+				pendingRequests[ port ].abort();
+			}
+			pendingRequests[ port ] = ajax.apply( this, arguments );
+			return pendingRequests[ port ];
+		}
+		return ajax.apply( this, arguments );
+	};
+}
+
+}));

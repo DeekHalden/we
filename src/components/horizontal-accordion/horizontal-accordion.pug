@@ -1,10 +1,10 @@
--var el = {src:"assets/images/cloths-image.jpg", href:"item.html"}
+-var el = {src:"assets/images/cloths-image.jpg", title:'Амбруа', href:"item.html"}
 -var i = 0
 
 .accordion
 	ul
 		while i < 20
 			+b.LI.el-wrapper
-				+e.A(href=el.src data-lightbox='cloths-lightbox' data-title="Перейти на страницу товара <a href="+el.href+" class='el-wrapper__href--item'> перейти").href.example-image-link
+				+e.A(href=el.src data-lightbox='cloths-lightbox' data-title=el.title + "<br><a class='link' href="+el.href+" class='el-wrapper__href--item'> перейти").href.example-image-link
 					+e.IMG(src=el.src).href--image.example-image
 			-i++

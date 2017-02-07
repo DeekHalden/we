@@ -1,0 +1,20 @@
+include /mixins/main_mixins
+.container-fluid.partnership-wrapper
+		.row.main-content
+			+CreateSeo('Lorem ipsum Fugiat pariatur sit consequat labore dolor.','Lorem ipsum Sunt sed eu officia labore nisi et cupidatat officia nisi est nisi velit et cillum aliquip in non in qui dolor. Lorem ipsum Excepteur cupidatat occaecat do dolor aliquip elit nulla amet Ut commodo culpa qui consectetur velit aute in qui fugiat est.','Lorem ipsum Est mollit esse aliqua aute sint.')
+		+b.partnership-form
+			+e.H3.heading Заполните свои реквизиты для заключения договора
+			+e.FORM(name="subscribe" action="POST")#partnership-page-form.form
+				+e.INPUT.form--form-control.form--name#name(placeholder="Контактное лицо (ФИО, должность)" type="text" name="name" )
+				+e.INPUT.form--form-control.form--email#email(placeholder="email для регистрации юр.лица" type="email" 
+				name="email")
+				+e.INPUT.form--form-control.form--tel#tel(placeholder="Телефон" type="number" name="tel" )
+				+e.INPUT.form--form-control.form--organization#organization(placeholder="Наименование организации" type="text" 
+				name="organization")
+				+e.INPUT.form--form-control.form--id_number#id_number(placeholder="ИНН/КПП" type="number" name="id_number" )
+				+e.INPUT.form--form-control.form--requisites#requisites(placeholder="Банковские реквизиты" type="text" 
+				name="requisites")
+				+CreateButton('','Отправить реквизиты для договора', 'action-btn partnership-action','submit')
+				+e.SPAN.form--error
+		.row.add-content
+			+CreateSeo('Lorem ipsum Fugiat pariatur sit consequat labore dolor.','Lorem ipsum Sunt sed eu officia labore nisi et cupidatat officia nisi est nisi velit et cillum aliquip in non in qui dolor. Lorem ipsum Excepteur cupidatat occaecat do dolor aliquip elit nulla amet Ut commodo culpa qui consectetur velit aute in qui fugiat est.','Lorem ipsum Est mollit esse aliqua aute sint.')

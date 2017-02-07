@@ -1,7 +1,7 @@
 .news-wrapper
 	background-color white
 	padding 50px 60px
-	
+	position relative
 	
 	.news-post 
 		text-decoration none
@@ -27,6 +27,16 @@
 			color $light-gray
 			font-size 16px
 			font-family "kelly slab",fantasy
+	.controls
+		display none	
+		position absolute 
+		bottom 20px
+		right 40px
+		cursor pointer
+		font-size 10px
+		
+.news-wrapper:hover .controls
+	display block
 
 @media (max-width 1199px)
 	.news-wrapper

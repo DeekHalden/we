@@ -1,7 +1,7 @@
 include /mixins/main_mixins
 
--var data = {heading:'Комбинат "ОСНОВА"', first_subheading:'Лучшие акции', second_subheading:'ДЛЯ ПАРТНЕРОВ', third_subheading:'Скидки. Распродажи. Подарки.', row_of_images:'assets/images/butterfly.jpg', count: 3, data_lightbox:'dicounts',createButton: true}
+-var data = {heading:'Комбинат "ОСНОВА"', first_subheading:'Лучшие акции', second_subheading:'ДЛЯ ПАРТНЕРОВ', third_subheading:'Скидки. Распродажи. Подарки.', row_of_images:'assets/images/butterfly.jpg', count: 3, href:'discounts.html',createButton: true}
 
 .discounts
-	+CreateLightboxContainer(data.heading, data.first_subheading, data.second_subheading, data.third_subheading,data.row_of_images, data.count, data.data_lightbox, data.createButton)
+	+CreateContainer(data.heading, data.first_subheading, data.second_subheading, data.third_subheading,data.row_of_images, data.count,data.href , data.createButton)
 	

@@ -2,11 +2,13 @@ include /assets/bemto/bemto
 
 doctype html
 html(lang="zxx")
+	title Акции, скидка, распродажа на ткани комбината Основа
 	include /components/head/head
+	
 	body
 		.parallax-container(data-image-src="assets/images/bg_cloth.webp")
 		include /components/navbar/navbar
-		include /components/contacts-wrapper/contacts-wrapper
+		
 		include /components/footer/footer
 		script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js")
 		script(src="assets/scripts/bundle.min.js")
@@ -14,7 +16,6 @@ html(lang="zxx")
 		script.
 			WebFont.load({
 				google: {
-					families: [ 'Marck+Script:400,700:latin', 'Kelly+Slab:400,600,400italic,700italic,700:latin','Lobster', 'basic:sans-serif']
+					families: [ 'Marck+Script:400,700:latin', 'Kelly+Slab:400,600,400italic,700italic,700:latin']
 				}
 			});
-		script(type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true" async defer)

@@ -17,9 +17,18 @@
 		cursor pointer
 		font-size 18px
 		color $light-gray
+		position relative
 		&:hover
 			color $light-gold
-		
+		&__logout
+			position absolute
+			top 15px
+			right 30px
+		&__me
+			text-decoration none
+			color $light-gray
+			&:hover
+				color $light-gold			
 	.logo
 		float left    	
 		padding-top 5px
@@ -34,6 +43,7 @@
 		margin-right 20px
 		white-space normal
 		text-align center
+		font-size 27px
 	// .basket
 	// 	float right
 	// 	padding-top 15px
@@ -76,10 +86,10 @@
 		&__element.icon-basket
 			position absolute
 			right 0
-			top -65px
+			top -73px
 			&:before
-				color $light-gold
-				font-size 30px
+				color $gold
+				font-size 40px
 			&--href
 				
 				position relative
@@ -89,9 +99,11 @@
 			.nav__element--href--goods-count
 					font-size 18px
 					position absolute
-					top 7px
-					left 23px
+					top 14px
+					left 27px
 					color #fff
+					font-size 16px
+					font-family 'eb garamond'
 			
 		&__element.lg-hidden
 			display none
@@ -105,7 +117,7 @@
 			display none
 		.heading
 			line-height 110px
-			font-size 28px
+			font-size 27px
 			float none
 			width 100%
 		.button-wrapper
@@ -189,7 +201,9 @@
 				padding 10px
 				color $light-gold
 				&--href
-					position relative 
+					position relative
+					&--text
+						font-style italic 
 					
 					
 				
@@ -202,8 +216,8 @@
 				.nav__element--href--text
 					display inline-block
 				.nav__element--href--goods-count
-					top 0px
-					left -18px
+					top 2px
+					left -17px
 
 		
 			&__element.icon-basket > &--href

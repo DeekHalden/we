@@ -3,12 +3,14 @@
 		display flex
 		flex-wrap wrap
 		justify-content space-around
-		
+		position relative
 		@extends .form-wrapper .row .login-form
 		&__form-control
+			line-height 38px
 			border-radius 0
 			font-size 16px
 			font-family Arial
+			border 2px solid $dark-gray
 		.info-row, .destination-row, .note-row
 			display inline
 			width calc(100%  / 3 - 2.5%)
@@ -22,8 +24,8 @@
 		
 		.note-row
 			margin-right 0
-			.heading 
-				margin-top 34px
+			
+				
 			.headings-row
 				display flex
 				justify-content space-around
@@ -33,7 +35,7 @@
 					color $gold
 					text-align center
 					float left
-					font-size 20px
+					font-size 19px
 					input:focus
 						outline none
 					
@@ -43,14 +45,17 @@
 				resize none
 				height 115px
 				overflow hidden
-				border 2px solid #000
+				border 2px solid $dark-gray
 				
-	.action-btn
-		display inline-block
-		float right
-		width auto
-		padding-left 10px
-		padding-right 10px
+		.action-btn
+			position absolute
+			right 0
+			bottom 0
+			display inline-block
+			float right
+			width auto
+			padding-left 10px
+			padding-right 10px
 			
 @media(max-width 1199px)
 	
@@ -75,9 +80,12 @@
 @media(max-width 640px)
 	
 		.user
+			padding-bottom 65px
 			.order-form
 				justify-content flex-start
 				.info-row, .destination-row, .note-row
 					width 100%
 					margin-right 0
+				.action-btn
+					bottom -65px
 

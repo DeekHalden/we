@@ -3,20 +3,17 @@ include /mixins/main_mixins
 #login.container-fluid.form-wrapper.zoom-anim-dialog.mfp-hide
 	.row
 		+b.P.title Вход
-		+b.FORM(action="POST" ).login-form.form
-			+e.INPUT(type="email" placeholder="Email").form-control
-			+e.INPUT(type="password" placeholder="Пароль").form-control
+		+b.FORM(action="me.html" method="GET" novalidate name="login-form" id="login-form").login-form.form
+			+e.INPUT#email(type="email" placeholder="Email" name="email").form-control
+			+e.INPUT#password(type="password" placeholder="Пароль" name="password").form-control
 			+e.checkbox
 				+e.INPUT(type="checkbox" id="remember-me" name="remember-me").checkbox--remember-me
 				+e.LABEL(for="remember-me").checkbox--label Запомнить меня
 				+e.A(href="#forgot-password").checkbox--forgot.popup-with-zoom-anim Не помню пароль
-			+e.SPAN.error
-			+CreateButton('', 'OK', 'action-btn')
+			
+			+CreateActionButton('OK', 'action-btn login-action','submit')
 		+b.SPAN.additional-action У вас нет аккаунта? <a href="#register" class="additional-action__href popup-with-zoom-anim">Регистрация</a>
 
 include change-password
 include register
-
-
-
 	
