@@ -28,11 +28,12 @@
       <div class="row">
         <p class="title">Вход
         </p>
-        <form class="login-form form" action="POST"><input class="login-form__form-control" type="email" placeholder="Email"/><input class="login-form__form-control" type="password" placeholder="Пароль"/>
+        <form class="login-form form" action="me.html" method="GET" novalidate="novalidate" name="login-form" id="login-form"><input class="login-form__form-control" id="email" type="email" placeholder="Email" name="email"/><input class="login-form__form-control" id="password" type="password" placeholder="Пароль" name="password"/>
           <div class="login-form__checkbox"><input class="login-form__checkbox--remember-me" type="checkbox" id="remember-me" name="remember-me"/>
             <label class="login-form__checkbox--label" for="remember-me">Запомнить меня
             </label><a class="login-form__checkbox--forgot popup-with-zoom-anim" href="#forgot-password">Не помню пароль</a>
-          </div><span class="login-form__error"></span><a class="action-btn" href="">OK</a>
+          </div>
+              <input class="action-btn login-action" name="submit" type="submit" value="OK">
         </form><span class="additional-action">У вас нет аккаунта? <a href="#register" class="additional-action__href popup-with-zoom-anim">Регистрация</a></span>
       </div>
     </div>
@@ -40,7 +41,7 @@
       <div class="row">
         <p class="title">Смена пароля <br> <span class="subtitle">Пожалуйста, введите ваш email</span>
         </p>
-        <form class="forgot-form form" action="POST"><input class="forgot-form__form-control" type="email" placeholder="Email"/><span class="forgot-form__error"></span><a class="action-btn" href="">OK</a>
+        <form class="forgot-form form" action="POST" novalidate="novalidate" id="change-form"><input class="forgot-form__form-control" type="email" placeholder="Email" name="email" id="email"/><span class="forgot-form__error"></span><a class="action-btn" href="#">OK</a>
         </form>
       </div>
     </div>
@@ -48,12 +49,15 @@
       <div class="row">
         <p class="title">Регистрация
         </p>
-        <form class="register-form form" action="POST"><input class="register-form__form-control" type="text" placeholder="Контактное лицо"/><input class="register-form__form-control" type="number" placeholder="Телефон"/><input class="register-form__form-control" type="email" placeholder="Email" id="email"/><input class="register-form__form-control important" type="text" placeholder="Наименование​ ​юр.​ ​лица"/><input class="register-form__form-control important" type="text" placeholder="Юр.​ ​адрес"/><input class="register-form__form-control important" type="number" placeholder="​ИНН"/><input class="register-form__form-control important" type="number" placeholder="​КПП"/><input class="register-form__form-control important" type="number" placeholder="ОРГН"/><input class="register-form__form-control important" type="text" placeholder="Банковские реквизиты"/><input class="register-form__form-control" type="password" placeholder="Пароль"/><input class="register-form__form-control" type="password" placeholder="Повторите пароль"/><span class="register-form__error"></span><a class="action-btn" href="">OK</a>
+        <form class="register-form form" action="me.html" method="GET" novalidate="novalidate" id="register-form"><input class="register-form__form-control" type="text" placeholder="Контактное лицо" name="name" id="name"/><input class="register-form__form-control" type="number" placeholder="Телефон" name="tel" id="tel"/><input class="register-form__form-control" type="email" placeholder="Email" name="email" id="email"/><input class="register-form__form-control important" type="text" placeholder="Наименование​ ​юр.​ ​лица" name="entity" id="entity"/><input class="register-form__form-control important" type="text" placeholder="Юр.​ ​адрес" name="entity_address" id="entity_address"/><input class="register-form__form-control important" type="number" placeholder="​ИНН" name="id_number" id="id_number"/><input class="register-form__form-control important" type="number" placeholder="​КПП" name="KPP" id="KPP"/><input class="register-form__form-control important" type="number" placeholder="ОРГН" name="ORGN" id="ORGN"/><input class="register-form__form-control important" type="text" placeholder="Банковские реквизиты" name="requisites" id="requisites"/><input class="register-form__form-control" type="password" placeholder="Пароль" name="password" id="password"/><input class="register-form__form-control" type="password" placeholder="Повторите пароль" name="password" id="password"/><span class="register-form__error"></span>
+              <input class="action-btn" name="submit" type="submit" value="OK">
         </form><span class="additional-action">У меня уже есть аккаунт <a href="#login" class="additional-action__href popup-with-zoom-anim">Войти</a></span>
       </div>
     </div>
     <div class="navbar container-fluid">
-      <div class="row clearfix"><a class="login popup-with-zoom-anim" href="#login">Вход / Регистрация</a>
+      <div class="row clearfix">
+        <div class="login"> <a class="login__me" href="me.html">Привет, Юзер  </a><a class="login__logout">Выйти</a>
+        </div>
         <div class="logo"><a class="logo__href" href="index.html"><img src="assets/images/logo.png"></a>
         </div>
         <h1 class="heading">Комбинат ОСНОВА <span class="heading-sub">- российский производитель высококачественных тканей</span>
@@ -91,7 +95,7 @@
         <div class="main-posts-wrapper">
           <div class="new-posts" id="posts">
                 <div class="post-card"><a class="post-card__title" href="post.html">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016»</a>
-                  <p class="post-card__date">22.12.2016
+                  <p class="post-card__date">22 декабря 2016
                   </p>
                   <div class="post-card__info clearfix"><img class="post-card__info--image" src="assets/images/post_image.webp" alt="" role="presentation"/>
                     <p class="post-card__info--content">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016» состоится 20 февраля в Москве в рамках «Российской недели текстильной и легкой промышленности», где на одной площадке будут объединены ведущие выставки рынка легкой промышленности, проходящие в России.
@@ -99,7 +103,7 @@
                   </div>
                 </div>
                 <div class="post-card"><a class="post-card__title" href="post.html">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016»</a>
-                  <p class="post-card__date">22.12.2016
+                  <p class="post-card__date">22 декабря 2016
                   </p>
                   <div class="post-card__info clearfix"><img class="post-card__info--image" src="assets/images/post_image.webp" alt="" role="presentation"/>
                     <p class="post-card__info--content">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016» состоится 20 февраля в Москве в рамках «Российской недели текстильной и легкой промышленности», где на одной площадке будут объединены ведущие выставки рынка легкой промышленности, проходящие в России.
@@ -107,7 +111,7 @@
                   </div>
                 </div>
                 <div class="post-card"><a class="post-card__title" href="post.html">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016»</a>
-                  <p class="post-card__date">22.12.2016
+                  <p class="post-card__date">22 декабря 2016
                   </p>
                   <div class="post-card__info clearfix"><img class="post-card__info--image" src="assets/images/post_image.webp" alt="" role="presentation"/>
                     <p class="post-card__info--content">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016» состоится 20 февраля в Москве в рамках «Российской недели текстильной и легкой промышленности», где на одной площадке будут объединены ведущие выставки рынка легкой промышленности, проходящие в России.
@@ -115,7 +119,7 @@
                   </div>
                 </div>
                 <div class="post-card"><a class="post-card__title" href="post.html">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016»</a>
-                  <p class="post-card__date">22.12.2016
+                  <p class="post-card__date">22 декабря 2016
                   </p>
                   <div class="post-card__info clearfix"><img class="post-card__info--image" src="assets/images/post_image.webp" alt="" role="presentation"/>
                     <p class="post-card__info--content">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016» состоится 20 февраля в Москве в рамках «Российской недели текстильной и легкой промышленности», где на одной площадке будут объединены ведущие выставки рынка легкой промышленности, проходящие в России.
@@ -123,7 +127,7 @@
                   </div>
                 </div>
                 <div class="post-card"><a class="post-card__title" href="post.html">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016»</a>
-                  <p class="post-card__date">22.12.2016
+                  <p class="post-card__date">22 декабря 2016
                   </p>
                   <div class="post-card__info clearfix"><img class="post-card__info--image" src="assets/images/post_image.webp" alt="" role="presentation"/>
                     <p class="post-card__info--content">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016» состоится 20 февраля в Москве в рамках «Российской недели текстильной и легкой промышленности», где на одной площадке будут объединены ведущие выставки рынка легкой промышленности, проходящие в России.
@@ -131,7 +135,7 @@
                   </div>
                 </div>
                 <div class="post-card"><a class="post-card__title" href="post.html">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016»</a>
-                  <p class="post-card__date">22.12.2016
+                  <p class="post-card__date">22 декабря 2016
                   </p>
                   <div class="post-card__info clearfix"><img class="post-card__info--image" src="assets/images/post_image.webp" alt="" role="presentation"/>
                     <p class="post-card__info--content">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016» состоится 20 февраля в Москве в рамках «Российской недели текстильной и легкой промышленности», где на одной площадке будут объединены ведущие выставки рынка легкой промышленности, проходящие в России.
@@ -139,7 +143,7 @@
                   </div>
                 </div>
                 <div class="post-card"><a class="post-card__title" href="post.html">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016»</a>
-                  <p class="post-card__date">22.12.2016
+                  <p class="post-card__date">22 декабря 2016
                   </p>
                   <div class="post-card__info clearfix"><img class="post-card__info--image" src="assets/images/post_image.webp" alt="" role="presentation"/>
                     <p class="post-card__info--content">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016» состоится 20 февраля в Москве в рамках «Российской недели текстильной и легкой промышленности», где на одной площадке будут объединены ведущие выставки рынка легкой промышленности, проходящие в России.
@@ -147,7 +151,7 @@
                   </div>
                 </div>
                 <div class="post-card"><a class="post-card__title" href="post.html">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016»</a>
-                  <p class="post-card__date">22.12.2016
+                  <p class="post-card__date">22 декабря 2016
                   </p>
                   <div class="post-card__info clearfix"><img class="post-card__info--image" src="assets/images/post_image.webp" alt="" role="presentation"/>
                     <p class="post-card__info--content">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016» состоится 20 февраля в Москве в рамках «Российской недели текстильной и легкой промышленности», где на одной площадке будут объединены ведущие выставки рынка легкой промышленности, проходящие в России.
@@ -155,7 +159,7 @@
                   </div>
                 </div>
                 <div class="post-card"><a class="post-card__title" href="post.html">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016»</a>
-                  <p class="post-card__date">22.12.2016
+                  <p class="post-card__date">22 декабря 2016
                   </p>
                   <div class="post-card__info clearfix"><img class="post-card__info--image" src="assets/images/post_image.webp" alt="" role="presentation"/>
                     <p class="post-card__info--content">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016» состоится 20 февраля в Москве в рамках «Российской недели текстильной и легкой промышленности», где на одной площадке будут объединены ведущие выставки рынка легкой промышленности, проходящие в России.
@@ -163,7 +167,7 @@
                   </div>
                 </div>
                 <div class="post-card"><a class="post-card__title" href="post.html">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016»</a>
-                  <p class="post-card__date">22.12.2016
+                  <p class="post-card__date">22 декабря 2016
                   </p>
                   <div class="post-card__info clearfix"><img class="post-card__info--image" src="assets/images/post_image.webp" alt="" role="presentation"/>
                     <p class="post-card__info--content">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016» состоится 20 февраля в Москве в рамках «Российской недели текстильной и легкой промышленности», где на одной площадке будут объединены ведущие выставки рынка легкой промышленности, проходящие в России.
@@ -171,7 +175,7 @@
                   </div>
                 </div>
                 <div class="post-card"><a class="post-card__title" href="post.html">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016»</a>
-                  <p class="post-card__date">22.12.2016
+                  <p class="post-card__date">22 декабря 2016
                   </p>
                   <div class="post-card__info clearfix"><img class="post-card__info--image" src="assets/images/post_image.webp" alt="" role="presentation"/>
                     <p class="post-card__info--content">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016» состоится 20 февраля в Москве в рамках «Российской недели текстильной и легкой промышленности», где на одной площадке будут объединены ведущие выставки рынка легкой промышленности, проходящие в России.
@@ -179,7 +183,7 @@
                   </div>
                 </div>
                 <div class="post-card"><a class="post-card__title" href="post.html">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016»</a>
-                  <p class="post-card__date">22.12.2016
+                  <p class="post-card__date">22 декабря 2016
                   </p>
                   <div class="post-card__info clearfix"><img class="post-card__info--image" src="assets/images/post_image.webp" alt="" role="presentation"/>
                     <p class="post-card__info--content">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016» состоится 20 февраля в Москве в рамках «Российской недели текстильной и легкой промышленности», где на одной площадке будут объединены ведущие выставки рынка легкой промышленности, проходящие в России.
@@ -187,7 +191,7 @@
                   </div>
                 </div>
                 <div class="post-card"><a class="post-card__title" href="post.html">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016»</a>
-                  <p class="post-card__date">22.12.2016
+                  <p class="post-card__date">22 декабря 2016
                   </p>
                   <div class="post-card__info clearfix"><img class="post-card__info--image" src="assets/images/post_image.webp" alt="" role="presentation"/>
                     <p class="post-card__info--content">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016» состоится 20 февраля в Москве в рамках «Российской недели текстильной и легкой промышленности», где на одной площадке будут объединены ведущие выставки рынка легкой промышленности, проходящие в России.
@@ -195,7 +199,7 @@
                   </div>
                 </div>
                 <div class="post-card"><a class="post-card__title" href="post.html">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016»</a>
-                  <p class="post-card__date">22.12.2016
+                  <p class="post-card__date">22 декабря 2016
                   </p>
                   <div class="post-card__info clearfix"><img class="post-card__info--image" src="assets/images/post_image.webp" alt="" role="presentation"/>
                     <p class="post-card__info--content">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016» состоится 20 февраля в Москве в рамках «Российской недели текстильной и легкой промышленности», где на одной площадке будут объединены ведущие выставки рынка легкой промышленности, проходящие в России.
@@ -203,7 +207,7 @@
                   </div>
                 </div>
                 <div class="post-card"><a class="post-card__title" href="post.html">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016»</a>
-                  <p class="post-card__date">22.12.2016
+                  <p class="post-card__date">22 декабря 2016
                   </p>
                   <div class="post-card__info clearfix"><img class="post-card__info--image" src="assets/images/post_image.webp" alt="" role="presentation"/>
                     <p class="post-card__info--content">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016» состоится 20 февраля в Москве в рамках «Российской недели текстильной и легкой промышленности», где на одной площадке будут объединены ведущие выставки рынка легкой промышленности, проходящие в России.
@@ -220,19 +224,19 @@
                       <li><a class="item" href="post.html"><span class="item__media"><img class="item__media--img" src="assets/images/medved.webp" alt="" role="presentation"/></span>
                         <p class="item__title">Завтрак с заместителем министра
                         </p>
-                        <p class="item__date">22.12.2016
+                        <p class="item__date">22 декабря 2016
                         </p></a>
                       </li>
                       <li><a class="item" href="post.html"><span class="item__media"><img class="item__media--img" src="assets/images/medved.webp" alt="" role="presentation"/></span>
                         <p class="item__title">Завтрак с заместителем министра
                         </p>
-                        <p class="item__date">22.12.2016
+                        <p class="item__date">22 декабря 2016
                         </p></a>
                       </li>
                       <li><a class="item" href="post.html"><span class="item__media"><img class="item__media--img" src="assets/images/medved.webp" alt="" role="presentation"/></span>
                         <p class="item__title">Завтрак с заместителем министра
                         </p>
-                        <p class="item__date">22.12.2016
+                        <p class="item__date">22 декабря 2016
                         </p></a>
                       </li>
                     </ul>
@@ -242,28 +246,32 @@
             </h4><a class="thumb" href="post.html"> <span class="thumb__media clearfix"><img class="thumb__media--image" src="assets/images/post_image.webp" alt="" role="presentation"/></span>
                     <p class="thumb__title">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016»
                     </p>
-                    <p class="thumb__date">22.12.2016
+                    <p class="thumb__date">22 декабря 2016
                     </p></a><a class="thumb" href="post.html"> <span class="thumb__media clearfix"><img class="thumb__media--image" src="assets/images/post_image.webp" alt="" role="presentation"/></span>
                     <p class="thumb__title">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016»
                     </p>
-                    <p class="thumb__date">22.12.2016
+                    <p class="thumb__date">22 декабря 2016
                     </p></a><a class="thumb" href="post.html"> <span class="thumb__media clearfix"><img class="thumb__media--image" src="assets/images/post_image.webp" alt="" role="presentation"/></span>
                     <p class="thumb__title">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016»
                     </p>
-                    <p class="thumb__date">22.12.2016
+                    <p class="thumb__date">22 декабря 2016
                     </p></a><a class="thumb" href="post.html"> <span class="thumb__media clearfix"><img class="thumb__media--image" src="assets/images/post_image.webp" alt="" role="presentation"/></span>
                     <p class="thumb__title">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016»
                     </p>
-                    <p class="thumb__date">22.12.2016
+                    <p class="thumb__date">22 декабря 2016
                     </p></a><a class="thumb" href="post.html"> <span class="thumb__media clearfix"><img class="thumb__media--image" src="assets/images/post_image.webp" alt="" role="presentation"/></span>
                     <p class="thumb__title">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016»
                     </p>
-                    <p class="thumb__date">22.12.2016
+                    <p class="thumb__date">22 декабря 2016
                     </p></a><a class="thumb" href="post.html"> <span class="thumb__media clearfix"><img class="thumb__media--image" src="assets/images/post_image.webp" alt="" role="presentation"/></span>
                     <p class="thumb__title">XIV Церемония вручения Национальной премии в области индустрии моды «Золотое веретено-2016»
                     </p>
-                    <p class="thumb__date">22.12.2016
+                    <p class="thumb__date">22 декабря 2016
                     </p></a>
+          </div>
+          <div class="socials">
+            <h4 class="socials__heading heading">Мы в соцсетях
+            </h4><a class="socials__item" href="vkontakte.com"><img class="socials__item--image" src="https://static.wixstatic.com/media/9c4b521dd2404cd5a05ed6115f3a0dc8.png/v1/fill/w_23,h_23,al_c,usm_0.66_1.00_0.01/9c4b521dd2404cd5a05ed6115f3a0dc8.png" alt="" role="presentation"/></a><a class="socials__item" href="vkontakte.com"><img class="socials__item--image" src="https://static.wixstatic.com/media/9c4b521dd2404cd5a05ed6115f3a0dc8.png/v1/fill/w_23,h_23,al_c,usm_0.66_1.00_0.01/9c4b521dd2404cd5a05ed6115f3a0dc8.png" alt="" role="presentation"/></a><a class="socials__item" href="vkontakte.com"><img class="socials__item--image" src="https://static.wixstatic.com/media/9c4b521dd2404cd5a05ed6115f3a0dc8.png/v1/fill/w_23,h_23,al_c,usm_0.66_1.00_0.01/9c4b521dd2404cd5a05ed6115f3a0dc8.png" alt="" role="presentation"/></a>
           </div>
         </div>
       </div>
