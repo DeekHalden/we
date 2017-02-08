@@ -4275,10 +4275,12 @@ ul {
   padding: 5px 10px;
   font-weight: bold;
 }
-@media (max-width: 991px) {
+@media (max-width: 1199px) {
   .history-wrapper .history-info {
     padding-right: 0;
   }
+}
+@media (max-width: 991px) {
   .history-wrapper .history-info__subtitle {
     width: 50%;
   }
