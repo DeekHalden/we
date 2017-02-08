@@ -1,0 +1,38 @@
+
+include /assets/bemto/bemto
+
+doctype html
+html(lang="zxx")
+	title Комбинат флисового полотна ОСНОВА
+	include /components/head/head
+	body
+		
+		include /components/navbar/navbar
+		.container-fluid.change-wrapper
+			.row
+				+b.P.title Смена данных
+				+b.FORM(action="me.html" method="get" novalidate="novalidate" name="change-information-form").change-form.form#change-information-form
+					+e.INPUT(type="text" placeholder="Контактное лицо" name="name").form-control#name
+					+e.INPUT(type="number" placeholder="Телефон" name="tel").form-control#tel
+					+e.INPUT(type="email" placeholder="Email" name="email" ).form-control#email
+					+e.INPUT(type="text" placeholder="Наименование​ ​юр.​ ​лица" name="entity").form-control#entity
+					+e.INPUT(type="text" placeholder="Юр.​ ​адрес" name="entity_address").form-control#entity_address
+					+e.INPUT(type="number" placeholder="​ИНН" name="id_number").form-control#id_number
+					+e.INPUT(type="number" placeholder="​КПП" name="KPP").form-control#KPP
+					+e.INPUT(type="number" placeholder="ОРГН" name="ORGN").form-control#ORGN
+					+e.INPUT(type="text" placeholder="Банковские реквизиты" name="requisites").form-control#requisites
+					+e.INPUT(type="password" placeholder="Пароль" name="password").form-control#password
+					+e.INPUT(type="password" placeholder="Повторите пароль" name="password_again").form-control#password_again
+					+CreateActionButton('OK', 'action-btn', 'submit')
+					+CreateButton('me.html', 'Назад', 'action-btn')
+					
+		include /components/footer/footer
+		//- script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js")
+		script(src="assets/scripts/bundle.min.js")
+		script(src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js")
+		script.
+			WebFont.load({
+				google: {
+					families: [ 'Marck+Script:400,700:latin', 'Kelly+Slab:400,600,400italic,700italic,700:latin']
+				}
+			});

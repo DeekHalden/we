@@ -1,99 +1,120 @@
-.cards-row
-	margin-bottom 20px
-	.card
-		border 15px solid #fff
-		padding 20px
-		position relative
-		display flex
-		flex-wrap wrap
-		justify-content space-between
-		margin-top 20px
-		&__image-container
-			width 150px
-			float left
-			
-			&--image
-				max-width 100%
-				height auto	
-		&__title
-			
-			text-align right
-			display inline-block
-			color $gold
-			font-size 26px
-			
-		&__sub
-			font-size 18px
-			color $light-gray
-			&--title
-				text-decoration none
+.items-wrapper
+	.heading
+		color $gold
+		font-size 22px
+		margin 0 20px
+		
+	
+	.cards-row
+		margin-bottom 20px
+		.card
+			border 15px solid #fff
+			padding 20px
+			position relative
+			display flex
+			flex-wrap wrap
+			justify-content flex-start
+			margin-top 20px
+			&__image-container
+				width 150px
+				float left
+				
+				&--image
+					max-width 100%
+					height auto	
+			&__title
+				
+				text-align right
+				display inline-block
+				color $gold
+				font-size 26px
+				margin 0 5%
+				
+			&__sub
+				font-size 18px
 				color $light-gray
-				font-weight 600
+				&--title
+					text-decoration none
+					color $light-gray
+					font-weight 600
+					&:hover
+						color $dark-gray
+				&--quantity
+					padding  5px
+					width 60px
+					margin-top 10px
+					margin-right 5px
+					cursor pointer
+			
+			&__remove
+				position absolute 
+				right 0
+				top 0
+				color $light-gray
+				cursor pointer
 				&:hover
 					color $dark-gray
-			&--quantity
-				padding  5px
-				width 60px
-				margin-top 10px
-				margin-right 5px
-				cursor pointer
-		
-		&__remove
-			position absolute 
-			right 0
-			top 0
-			color $light-gray
-			cursor pointer
-			&:hover
-				color $dark-gray
-				transform scale(1.1)
-	.total
-		&__price
-			margin-top 20px
-			float right
-	.order
-		width auto
-		display block
-		padding 0 10px
-		float right
-		font-family Arial
-		
-			
-@media(max-width 791px)
-	.cards-row
-		.card
-			display block
-			
-			&__image-container, &__title
-				
-				width 50%
-			&__title
-				margin-bottom 10px
-				float right
-			&__sub--quantity
-				margin-top 0
-@media(max-width 480px)
-	.cards-row
-		.card
-			display flex
-			justify-content space-around
-			&__image-container
-				width 50%
-				&--image
-					max-width 60%
-					
-					
-			&__title.item-title
-				width 50%
-				float left
-				margin-top 0
-
-			&__title
-				width 25%
-				height 70px
-				margin 0 auto
-				text-align left
+					transform scale(1.1)
+		.total
+			&__price
 				margin-top 20px
-				font-size 18px
-				float none
+				float right
+		.order
+			width auto
+			display block
+			padding 0 10px
+			float right
+			font-family Arial
+		
+			
+@media(max-width 1199px)
+	.items-wrapper
+			.cards-row
+				.card
+					justify-content space-around
+					&__title
+						margin 0
+@media(max-width 791px)
+	.items-wrapper
+		.cards-row
+			.card
+				display block
 				
+				&__image-container, &__title
+					
+					width 50%
+				&__title
+					margin-bottom 10px
+					float right
+				&__sub--quantity
+					margin-top 0
+@media(max-width 480px)
+	.items-wrapper
+		.heading
+			text-align center
+			padding-top 20px
+		.cards-row
+			.card
+				display flex
+				justify-content space-between
+				padding 5px
+				&__image-container
+					width 50%
+					&--image
+						max-width 60%
+						
+						
+				&__title.item-title
+					width 50%
+					float left
+					margin-top 0
+
+				&__title
+					width 25%
+					height 70px
+					margin 0 auto
+					text-align left
+					margin-top 20px
+					font-size 18px
+					float none
+					

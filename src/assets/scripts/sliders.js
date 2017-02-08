@@ -66,8 +66,8 @@
      }]
 
  });
-if(pauseableSlider){
-    // $('.total').text(pauseableSlider.getTotalSlideCount());
+if(pauseableSlider.children().length > 0){
+    $('.total').text(pauseableSlider.getTotalSlideCount());
      $('.pause').click(function() {
          
         if($(this).text() =="►") {

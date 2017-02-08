@@ -1,21 +1,19 @@
 #register.container-fluid.form-wrapper.zoom-anim-dialog.mfp-hide
 	.row
 		+b.P.title Регистрация
-		+b.FORM(action="me.html" method="GET" novalidate="novalidate").register-form.form#register-form
+		+b.FORM(action="me.html" method="post" novalidate="novalidate").register-form.form#register-form
 			+e.INPUT(type="text" placeholder="Контактное лицо" name="name").form-control#name
 			+e.INPUT(type="number" placeholder="Телефон" name="tel").form-control#tel
 			+e.INPUT(type="email" placeholder="Email" name="email" ).form-control#email
-			+e.INPUT(type="text" placeholder="Наименование​ ​юр.​ ​лица" name="entity").form-control.important#entity
-			
-			+e.INPUT(type="text" placeholder="Юр.​ ​адрес" name="entity_address").form-control.important#entity_address
-			+e.INPUT(type="number" placeholder="​ИНН" name="id_number").form-control.important#id_number
-			+e.INPUT(type="number" placeholder="​КПП" name="KPP").form-control.important#KPP
-			+e.INPUT(type="number" placeholder="ОРГН" name="ORGN").form-control.important#ORGN
-			+e.INPUT(type="text" placeholder="Банковские реквизиты" name="requisites").form-control.important#requisites
-
+			+e.INPUT(type="text" placeholder="Наименование​ ​юр.​ ​лица" name="entity").form-control#entity
+			+e.INPUT(type="text" placeholder="Юр.​ ​адрес" name="entity_address").form-control#entity_address
+			+e.INPUT(type="number" placeholder="​ИНН" name="id_number").form-control#id_number
+			+e.INPUT(type="number" placeholder="​КПП" name="KPP").form-control#KPP
+			+e.INPUT(type="number" placeholder="ОРГН" name="ORGN").form-control#ORGN
+			+e.INPUT(type="text" placeholder="Банковские реквизиты" name="requisites").form-control#requisites
 			+e.INPUT(type="password" placeholder="Пароль" name="password").form-control#password
-			+e.INPUT(type="password" placeholder="Повторите пароль" name="password").form-control#password
-			+e.SPAN.error
+			+e.INPUT(type="password" placeholder="Повторите пароль" name="password_again").form-control#password_again
+			
 			+CreateActionButton('OK', 'action-btn', 'submit')
 		+b.SPAN.additional-action У меня уже есть аккаунт <a href="#login" class="additional-action__href popup-with-zoom-anim">Войти</a>
 

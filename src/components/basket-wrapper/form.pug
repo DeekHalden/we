@@ -16,12 +16,12 @@
 				+e.INPUT(type="text" placeholder="Улица" name="street" id="street").form-control.important
 				+e.SPAN.error
 			.note-row
+				p.heading Примечание
 				+b.headings-row 
 					+e.SPAN.heading Способ доставки <br>
 						<input class="radio-input" type="radio" name="delivery" id="delivery"><label for="delivery">По договоренности</label>
 					+e.SPAN.heading Способ оплаты <br>
 						<input class="radio-input" type="radio" name ="payment" id="payment" data-color="green"><label for="payment">Офлайн оплата</label>
 
-				p.heading Примечание
 				+e.TEXTAREA(type="text" placeholder="Примечание").form-control
 			+CreateActionButton('Заказать', 'order action-btn', 'submit')

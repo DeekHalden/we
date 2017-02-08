@@ -2,25 +2,35 @@
 	margin 20px
 	display flex
 	
+	justify-content flex-start
 	flex-wrap wrap
-	text-align center
+	position relative
 	
 	&__icon
 	
-		margin 0 auto
+		margin 0 10px
 		
 		&.facebook
 			margin-top -1px
 		&.favorite
+			width 34px
+			height 34px
 			display block
 			float right
-			font-size 30px
 			margin-top -10px
-			
-			.love
-				color black
-				vertical-align top
-			
+			position absolute
+			background url('https://static.parastorage.com/services/santa/1.2080.14/static/images/new-blog-social-icons/like-post.svg')
+			right 0
+			&:hover
+				background url('https://static.parastorage.com/services/santa/1.2080.14/static/images/new-blog-social-icons/like-post-hover.svg')
+			&.active
+				background url('https://static.parastorage.com/services/santa/1.2080.14/static/images/new-blog-social-icons/like-post-red.svg')
+			.count
+				position absolute
+				font-size 18px
+				right -5px
+				top 5px
+				
 			.active
 				color red
 .fb-comments

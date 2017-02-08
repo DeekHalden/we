@@ -33,8 +33,10 @@
 					&__title
 						transition .2s ease all
 					&__date
+						margin-top 5px
 						font-family 'Abel', sans-serif
 						font-size 12px
+						float right
 					
 		.recent
 			.thumb
@@ -53,6 +55,21 @@
 				&__date
 					font-family  "Abel",sans-serif
 					font-size 12px
+					margin-top 5px
+					text-align right
+		.socials-bar
+			.heading
+				margin-top 10px
+			.content
+				padding-top 10px 
+				&__item
+					float left
+					margin-right 10px
+					&--image
+						width 23px
+						height 23px
+						
+					
 @media (max-width 1199px)
 	.posts-sidebar
 			
@@ -75,6 +92,10 @@
 			.recent
 				float left
 				width 48%
+			.socials-bar
+				width 48%
+				margin-left 10px
+				margin-bottom 20px
 				
 @media (max-width 640px)
 	.posts-sidebar

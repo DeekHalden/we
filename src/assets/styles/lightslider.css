@@ -157,19 +157,17 @@
     display: block;
     top: 50%;
     height: 32px;
-    background-color: #666;
+    background-color: #94821b;
     background-image: url('../images/controls.png');
     cursor: pointer;
     position: absolute;
     z-index: 99;
     margin-top: -16px;
-    opacity: 0.8;
+    opacity: 1;
     -webkit-transition: opacity 0.35s linear 0s;
     transition: opacity 0.35s linear 0s;
 }
-.lSAction > a:hover {
-    opacity: 1;
-}
+
 .lSAction > .lSPrev {
     background-position: 0 0;
     left: 0;

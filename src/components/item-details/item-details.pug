@@ -15,16 +15,10 @@ include /mixins/main_mixins
 				+e.P.article #{item.article}
 				+e.P.price <span class="old-price">#{item.old_price}</span>&nbsp;&nbsp;<span class="price">#{item.price}</span>
 				+e.form-control
-					+e.LABEL(for="feedback").form-control--feedback-label Ваши пожелания (необязательно)
+					+e.LABEL(for="#feedback").form-control--feedback-label Ваши пожелания (необязательно)
 					+e.TEXTAREA(name="feedback" id="feedback" placeholder="До 500 символов").form-control--feedback
 					+e.form-control--chars_remaining#chars-remaining
-				.select Количество
-					#current_page 1 <span class="down-arrowhead">&#709;</span>
-					#current_menu
-						+b.UL.select-wrapper
-							each el, i in select
-								+e.LI.item
-									+e.A(value = el) #{el}
+				+e.INPUT(type="number" min="1" step="1" value="1").quantity
 				+CreateActionButton('Добавить в корзину','action-btn checkout', 'submit')
 				+e.item-description
 					+e.H4.item-description--title О ТКАНИ
@@ -32,27 +26,31 @@ include /mixins/main_mixins
 				+e.delivery
 					each el, i in item.delivery
 						+e.P.delivery--content #{el} 
-					+CreateButton('', 'Калькулятор','action-btn')
+					+CreateButton('delivery.html', 'Калькулятор','action-btn')
 	+b.checkout-sidebar
-		+e.title Корзина
+		+e.title Корзина <span class="checkout-sidebar__title--toggle"> &#8250; </span>
 		+e.item.clearfix
 			+e.item--image
 				img(src=item.image)
 			+e.item--title Атташе
 			+e.item--quantity <span class="quantity">Количество:</span> 1
 			+e.item--price <span class="disabled">#{item.old_price}</span> #{item.price}
+			+e.item--close <span>&times;</span>
 		+e.item.clearfix
 			+e.item--image
 				img(src=item.image)
 			+e.item--title Атташе
 			+e.item--quantity <span class="quantity">Количество:</span> 1
 			+e.item--price <span class="disabled">#{item.old_price}</span> #{item.price}
+			+e.item--close <span>&times;</span>
+				
 		+e.total
 			+e.total--title
 				p Сумма
 			+e.total--cost
 				p 14.430руб.
 		+CreateButton('basket.html','Перейти в корзину', 'action-btn' )
+
 
 
 

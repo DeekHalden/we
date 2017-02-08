@@ -1,0 +1,78 @@
+.personal-wrapper
+	margin-top 164px
+	margin-bottom 90px
+	background-color rgba(255,255,255,.7)
+	padding 20px
+	border 15px solid #fff
+	.personal-info
+		width 50%
+		padding-top 20px
+		color $light-gray
+		float left
+		display flex
+		flex-wrap wrap
+		justify-content space-between
+		margin-right 5%
+		padding-right 40px
+		border-right 1px solid #c5b5b5
+		
+		.title
+			width 100%
+			color $light-gold
+			font-size 30px
+			margin-bottom 20px
+			.action-btn
+				margin-top 5px
+				padding 0 10px
+				float right
+				margin-right 1px
+				margin-left auto
+				
+		&__subtitle
+			width 100%
+			font-size 20px
+			margin-bottom 20px
+			&.requisites
+				width 100%
+			&--head
+				float left
+				font-weight 600
+			&--info
+				float right
+				
+				font-weight 300
+	.personal-actions
+		@extends .personal-wrapper .personal-info
+		width 45%
+		margin-right 0
+		border-right 0
+		&__subtitle
+			
+			&--info
+				.action-btn
+					margin-top 5px
+					padding 5px 10px
+					font-family 'EB GARaMOND'
+					font-weight bold
+			
+				
+@media(max-width 991px)
+	.personal-wrapper
+		.personal-info
+			&__subtitle
+				width 100%
+				font-size 18px
+@media(max-width 480px)
+	.personal-wrapper
+		.personal-info
+			&__subtitle
+				font-size 16px
+	// .personal-actions
+	// 	@extends .personal-wrapper .personal-info
+	// 	border-right 0
+	// 	.action-btn
+	// 		padding 5px 10px
+	// 		font-family 'eb garamond'
+	// 		font-weight bold
+		
+		

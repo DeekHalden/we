@@ -42,7 +42,8 @@
       <div class="row">
         <p class="title">Смена пароля <br> <span class="subtitle">Пожалуйста, введите ваш email</span>
         </p>
-        <form class="forgot-form form" action="POST" novalidate="novalidate" id="change-form"><input class="forgot-form__form-control" type="email" placeholder="Email" name="email" id="email"/><span class="forgot-form__error"></span><a class="action-btn" href="#">OK</a>
+        <form class="forgot-form form" action="" method="post" novalidate="novalidate" id="change-form"><input class="forgot-form__form-control" type="email" placeholder="Email" name="email" id="email"/><span class="forgot-form__error"></span>
+              <input class="action-btn" name="submit" type="submit" value="OK">
         </form>
       </div>
     </div>
@@ -50,15 +51,13 @@
       <div class="row">
         <p class="title">Регистрация
         </p>
-        <form class="register-form form" action="me.html" method="GET" novalidate="novalidate" id="register-form"><input class="register-form__form-control" type="text" placeholder="Контактное лицо" name="name" id="name"/><input class="register-form__form-control" type="number" placeholder="Телефон" name="tel" id="tel"/><input class="register-form__form-control" type="email" placeholder="Email" name="email" id="email"/><input class="register-form__form-control important" type="text" placeholder="Наименование​ ​юр.​ ​лица" name="entity" id="entity"/><input class="register-form__form-control important" type="text" placeholder="Юр.​ ​адрес" name="entity_address" id="entity_address"/><input class="register-form__form-control important" type="number" placeholder="​ИНН" name="id_number" id="id_number"/><input class="register-form__form-control important" type="number" placeholder="​КПП" name="KPP" id="KPP"/><input class="register-form__form-control important" type="number" placeholder="ОРГН" name="ORGN" id="ORGN"/><input class="register-form__form-control important" type="text" placeholder="Банковские реквизиты" name="requisites" id="requisites"/><input class="register-form__form-control" type="password" placeholder="Пароль" name="password" id="password"/><input class="register-form__form-control" type="password" placeholder="Повторите пароль" name="password" id="password"/><span class="register-form__error"></span>
+        <form class="register-form form" action="me.html" method="post" novalidate="novalidate" id="register-form"><input class="register-form__form-control" type="text" placeholder="Контактное лицо" name="name" id="name"/><input class="register-form__form-control" type="number" placeholder="Телефон" name="tel" id="tel"/><input class="register-form__form-control" type="email" placeholder="Email" name="email" id="email"/><input class="register-form__form-control" type="text" placeholder="Наименование​ ​юр.​ ​лица" name="entity" id="entity"/><input class="register-form__form-control" type="text" placeholder="Юр.​ ​адрес" name="entity_address" id="entity_address"/><input class="register-form__form-control" type="number" placeholder="​ИНН" name="id_number" id="id_number"/><input class="register-form__form-control" type="number" placeholder="​КПП" name="KPP" id="KPP"/><input class="register-form__form-control" type="number" placeholder="ОРГН" name="ORGN" id="ORGN"/><input class="register-form__form-control" type="text" placeholder="Банковские реквизиты" name="requisites" id="requisites"/><input class="register-form__form-control" type="password" placeholder="Пароль" name="password" id="password"/><input class="register-form__form-control" type="password" placeholder="Повторите пароль" name="password_again" id="password_again"/>
               <input class="action-btn" name="submit" type="submit" value="OK">
         </form><span class="additional-action">У меня уже есть аккаунт <a href="#login" class="additional-action__href popup-with-zoom-anim">Войти</a></span>
       </div>
     </div>
     <div class="navbar container-fluid">
-      <div class="row clearfix">
-        <div class="login"> <a class="login__me" href="me.html">Привет, Юзер  </a><a class="login__logout">Выйти</a>
-        </div>
+      <div class="row clearfix"><a class="login popup-with-zoom-anim" href="#login">Вход / Регистрация</a>
         <div class="logo"><a class="logo__href" href="index.html"><img src="assets/images/logo.png"></a>
         </div>
         <h1 class="heading">Комбинат ОСНОВА <span class="heading-sub">- российский производитель высококачественных тканей</span>
@@ -91,6 +90,29 @@
         </ul>
       </div>
     </div>
+    <div class="container-fluid">
+      <div class="personal-wrapper row clearfix">
+        <div class="personal-info">
+          <h3 class="title clearfix">Личная информация<a class="action-btn" href="change.html">Редактировать</a>
+          </h3>
+          <p class="personal-info__subtitle clearfix name"> <span class="personal-info__subtitle--head">Имя:</span><span class="personal-info__subtitle--info">Lorem Ipsum</span>
+          </p>
+          <p class="personal-info__subtitle clearfix tel"> <span class="personal-info__subtitle--head">Телефон:</span><span class="personal-info__subtitle--info">+79 02 31 31 54 22</span>
+          </p>
+          <p class="personal-info__subtitle clearfix email"> <span class="personal-info__subtitle--head">email</span><span class="personal-info__subtitle--info"> lorem@ipsum.org</span>
+          </p>
+        </div>
+        <div class="personal-actions">
+          <h3 class="title clearfix">Дополнительные действия</h3>
+          <p class="personal-actions__subtitle clearfix"><span class="personal-actions__subtitle--head"> 
+            <label for="subscription">Рассылка:</label></span><span class="personal-actions__subtitle--info"> 
+            <input type="checkbox" id="subscription" name="subscription"></span>
+          </p>
+          <p class="personal-actions__subtitle clearfix"><span class="personal-actions__subtitle--head">История заказов:</span><span class="personal-actions__subtitle--info"> <a class="action-btn" href="history.html">Перейти</a></span>
+          </p>
+        </div>
+      </div>
+    </div>
     <div class="footer-container contaier-fluid">
       <div class="container">
         <div class="footer row">
@@ -107,7 +129,6 @@
         </div>
       </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="assets/scripts/bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
     <script>

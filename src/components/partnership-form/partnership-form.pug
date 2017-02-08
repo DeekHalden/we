@@ -2,7 +2,7 @@ include /mixins/main_mixins
 .row
 	+b.partnership-form
 		+e.H3.heading Заполните свои реквизиты для заключения договора
-		+e.FORM(name="subscribe" action="POST" novalidate="novalidate")#partnership-form.form
+		+e.FORM(name="subscribe" action="" method="post" novalidate="novalidate")#partnership-form.form
 			+e.INPUT.form--form-control.form--name#name(placeholder="Контактное лицо (ФИО, должность)" type="text" name="name")
 			+e.INPUT.form--form-control.form--email#email(placeholder="email для регистрации юр.лица" type="email" 
 			name="email")
@@ -13,5 +13,5 @@ include /mixins/main_mixins
 			+e.INPUT.form--form-control.form--requisites#requisites(placeholder="Банковские реквизиты" type="text" 
 			name="requisites")
 			
-			+CreateButton('','Отправить реквизиты для договора', 'action-btn partnership-action', 'submit')
+			+CreateActionButton('Отправить реквизиты для договора', 'action-btn partnership-action', 'submit')
 		

@@ -5,14 +5,14 @@ include ../login/login
 
 +b.navbar.container-fluid
 	.row.clearfix
-		if loggedIn
-			+b.login 
-				+e.A(href="me.html").me Привет, Юзер  
-				+e.A(click=loggenIn = false).logout Выйти
+		//- if loggedIn
+		//- 	+b.login 
+		//- 		+e.A(href="me.html").me Привет, Юзер  
+		//- 		+e.A(click=loggenIn = false).logout Выйти
 				
 
-		else 
-			+b.A.login.popup-with-zoom-anim(href="#login") Вход / Регистрация
+		//- else 
+		+b.A.login.popup-with-zoom-anim(href="#login") Вход / Регистрация
 		+b.logo
 			+e.A(href="index.html").href
 				img(src="assets/images/logo.png")

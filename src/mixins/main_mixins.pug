@@ -124,8 +124,8 @@ mixin CreateContacts(title, tel,email,address, subtitle)
 	+e.H2.heading #{title}
 	+e.H3.subheading #{subtitle}
 	+e.contacts
-		+e.SPAN.contacts--content.tel Телефон: <span class="georgia">#{tel}</span>
-		+e.SPAN.contacts--content.email Email:<a href="mailto:"#{email}" class="href georgia"> #{email}</a>
+		+e.SPAN.contacts--content.tel Телефон: <span class="font-styled">#{tel}</span>
+		+e.SPAN.contacts--content.email Email:<a href="mailto:"#{email}" class="href font-styled"> #{email}</a>
 		+e.SPAN.contacts--content.address <span class="margined">Наше производство:</span>  #{address}
 
 mixin CreateButton(href, text,button_class)

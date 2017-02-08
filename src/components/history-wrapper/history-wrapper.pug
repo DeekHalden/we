@@ -1,0 +1,28 @@
+include /mixins/main_mixins
+-var i = 0
+.container-fluid
+	.history-wrapper.row.clearfix
+		h3.title.clearfix История заказов
+		while i < 3
+			+b.history-info
+					
+				+e.P.subtitle.clearfix.name 
+					+e.subtitle--head Номер заказа:
+					+e.subtitle--info 1
+				+e.P.subtitle.clearfix.quantity
+					+e.subtitle--head Количество
+					+e.subtitle--info 1
+				+e.P.subtitle.clearfix.price 
+					+e.subtitle--head Cумма:
+					+e.subtitle--info 8.215руб.
+				+e.P.subtitle.clearfix.name 
+					+e.subtitle--head Получатель:
+					+e.subtitle--info Lorem aka Ipsum
+				+e.P.subtitle.clearfix.name 
+					+e.subtitle--head Статус заказа:
+					+e.subtitle--info Доставлено
+				+e.P.subtitle.clearfix.price 
+					+e.subtitle--head Информация:
+					+e.subtitle--info 
+						+CreateButton('','Детальнее','action-btn')
+			-i++

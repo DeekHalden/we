@@ -1,0 +1,27 @@
+include /mixins/main_mixins
+.container-fluid
+	.personal-wrapper.row.clearfix
+		+b.personal-info
+			h3.title.clearfix Личная информация
+				+CreateButton('change.html','Редактировать','action-btn')
+			+e.P.subtitle.clearfix.name 
+				+e.subtitle--head Имя:
+				+e.subtitle--info Lorem Ipsum
+			+e.P.subtitle.clearfix.tel 
+				+e.subtitle--head Телефон:
+				+e.subtitle--info +79 02 31 31 54 22
+			+e.P.subtitle.clearfix.email 
+				+e.subtitle--head email
+				+e.subtitle--info  lorem@ipsum.org
+		+b.personal-actions
+			h3.title.clearfix Дополнительные действия
+			+e.P.subtitle.clearfix
+				+e.subtitle--head 
+					label(for="subscription") Рассылка:
+				+e.subtitle--info 
+					input(type='checkbox' id="subscription" name="subscription")
+			+e.P.subtitle.clearfix
+				+e.subtitle--head История заказов:
+				+e.subtitle--info 
+					+CreateButton('history.html','Перейти','action-btn')
+
