@@ -1,10 +1,28 @@
 .user	
 	.order-form 
+		
 		display flex
 		flex-wrap wrap
 		justify-content space-around
 		position relative
 		padding-bottom 40px
+		padding-top 70px
+		.headings-row
+				position absolute
+				top 0px
+				right 0
+				display flex
+				justify-content space-around
+				flex-wrap wrap
+				&__heading
+					@extend .heading
+					color $gold
+					text-align center
+					float left
+					font-size 19px
+					input:focus
+						outline none
+		
 		@extends .form-wrapper .row .login-form
 		&__form-control
 			line-height 38px
@@ -25,26 +43,8 @@
 		
 		.note-row
 			margin-right 0
-			
-				
-			.headings-row
-				display flex
-				justify-content space-around
-				flex-wrap wrap
-				&__heading
-					@extend .heading
-					color $gold
-					text-align center
-					float left
-					font-size 19px
-					input:focus
-						outline none
-			// .heading
-			// 	margin-bottom 50px
-					
 			textarea
-				
-				margin-top -2px
+				margin-top 65px
 				resize none
 				height 115px
 				overflow hidden
@@ -62,18 +62,29 @@
 			
 @media(max-width 1199px)
 	
-		.user
-			.order-form
-				justify-content flex-start
-				.info-row, .destination-row, .note-row
-					width 47.5%
-					margin-right 0
-				.info-row
-					margin-right 5%	
+	.user
+		.order-form
+			justify-content flex-start
+			.headings-row
+				justify-content space-between
+				width 47.5%
+				padding-top 20px
+				margin-right 5%
+				position initial
+				display flex
+			.info-row, .destination-row, .note-row
+				width 47.5%
+				margin-right 0
+			.info-row
+				margin-right 5%	
+			.note-row
+				textarea
+					margin-top 20px
 					
 @media(max-width 799px)
 	.user
 		.order-form
+			
 			.note-row
 				.headings-row
 					&__heading
@@ -86,9 +97,15 @@
 			padding-bottom 65px
 			.order-form
 				justify-content flex-start
-				.info-row, .destination-row, .note-row
+				.info-row, .destination-row, .note-row,.headings-row
 					width 100%
 					margin-right 0
 				.action-btn
 					bottom -65px
+				
+@media(max-width 400px)
+	.user
+		.order-form
+			padding-top 100px
+
 

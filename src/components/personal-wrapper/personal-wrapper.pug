@@ -17,9 +17,8 @@ include /mixins/main_mixins
 			h3.title.clearfix Дополнительные действия
 			+e.P.subtitle.clearfix
 				+e.subtitle--head 
+					input(type='checkbox' class="subscribe-checkbox" id="subscription" name="subscription" data-color="green")
 					label(for="subscription") Рассылка:
-				+e.subtitle--info 
-					input(type='checkbox' id="subscription" name="subscription")
 			+e.P.subtitle.clearfix
 				+e.subtitle--head История заказов:
 				+e.subtitle--info 
