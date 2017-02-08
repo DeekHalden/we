@@ -40,7 +40,8 @@
       <div class="row">
         <p class="title">Смена пароля <br> <span class="subtitle">Пожалуйста, введите ваш email</span>
         </p>
-        <form class="forgot-form form" action="POST" novalidate="novalidate" id="change-form"><input class="forgot-form__form-control" type="email" placeholder="Email" name="email" id="email"/><span class="forgot-form__error"></span><a class="action-btn" href="#">OK</a>
+        <form class="forgot-form form" action="" method="post" novalidate="novalidate" id="change-form"><input class="forgot-form__form-control" type="email" placeholder="Email" name="email" id="email"/><span class="forgot-form__error"></span>
+              <input class="action-btn" name="submit" type="submit" value="OK">
         </form>
       </div>
     </div>
@@ -48,15 +49,13 @@
       <div class="row">
         <p class="title">Регистрация
         </p>
-        <form class="register-form form" action="me.html" method="GET" novalidate="novalidate" id="register-form"><input class="register-form__form-control" type="text" placeholder="Контактное лицо" name="name" id="name"/><input class="register-form__form-control" type="number" placeholder="Телефон" name="tel" id="tel"/><input class="register-form__form-control" type="email" placeholder="Email" name="email" id="email"/><input class="register-form__form-control important" type="text" placeholder="Наименование​ ​юр.​ ​лица" name="entity" id="entity"/><input class="register-form__form-control important" type="text" placeholder="Юр.​ ​адрес" name="entity_address" id="entity_address"/><input class="register-form__form-control important" type="number" placeholder="​ИНН" name="id_number" id="id_number"/><input class="register-form__form-control important" type="number" placeholder="​КПП" name="KPP" id="KPP"/><input class="register-form__form-control important" type="number" placeholder="ОРГН" name="ORGN" id="ORGN"/><input class="register-form__form-control important" type="text" placeholder="Банковские реквизиты" name="requisites" id="requisites"/><input class="register-form__form-control" type="password" placeholder="Пароль" name="password" id="password"/><input class="register-form__form-control" type="password" placeholder="Повторите пароль" name="password" id="password"/><span class="register-form__error"></span>
+        <form class="register-form form" action="me.html" method="post" novalidate="novalidate" id="register-form"><input class="register-form__form-control" type="text" placeholder="Контактное лицо" name="name" id="name"/><input class="register-form__form-control" type="number" placeholder="Телефон" name="tel" id="tel"/><input class="register-form__form-control" type="email" placeholder="Email" name="email" id="email"/><input class="register-form__form-control" type="text" placeholder="Наименование​ ​юр.​ ​лица" name="entity" id="entity"/><input class="register-form__form-control" type="text" placeholder="Юр.​ ​адрес" name="entity_address" id="entity_address"/><input class="register-form__form-control" type="number" placeholder="​ИНН" name="id_number" id="id_number"/><input class="register-form__form-control" type="number" placeholder="​КПП" name="KPP" id="KPP"/><input class="register-form__form-control" type="number" placeholder="ОРГН" name="ORGN" id="ORGN"/><input class="register-form__form-control" type="text" placeholder="Банковские реквизиты" name="requisites" id="requisites"/><input class="register-form__form-control" type="password" placeholder="Пароль" name="password" id="password"/><input class="register-form__form-control" type="password" placeholder="Повторите пароль" name="password_again" id="password_again"/>
               <input class="action-btn" name="submit" type="submit" value="OK">
         </form><span class="additional-action">У меня уже есть аккаунт <a href="#login" class="additional-action__href popup-with-zoom-anim">Войти</a></span>
       </div>
     </div>
     <div class="navbar container-fluid">
-      <div class="row clearfix">
-        <div class="login"> <a class="login__me" href="me.html">Привет, Юзер  </a><a class="login__logout">Выйти</a>
-        </div>
+      <div class="row clearfix"><a class="login popup-with-zoom-anim" href="#login">Вход / Регистрация</a>
         <div class="logo"><a class="logo__href" href="index.html"><img src="assets/images/logo.png"></a>
         </div>
         <h1 class="heading">Комбинат ОСНОВА <span class="heading-sub">- российский производитель высококачественных тканей</span>
@@ -118,38 +117,11 @@
             <p class="description__price"><span class="old-price">7.800руб.</span>&nbsp;&nbsp;<span class="price">7.215руб.</span>
             </p>
             <div class="description__form-control">
-              <label class="description__form-control--feedback-label" for="feedback">Ваши пожелания (необязательно)
+              <label class="description__form-control--feedback-label" for="#feedback">Ваши пожелания (необязательно)
               </label><textarea class="description__form-control--feedback" name="feedback" id="feedback" placeholder="До 500 символов"></textarea>
               <div class="description__form-control--chars description__form-control--chars_remaining" id="chars-remaining">
               </div>
-            </div>
-            <div class="select">Количество
-              <div id="current_page">1 <span class="down-arrowhead">&#709;</span></div>
-              <div id="current_menu">
-                <ul class="select-wrapper">
-                  <li class="select-wrapper__item"><a value="1">1</a>
-                  </li>
-                  <li class="select-wrapper__item"><a value="2">2</a>
-                  </li>
-                  <li class="select-wrapper__item"><a value="3">3</a>
-                  </li>
-                  <li class="select-wrapper__item"><a value="4">4</a>
-                  </li>
-                  <li class="select-wrapper__item"><a value="5">5</a>
-                  </li>
-                  <li class="select-wrapper__item"><a value="6">6</a>
-                  </li>
-                  <li class="select-wrapper__item"><a value="7">7</a>
-                  </li>
-                  <li class="select-wrapper__item"><a value="8">8</a>
-                  </li>
-                  <li class="select-wrapper__item"><a value="9">9</a>
-                  </li>
-                  <li class="select-wrapper__item"><a value="10">10</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
+            </div><input class="description__quantity" type="number" min="1" step="1" value="1"/>
                 <input class="action-btn checkout" name="submit" type="submit" value="Добавить в корзину">
             <div class="description__item-description">
               <h4 class="description__item-description--title">О ТКАНИ
@@ -161,13 +133,13 @@
               <p class="description__delivery--content">Доставка транспортной компанией. 
               </p>
               <p class="description__delivery--content">Партнерам из удаленных регионов рекомендуем воспользоваться услугами доставки заказа силами транспортной компании. С ценами  на доставку вы можете ознакомиться здесь. 
-              </p><a class="action-btn" href="">Калькулятор</a>
+              </p><a class="action-btn" href="delivery.html">Калькулятор</a>
             </div>
           </div>
         </div>
       </div>
       <div class="checkout-sidebar">
-        <div class="checkout-sidebar__title">Корзина
+        <div class="checkout-sidebar__title">Корзина <span class="checkout-sidebar__title--toggle"> &#8250; </span>
         </div>
         <div class="checkout-sidebar__item clearfix">
           <div class="checkout-sidebar__item--image"><img src="assets/images/item.jpg">
@@ -178,6 +150,8 @@
           </div>
           <div class="checkout-sidebar__item--price"><span class="disabled">7.800руб.</span> 7.215руб.
           </div>
+          <div class="checkout-sidebar__item--close"><span>&times;</span>
+          </div>
         </div>
         <div class="checkout-sidebar__item clearfix">
           <div class="checkout-sidebar__item--image"><img src="assets/images/item.jpg">
@@ -187,6 +161,8 @@
           <div class="checkout-sidebar__item--quantity"><span class="quantity">Количество:</span> 1
           </div>
           <div class="checkout-sidebar__item--price"><span class="disabled">7.800руб.</span> 7.215руб.
+          </div>
+          <div class="checkout-sidebar__item--close"><span>&times;</span>
           </div>
         </div>
         <div class="checkout-sidebar__total">
@@ -215,7 +191,6 @@
         </div>
       </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="assets/scripts/bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
     <script>
