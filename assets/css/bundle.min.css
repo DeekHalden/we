@@ -1584,12 +1584,10 @@ ul {
 .navbar .login:hover {
   color: #94821b;
 }
-.navbar .login__logout,
 .navbar .login__me {
   text-decoration: none;
   color: #4d4b4b;
 }
-.navbar .login__logout:hover,
 .navbar .login__me:hover {
   color: #94821b;
 }
@@ -1771,11 +1769,7 @@ ul {
     text-decoration: none;
     font-size: 16px;
     color: #94821b;
-    padding-right: 20px;
-  }
-  .navbar .nav__element.lg-hidden .login1 a + span {
-    padding-left: 20px;
-    border-left: 1px solid #b9b0b0;
+    padding-right: 10px;
   }
   .navbar .nav__element.lg-hidden .login1 span {
     cursor: pointer;
@@ -4086,6 +4080,11 @@ ul {
   float: left;
   margin-right: 3.75%;
 }
+.basket-wrapper .user .order-form .info-row .country:focus,
+.basket-wrapper .user .order-form .destination-row .country:focus,
+.basket-wrapper .user .order-form .note-row .country:focus {
+  opacity: 1;
+}
 .basket-wrapper .user .order-form .info-row .heading,
 .basket-wrapper .user .order-form .destination-row .heading,
 .basket-wrapper .user .order-form .note-row .heading {
@@ -4098,7 +4097,6 @@ ul {
   margin-right: 0;
 }
 .basket-wrapper .user .order-form .note-row textarea {
-  margin-top: 65px;
   resize: none;
   height: 115px;
   overflow: hidden;
@@ -4107,7 +4105,7 @@ ul {
 .basket-wrapper .user .order-form .action-btn {
   position: absolute;
   right: 0;
-  bottom: -10px;
+  bottom: 41px;
   display: inline-block;
   float: right;
   width: auto;
