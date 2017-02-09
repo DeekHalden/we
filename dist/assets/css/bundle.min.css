@@ -4116,6 +4116,8 @@ ul {
   .basket-wrapper .user .order-form {
     -ms-flex-pack: start;
     justify-content: flex-start;
+    padding-top: 20px;
+    padding-bottom: 0;
   }
   .basket-wrapper .user .order-form .headings-row {
     -ms-flex-pack: justify;
@@ -4138,6 +4140,9 @@ ul {
   }
   .basket-wrapper .user .order-form .note-row textarea {
     margin-top: 20px;
+  }
+  .basket-wrapper .user .order-form .action-btn {
+    bottom: 0px;
   }
 }
 @media (max-width: 799px) {
