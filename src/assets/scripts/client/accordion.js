@@ -18,3 +18,8 @@ $('.filter-accordion__title').on('click', function(e) {
         $this.next().addClass('show').slideDown(350);
     }
 });
+
+if($(window).width() < 991) {
+    $('.filter-accordion__title').removeClass('passive');
+    $('.filter-accordion__title').next().removeClass('show').slideUp(350);
+}

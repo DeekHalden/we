@@ -1,7 +1,8 @@
 include /mixins/main_mixins
 
 -var info = {heading:'Первый в России комбинат флисового полотна "ОСНОВА"', tel:'+7 (920) 369-08-27',email:'info@osnova37.ru',address:'г.Родники, ул. Советская, д. 20',subheading:'Мы воплотим в жизнь все ваши дизайнерские мечты'}
--var shop = {city: 'ИВАНОВО', address:'ул. Сосновая, 16 б, лит 1'}
+-var shop1 = {city: 'ИВАНОВО', address:'ул. Сосновая, 16 б, лит 1'}
+-var shop2 = {city: 'Родники', address:'ул. Совесткая, 20'}
 -var i = 0
 
 include ./map
@@ -12,13 +13,17 @@ include ./map
 		+b.shops
 			+e.H5.title НАШИ МАГАЗИНЫ
 			.shops-wrapper
-				while i < 2
-					+b.shop-wrapper
-						+e.text
-							+e.P.text--city #{shop.city}
-							+e.P.text--address #{shop.address}
-						+CreateButton('','На карте','collections-btn map-btn')
-					-i++
+				+b.shop-wrapper
+					+e.text
+						+e.P.text--city #{shop1.city}
+						+e.P.text--address #{shop1.address}
+					+CreateButton('','На карте','collections-btn map1-btn')
+				+b.shop-wrapper
+					+e.text
+						+e.P.text--city #{shop2.city}
+						+e.P.text--address #{shop2.address}
+					+CreateButton('','На карте','collections-btn map2-btn')
+					
 	.row
 		+b.contact-form.clearfix
 			+e.FORM(action="POST").form.clearfix#contacts-form

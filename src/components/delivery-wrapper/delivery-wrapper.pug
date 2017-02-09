@@ -5,6 +5,8 @@ include /mixins/main_mixins
 		+CreateSeo('ДОСТАВКА ТРАНСПОРТНОЙ КОМПАНИЕЙ:', 'Мы осуществляем отправку вашего заказа транспортными компаниями, после его оплаты. Выбор транспортной компании остается за вами, рассчитать стоимость доставки вы можете с помощью калькуляторов транспортных компаний и указав нашим менеджерам, через какую транспортную компанию отправить ваш заказ.', 'Уважаемые партнеры!')
 		+b.calculators
 			+e.row
-				+e.PEK
+				+e.row--calc
+					iframe(allowtransparency="true" frameborder="0" width="250" height="345" scrolling="no" style="border:1px solid #ededed" src="https://pecom.ru/ru/newcalc/")
+				+e.row--calc
 					iframe(allowtransparency="true" frameborder="0" width="250" height="345" scrolling="no" style="border:1px solid #ededed" src="https://pecom.ru/ru/newcalc/")
 			+CreateButton('','Смотреть прайс на доставку','action-btn')

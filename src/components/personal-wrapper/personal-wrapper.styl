@@ -1,5 +1,5 @@
 .personal-wrapper
-	margin-top 164px
+	margin-top 162px
 	margin-bottom 90px
 	background-color rgba(255,255,255,.7)
 	padding 20px
@@ -48,6 +48,8 @@
 		border-right 0
 		&__subtitle
 			position relative
+			&.subscription
+				margin-top -3px
 			&--head
 				label 
 					margin-left  0
@@ -66,7 +68,10 @@
 				
 @media(max-width 991px)
 	.personal-wrapper
-		.personal-info
+		.personal-info,.personal-actions
+			padding-right 0
+			border-right 0
+			width 100%
 			&__subtitle
 				width 100%
 				font-size 18px

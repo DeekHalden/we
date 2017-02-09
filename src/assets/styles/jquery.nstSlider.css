@@ -24,6 +24,11 @@
     height: 2px;
     top: 4px
 }
+@media(max-width:900px) {
+  .nstSlider:after {
+    min-width: 100%;
+  }
+}
 .nstSlider .leftGrip.gripHighlighted {
   background: #113344;
 }

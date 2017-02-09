@@ -18,7 +18,7 @@ include /mixins/main_mixins
 					+e.LABEL(for="#feedback").form-control--feedback-label Ваши пожелания (необязательно)
 					+e.TEXTAREA(name="feedback" id="feedback" placeholder="До 500 символов").form-control--feedback
 					+e.form-control--chars_remaining#chars-remaining
-				+e.INPUT(type="number" min="1" step="1" value="1").quantity
+				+e.INPUT(type="number" min="1" step="1" value="1").quantity.item-quantity
 				+CreateActionButton('Добавить в корзину','action-btn checkout', 'submit')
 				+e.item-description
 					+e.H4.item-description--title О ТКАНИ

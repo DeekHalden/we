@@ -59,7 +59,7 @@ gulp.task('styles', () => {
 
 gulp.task('js', function (cb) {
   pump([
-        gulp.src(['src/**/*.js','src/**/lightslider.client.js','!src/assets/bemto/**/*.js']),concat('bundle.min.js'),
+        gulp.src(['src/assets/scripts/vendor/*.js','src/assets/scripts/client/*.js','!src/assets/bemto/**/*.js']),concat('bundle.min.js'),
         gulp.dest('dist/assets/scripts')
     ],
     cb

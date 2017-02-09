@@ -6,17 +6,15 @@ function setParallaxHeight() {
 };
 
 $(document).ready(function() {
-
-
     if ($(window).width() > 1199) {
         $('.parallax-container').parallax();
-
     }
-    // $('.love').hover(function() {
-    //     $(this).attr('src','https://static.parastorage.com/services/santa/1.2080.14/static/images/new-blog-social-icons/like-post-hover.svg');
-    // })
-
     setParallaxHeight();
-
+    if($(window).width() > 1024) {
+        $('.imgBox').imgZoom({
+            origin: 'data-origin'
+        });
+    }
 
 });
+

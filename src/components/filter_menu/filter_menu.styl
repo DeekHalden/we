@@ -8,6 +8,7 @@
 	.heading
 		font-size 26px 
 		color #212020
+	
 	.filter-accordion
 		padding 30px 0
 		
@@ -31,7 +32,6 @@
 					right 0px
 		&__content
 			padding 10px 0
-	.filter-accordion
 		&__content
 			cursor pointer
 			&--list-heading
@@ -61,9 +61,16 @@
 				
 
 		
+
 @media(max-width 900px)
 	.filter-menu
 		float none
 		width 95%
 		margin 0 auto
+		.filter-accordion
+			padding 10px 0
+			&__content.widget
+				padding-bottom 40px
+				
+		
 		

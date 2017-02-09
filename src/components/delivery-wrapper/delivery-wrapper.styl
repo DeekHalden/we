@@ -1,5 +1,5 @@
 .delivery-wrapper
-	margin-top 160px
+	margin-top 162px
 	background-color #fff
 	padding 15px
 	&__heading, &__subheading
@@ -19,10 +19,13 @@
 		text-align justify
 	.calculators
 		&__row
-			margin 50px 0
 			display flex
-			justify-content  space-around
+			justify-content  space-between
 			flex-wrap wrap
+			&--calc
+				display block
+				margin 50px auto 
+				
 		.action-btn
 			display block
 			max-width 300px
@@ -32,4 +35,13 @@
 			border 1px solid $gold
 			&:hover
 				color #fff
+				opacity .7
 				background-color $gold
+				
+@media(max-width 791px)
+	.delivery-wrapper
+		.calculators
+			&__row
+				&--calc
+					margin-bottom 20px
+					

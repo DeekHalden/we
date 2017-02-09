@@ -1,5 +1,5 @@
 .change-wrapper
-	margin-top 165px
+	margin-top 162px
 	.title
 		margin-top 40px
 		text-align center
@@ -11,5 +11,24 @@
 		max-width 600px
 		margin 0 auto
 		.error
-			
 			font-family 'Helvetica'
+		.action-btn
+			font-family Arial
+			width 47.5%
+			display inline-block
+			margin-right 2.5%
+			float left
+			opacity .8
+			
+			&:last-child
+				margin-left 2.5%
+				margin-right 0
+				opacity 1
+@media(max-width 640px)
+	.change-wrapper
+		.change-form
+			.action-btn
+				width 100%
+				margin 10px 0 0
+				&:last-child
+					margin-left 0

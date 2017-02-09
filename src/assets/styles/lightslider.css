@@ -153,30 +153,33 @@
 
 /* slider actions */
 .lSAction > a {
-    width: 32px;
+    width: 31px;
     display: block;
     top: 50%;
-    height: 32px;
-    background-color: #94821b;
+    height: 31px;
+    background-color: #c5b5b5;
     background-image: url('../images/controls.png');
     cursor: pointer;
     position: absolute;
     z-index: 99;
     margin-top: -16px;
     opacity: 1;
-    -webkit-transition: opacity 0.35s linear 0s;
-    transition: opacity 0.35s linear 0s;
+    -webkit-transition: ease all 0.35s;
+    transition: ease all 0.35s;
 }
+.lSAction > a:hover {
+    background-color:  #6b6363;
+ }
 
 .lSAction > .lSPrev {
     background-position: 0 0;
-    left: 0;
+    left: 1px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px; 
 }
 .lSAction > .lSNext {
     background-position: -32px 0;
-    right: 0;
+    right: 1px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }

@@ -11,16 +11,13 @@ include /mixins/main_mixins
 				+e.subtitle--head Телефон:
 				+e.subtitle--info +79 02 31 31 54 22
 			+e.P.subtitle.clearfix.email 
-				+e.subtitle--head email
+				+e.subtitle--head email:
 				+e.subtitle--info  lorem@ipsum.org
 		+b.personal-actions
 			h3.title.clearfix Дополнительные действия
-			+e.P.subtitle.clearfix
+			+e.P.subtitle.clearfix.subscription
 				+e.subtitle--head 
 					input(type='checkbox' class="subscribe-checkbox" id="subscription" name="subscription" data-color="green")
 					label(for="subscription") Рассылка:
-			+e.P.subtitle.clearfix
-				+e.subtitle--head История заказов:
-				+e.subtitle--info 
-					+CreateButton('history.html','Перейти','action-btn')
+			
 

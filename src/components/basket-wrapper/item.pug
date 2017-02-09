@@ -13,7 +13,7 @@
 				+e.title.item-price  Стоимость <br><span class="card__sub">#{data.price}</span>
 
 				+e.title.item-quantity  Количество  <br><span class="card__sub">
-					+e.INPUT(type="number" min="" step="1" value="1").sub--quantity
+					+e.INPUT(type="number" min="0" step="1" value="1" ).sub--quantity.item-quantity
 				</span>
 				+e.title.item-total  Сумма <br><span class="card__sub">#{data.price} </span>
 				+e.remove &#10005;

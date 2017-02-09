@@ -238,7 +238,7 @@ $("#change-information-form").validate({
         ORGN: "required",
         requisites: "required",
         password: "required",
-        password_again: {
+        password__again: {
             equalTo: '#password'
         }
 

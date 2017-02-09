@@ -7,9 +7,4 @@ $('#feedback').keyup(function() {
     var text_remaining = max_chars - text_length;
     $('#chars-remaining').html(text_remaining);
 });
-
-
-(function() {
-    $('.post-card__info--content').text($('.post-card__info--content').text().substr(0, 300) + '...');
-
-})();
+$('.post-card__info--content').text($('.post-card__info--content').text().substr(0, 300) + '...');

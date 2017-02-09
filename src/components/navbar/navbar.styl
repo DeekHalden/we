@@ -21,9 +21,7 @@
 		&:hover 
 			color $light-gold
 		&__logout
-			position absolute
-			top 15px
-			right 30px
+			
 		&__me
 			text-decoration none
 			color $light-gray
@@ -91,6 +89,7 @@
 		&__element.lg-hidden
 			display none
 			border-left none
+			
 		
 			
 @media (max-width 1199px)
@@ -110,8 +109,8 @@
 			display inline-block
 			transition .4s ease all
 			z-index 9998888888888
-			right 10px
-			top 5px 
+			right 5px
+			top 0px 
 			position absolute
 			transform rotate(0deg)
 			transition .5s ease-in-out
@@ -176,10 +175,32 @@
 				border-bottom 1px solid #f4f4f4 !important
 			&__element.lg-hidden
 				display block
+				&:hover .login1 a 
+					color $gray
+				.login1
+					display inline-block
+					&:hover .me
+						color $light-gray
+					a
+						text-decoration none
+						font-size 16px
+						color $light-gold
+						padding-right  20px
+					a + span
+						padding-left 20px
+						border-left  1px solid #b9b0b0
+					span
+						cursor pointer
+					
 			&__element.xs-hidden
 				display none
 			&__element:hover
+				color $gray
 				background-color #fff
+			&__element:hover > a
+				color $gray
+				
+				
 			&__element
 				padding 10px
 				color $light-gold

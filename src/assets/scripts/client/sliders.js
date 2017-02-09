@@ -33,7 +33,7 @@
      pager: false,
      keyPress: false,
      slideMove: 1,
-     slideMargin: 40,
+     slideMargin: 15,
      mode: 'slide',
      useCSS: true,
      easing: 'linear',
