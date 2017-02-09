@@ -37,7 +37,7 @@
 
 
 
- var user = '<div class="login1"><a href="me.html" class="me">Личный кабинет </a>/&nbsp;&nbsp;&nbsp;&nbsp;<span  onclick="logout()" class="logout">Выйти</span></div>';
+ var user = '<div class="login1"><a href="me.html" class="me">Личный кабинет</a>|<span  onclick="logout()" class="logout">Выйти</span></div>';
  var login = '<a class="nav__element--href lg-hidden popup-with-zoom-anim" href="#login">Вход /<span="login__register"Регистрация</span></a>';
 var isLoggedIn = true;
      if (isLoggedIn) {

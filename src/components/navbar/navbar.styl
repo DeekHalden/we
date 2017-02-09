@@ -52,12 +52,15 @@
 			border-left 1px solid $gold
 			padding-left 15px
 			&--href
+				display block
 				font-size 22px
 				text-decoration none
 				color $light-gold
 				transition .4s ease all
 				&.active 
 					color $light-gray
+				&:focus
+					outline none
 			a:hover
 				color #4A410D
 		&__element:first-child,&__element:nth-child(2),&__element:nth-child(3) 
@@ -65,11 +68,12 @@
 			
 		&__element.icon-basket
 			position absolute
-			right 0
+			right 30px
 			top -73px
 			&:before
 				color $gold
 				font-size 40px
+				position absolute
 			&--href
 				
 				position relative
@@ -174,21 +178,36 @@
 				border-bottom 1px solid #f4f4f4 !important
 			&__element.lg-hidden
 				display block
+				padding 0
+				&:hover 
+					background-color transparent
 				&:hover .login1 a 
 					color $gray
 				.login1
-					display inline-block
-					&:hover .me
+					
+					font-style normal
+					display block
+					.me:hover 
 						color $light-gray
+						background-color #fff
+					
 					a
+						display inline-block
+						font-style italic
 						text-decoration none
+						padding 10px
 						font-size 16px
 						color $light-gold
 						padding-right  10px
 					
 					span
+						padding 10px
+						display inline-block
+						font-style italic
 						cursor pointer
-					
+						&:hover 
+							color $light-gray
+							background-color #fff
 			&__element.xs-hidden
 				display none
 			&__element:hover
@@ -213,12 +232,14 @@
 			
 			&__element.icon-basket
 				position initial
-				
+				&--href
+					margin-left 20px
 				.nav__element--href--text
+					padding-left 30px
 					display inline-block
 				.nav__element--href--goods-count
-					top 2px
-					left -17px
+					top 10px
+					left 8px
 
 		
 			&__element.icon-basket > &--href
@@ -243,4 +264,4 @@
 @media (max-width 480px)
 	.navbar
 		.heading
-			font-size 24px
+			font-size 20px

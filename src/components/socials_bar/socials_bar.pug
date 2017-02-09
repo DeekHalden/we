@@ -4,17 +4,12 @@
 			a.fb-xfbml-parse-ignore(target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse") Поделиться
 	+e.SPAN.icon.twitter
 		a.twitter-share-button(href="https://twitter.com/intent/tweet?text=Hello%20world") Tweet
-		
-	+e.SPAN.icon.linkedin
-		script(src="//platform.linkedin.com/in.js" type="text/javascript").
-			lang: ru_RU
-		script(type="IN/Share")
-	+e.SPAN.icon.pinit
-		a.pinit(href="https://www.pinterest.com/pin/create/button/")
-			img(src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png")
+	+e.SPAN.icon.vk
+		script(type="text/javascript").
+			document.write(VK.Share.button(false,{type: "custom", text: "<img src=\"https://vk.com/images/share_32.png\" width=\"20\" height=\"20\" />"}));
 
-	+e.SPAN.icon.google
-		.g-plusone(data-size="medium" data-annotation="none")
+			
+			
 	+e.SPAN.icon.favorite
 		
 		span.count 0

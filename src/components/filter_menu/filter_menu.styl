@@ -67,6 +67,16 @@
 		float none
 		width 95%
 		margin 0 auto
+		padding-bottom 10px
+		.heading:after
+			content '+'
+			position absolute
+			right 20px
+			font-family Arial
+		.heading.show:after
+				content '-'
+				
+			
 		.filter-accordion
 			padding 10px 0
 			&__content.widget

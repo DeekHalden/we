@@ -43,8 +43,8 @@
       	js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.8&appId=513708105494020";
       	fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
-      
     </script>
+    <script type="text/javascript" src="https://vk.com/js/api/share.js?94" charset="windows-1251"></script>
     <div class="parallax-container" data-image-src="assets/images/bg_cloth.webp"></div>
     <div class="container-fluid form-wrapper zoom-anim-dialog mfp-hide" id="login">
       <div class="row">
@@ -140,10 +140,13 @@
                   </div>
                 </div>
             <div class="socials clearfix"><span class="socials__icon facebook">
-              <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;amp;src=sdkpreparse">Поделиться</a></div></span><span class="socials__icon twitter"><a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=Hello%20world">Tweet</a></span><span class="socials__icon linkedin">
-              <script src="//platform.linkedin.com/in.js" type="text/javascript">lang: ru_RU</script>
-              <script type="IN/Share"></script></span><span class="socials__icon pinit"><a class="pinit" href="https://www.pinterest.com/pin/create/button/"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png"></a></span><span class="socials__icon google">
-              <div class="g-plusone" data-size="medium" data-annotation="none"></div></span><span class="socials__icon favorite"><span class="count">0</span></span>
+              <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;amp;src=sdkpreparse">Поделиться</a></div></span><span class="socials__icon twitter"><a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=Hello%20world">Tweet</a></span><span class="socials__icon vk">
+              <script type="text/javascript">
+                document.write(VK.Share.button(false,{type: "custom", text: "<img src=\"https://vk.com/images/share_32.png\" width=\"20\" height=\"20\" />"}));
+                
+                
+                
+              </script></span><span class="socials__icon favorite"><span class="count">0</span></span>
             </div><span class="fb-comments" data-href="https://www.facebook.com/permalink.php?story_fbid=367303526970121&amp;amp;id=100010714299436&amp;amp;pnref=story" data-numposts="5" data-width="100%"></span>
           </div>
           <div class="posts-sidebar clearfix">
@@ -234,7 +237,5 @@
       	}
       });
     </script>
-    <script type="text/javascript" async defer src="//assets.pinterest.com/js/pinit.js"></script>
-    <script src="https://apis.google.com/js/platform.js" async defer>{lang: 'ru'}</script>
   </body>
 </html>

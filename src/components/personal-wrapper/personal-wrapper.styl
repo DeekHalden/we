@@ -68,6 +68,7 @@
 				
 @media(max-width 991px)
 	.personal-wrapper
+		position relative
 		.personal-info,.personal-actions
 			padding-right 0
 			border-right 0
@@ -75,11 +76,15 @@
 			&__subtitle
 				width 100%
 				font-size 18px
+			.action-btn 
+				position absolute
+				bottom 0
+				right 25px
 @media(max-width 480px)
 	.personal-wrapper
-		.personal-info
-			&__subtitle
-				font-size 16px
+		.personal-info,.personal-actions
+			.title
+				font-size 20px
 	// .personal-actions
 	// 	@extends .personal-wrapper .personal-info
 	// 	border-right 0
